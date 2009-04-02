@@ -1,0 +1,13 @@
+h1. Portal de Video Conferencias
+
+h3. Proyecto del curso de Ingeniería de Software (CC51A)
+
+h2. Integrantes
+
+|*Integrante*     |*Puesto*         |
+|Rodrigo Díaz     |Jefe de Proyecto |
+|Pablo Cordella   |Analista         |
+|Sebastián Gamboa |Diseñador        |
+|Felipe Urbina    |Implementador    |
+|Alonso Gonzalez  |Implementador    |
+|Renata Faccilongo|Tester           |
