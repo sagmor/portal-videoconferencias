@@ -1,5 +1,16 @@
+# Sensible configuration files
 app/config/database.php
 app/config/secret.php
 
+# User Content Files
+app/webroot/resources/**/*
+!app/webroot/resources/**/empty
+
+# Temporal Files
 app/tmp/**/*
 !app/tmp/**/empty
+
+# Generic Files
+.DS_Store
+Thumbs.db
+.*~
