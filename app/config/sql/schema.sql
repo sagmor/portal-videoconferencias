@@ -5,69 +5,62 @@ CREATE TABLE app_sessions (
   PRIMARY KEY  (id)
 );
 
-CREATE TABLE app_sessions (
-  id int(11) NOT NULL auto_increment,
-  data text,
-  expires int(11) default NULL,
-  PRIMARY KEY  (id)
-);
-
 CREATE TABLE users(
   id int(11) NOT NULL auto_increment,
-  password
-  email
-  type
-  name
+  password varchar(255),
+  salt varchar(255),
+  email varchar(100),
+  type varchar(50),
+  name varchar(255),
+  lang varchar(10),
   PRIMARY KEY  (id)
 );
 
 CREATE TABLE tags(
   id int(11) NOT NULL auto_increment,
-  name
-  PRIMARY KEY  (id)
+  name varchar(255),
+  PRIMARY KEY  (id),
 );
 
 CREATE TABLE speaches(
   id int(11) NOT NULL auto_increment,
-  title
-  date
-  description
-  location
-  speakers
-  status
-  informed
+  title varchar(255),
+  date timestamp,
+  description text,
+  location varchar(255),
+  speakers text,
+  status varchar(50),
+  informed int(1),
   PRIMARY KEY  (id)
 );
 
 CREATE TABLE speach_subscriptions(
   id int(11) NOT NULL auto_increment,
-  user_id
-  speach_id
-  remember_at
+  user_id int(11),
+  speach_id int(11),
+  remember_at timestamp,
+  resend_in timestamp,
   PRIMARY KEY  (id)
 );
 
 CREATE TABLE tag_subscriptions(
  id int(11) NOT NULL auto_increment,
-  user_id
-  tag_id
+  user_id int(11),
+  tag_id int(11),
   PRIMARY KEY  (id)
 );
 
 CREATE TABLE tagged_speaches(
-  id int(11) NOT NULL auto_increment,
-  tag_id
-  speach_id
-  PRIMARY KEY  (id)
+  tag_id int(11),
+  speach_id int(11)
 );
 
 CREATE TABLE attachments(
   id int(11) NOT NULL auto_increment,
-  id
-  name
-  speach_id
-  type
-  original
-  status
+  name varchar(255),
+  speach_id int(11),
+  type varchar(50),
+  location varchar(255),
+  filename varchar(255),
   PRIMARY KEY  (id)
 );
