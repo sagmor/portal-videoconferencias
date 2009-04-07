@@ -1,6 +1,7 @@
 h1. Portal de Video Conferencias
 
 h3. Proyecto del curso de Ingeniería de Software (CC51A)
+Conflictos
 
 h2. Integrantes
 
@@ -11,3 +12,5 @@ h2. Integrantes
 |Felipe Urbina    |Implementador    |
 |Alonso Gonzalez  |Implementador    |
 |Renata Faccilongo|Tester           |
+
+Conflictos
