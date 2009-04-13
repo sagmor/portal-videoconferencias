@@ -117,7 +117,7 @@
 /**
  * The name of CakePHP's session cookie.
  */
-	Configure::write('Session.cookie', 'videoteca');
+	Configure::write('Session.cookie', 'portalvcs');
 /**
  * Session time out time (in seconds).
  * Actual value depends on 'Security.level' setting.

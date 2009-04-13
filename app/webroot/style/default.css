@@ -1,0 +1,394 @@
+/*
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+*/
+
+body {
+	margin: 100px 0 0 0;
+	padding: 0;
+	background: #FFFFFF url(images/img01.gif) repeat-x;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #333333;
+}
+
+h1, h2, h3 {
+	margin: 0;
+	font-weight: normal;
+	color: #3E3E3E;
+}
+
+h1 {
+	letter-spacing: -1px;
+	font-size: 32px;
+}
+
+h2 {
+	font-size: 23px;
+}
+
+p, ul, ol {
+	margin: 0 0 2em 0;
+	text-align: justify;
+	line-height: 26px;
+	font-size: 11px;
+}
+
+a:link {
+	color: #7BAA0F;
+}
+
+a:hover, a:active {
+	text-decoration: none;
+	color: #003448;
+}
+
+a:visited {
+	color: #333333;
+}
+
+img {
+	border: none;
+}
+
+img.left {
+	float: left;
+	margin-right: 15px;
+}
+
+img.right {
+	float: right;
+	margin-left: 15px;
+}
+
+/* Form */
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+legend {
+	display: none;
+}
+
+input, textarea, select {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #333333;
+}
+
+/* Header */
+
+#header {
+	width: 850px;
+	height: 82px;
+	margin: 0 auto 40px auto;
+	background: url(images/img03.gif) repeat-x left bottom;
+}
+
+#logo {
+	float: left;
+}
+
+#header img{
+  float: left;
+  margin-top: -10px;
+  margin-right: 10px;
+	height: 70px;
+}
+
+#logo h1 {
+  margin-top: 10px;
+	font-size: 38px;
+	color: #494949;
+}
+
+#logo h1 sup {
+	vertical-align: text-top;
+	font-size: 24px;
+}
+
+#logo h1 a {
+	color: #494949;
+}
+
+#logo h2 {
+	margin-top: -10px;
+	font-size: 12px;
+	color: #A0A0A0;
+}
+
+#logo a {
+	text-decoration: none;
+}
+
+/* Menu */
+
+#menu {
+	float: right;
+}
+
+#menu ul {
+	margin: 0;
+	padding: 15px 0 0 0;
+	list-style: none;
+}
+
+#menu li {
+	display: inline;
+}
+
+#menu a {
+	display: block;
+	float: left;
+	background: #F5F5F5 url(images/img02.gif) repeat-x left bottom;
+	margin-left: 5px;
+	padding: 7px 20px;
+	text-decoration: none;
+	font-size: 13px;
+	color: #000000;
+}
+
+#menu a:hover {
+	text-decoration: underline;
+}
+
+#menu .active a {
+}
+
+/* Page */
+
+#page {
+	width: 850px;
+	margin: 0 auto;
+}
+
+/* Content */
+
+#content {
+	float: left;
+	width: 575px;
+}
+
+/* Post */
+
+.speech {
+}
+
+.speech .title {
+	margin-bottom: 20px;
+	padding-bottom: 5px;
+	background: url(images/img11.gif) no-repeat right 50%;
+	border-bottom: 1px dotted #D1D1D1;
+}
+
+.speech .description {
+  float: left;
+  width: 65%;
+}
+
+.speech .attachments {
+  margin-top: 20px;
+  float: right;
+  width: 30%;
+}
+
+.speech .attachments ul {
+}
+
+.speech .attachments ul li {
+}
+
+.speech .attachments ul li.video {
+  list-style-image: url(images/video-attachment.png);
+}
+
+.speech .attachments ul li.document {
+  list-style-image: url(images/document-attachment.png);
+}
+
+.speech .attachments ul li.image {
+  list-style-image: url(images/image-attachment.png);
+}
+.speech .attachments ul li.audio {
+  list-style-image: url(images/audio-attachment.png);
+}
+
+.speech .meta {
+	padding: 0px 0 30px 0;
+}
+
+.speech .meta p {
+	margin: 0;
+	line-height: normal;
+	color: #999999;
+}
+
+.speech .meta .at {
+	float: left;
+}
+
+.speech .meta .links {
+	float: right;
+}
+
+.speech .meta .more {
+	padding: 0 20px 0 18px;
+	background: url(images/img06.gif) no-repeat left center;
+}
+
+.speech .meta .comments {
+	padding-left: 22px;
+	background: url(images/img07.gif) no-repeat left center;
+}
+
+.speech .meta b {
+	display: none;
+}
+
+/* Sidebar */
+
+#sidebar {
+	float: right;
+	width: 195px;
+}
+
+#sidebar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#sidebar li {
+	margin-bottom: 40px;
+}
+
+#sidebar li ul {
+}
+
+#sidebar li li {
+	margin: 0;
+	padding-left: 12px;
+	background: url(images/img12.gif) no-repeat left 50%;
+}
+
+#sidebar h2 {
+	margin-bottom: 10px;
+	background: url(images/img11.gif) no-repeat right 50%;
+	border-bottom: 1px dotted #D1D1D1;
+	font-size: 16px;
+}
+
+/* Search */
+
+#login {
+}
+
+#login h2 {
+	margin-bottom: 20px;
+}
+
+#username, #password {
+	width: 120px;
+	margin-right: 5px;
+	padding: 3px;
+	border: 1px solid #F0F0F0;
+}
+
+#x {
+	padding: 3px;
+	background: #ECECEC url(images/img08.gif) repeat-x left bottom;
+	border: none;
+	text-transform: lowercase;
+	font-size: 11px;
+	color: #4F4F4F;
+}
+
+/* Boxes */
+
+.box1 {
+	padding: 20px;
+	background: url(images/img05.gif) no-repeat;
+}
+
+.box2 {
+	color: #BABABA;
+}
+
+.box2 h2 {
+	margin-bottom: 15px;
+	background: url(images/img10.gif) repeat-x left bottom;
+	font-size: 16px;
+	color: #FFFFFF;
+}
+
+.box2 ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.box2 a:link, .box2 a:hover, .box2 a:active, .box2 a:visited  {
+	color: #EDEDED;
+}
+
+/* Footer */
+
+#footer {
+	height: 400px;
+	min-height: 74px;
+	padding: 10px 0 0 0;
+	background: #003448 url(images/img09.gif) repeat-x;
+}
+
+html>body #footer {
+	height: auto;
+}
+
+#legal {
+	clear: both;
+	padding-top: 20px;
+	text-align: center;
+	color: #8ADE3C;
+}
+
+#legal a {
+	color: #76D424;
+}
+
+.overlay {
+  width: 800px; 
+  height: 500px;
+  padding: 50px;
+  
+  text-align: center;
+  display:none; 
+
+  background-image: url(images/overlay.png);
+}
+
+.overlay .close
+{
+  -webkit-background-clip: border;
+  -webkit-background-origin: padding;
+  background-attachment: scroll;
+  background-color: transparent;
+  background-image: url(images/close.png);
+  background-repeat: no-repeat;
+  
+  cursor: pointer;
+  height: 35px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 35px;
+  z-index: 10000;
+}

@@ -1,0 +1,12 @@
+<h2><b class="text1">Ingreso</b></h2>
+<form method="post" action="" id="login">
+	<fieldset>
+		Usuario:
+		<input type="text" id="username" name="username" value="" /><br />
+		Password:
+		<input type="password" id="password" name="password" value="" /><br />
+
+	  <input type="submit" id="x" value="Ingreso" />
+	  <a href="">Registro</a>
+	</fieldset>
+</form>
