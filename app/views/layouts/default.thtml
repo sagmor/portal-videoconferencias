@@ -7,8 +7,10 @@
   <?php echo $html->charset() ?>
   <title><?php echo $title_for_layout?></title>
 
-  <link href="/style/default.css" rel="stylesheet" type="text/css" />
-  <script src="/javascript/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <?php echo $html->css('default') ?>
+  <?php echo $html->css('jquery-ui') ?>
+  <?php echo $javascript->link('jquery') ?>
+  <?php echo $javascript->link('jquery-ui') ?>
 </head>
 
 <body>
@@ -67,4 +69,3 @@
 
   -->
 </html>
-<?php echo $cakeDebug; ?>
