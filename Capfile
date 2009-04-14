@@ -6,4 +6,11 @@ namespace :deploy do
   task :restart do
     
   end
+  
+  task :finalize_update do
+    ['secret','database'].eache do |config|
+      run "ln -s #{shared_path}/config/#{config}.php #{current_path}/app/config/#{config}.php"      
+    end
+    run "chmod -R a+w #{release_path}/app/tmp"
+  end
 end

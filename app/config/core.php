@@ -148,8 +148,15 @@
 /**
  * A random string used in security hashing methods.
  */
-  include('secret.php');
-	//Configure::write('Security.salt', '');
+ 	if (!defined('SALT_CONF')) {
+		define('SALT_CONF', ROOT.DS.APP_DIR.DS.'config'.DS.'secret.php');
+	}
+ if (file_exists(SALT_CONF))
+ {
+   include(SALT_CONF);
+ } else {
+   Configure::write('Security.salt', 'Hello World!');
+ }
 
 /**
  * The classname and database used in CakePHP's

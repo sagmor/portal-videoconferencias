@@ -20,3 +20,4 @@ set :use_sudo, false
 # set :scm, :subversion
 
 role :app, "anakena.dcc.uchile.cl"
+
