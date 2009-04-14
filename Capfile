@@ -8,8 +8,8 @@ namespace :deploy do
   end
   
   task :finalize_update do
-    ['secret','database'].eache do |config|
-      run "ln -s #{shared_path}/config/#{config}.php #{current_path}/app/config/#{config}.php"      
+    ['secret','database'].each do |config|
+      run "ln -s #{shared_path}/config/#{config}.php #{release_path}/app/config/#{config}.php"      
     end
     run "chmod -R a+w #{release_path}/app/tmp"
   end
