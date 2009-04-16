@@ -1,0 +1,36 @@
+<!-- Titulo de la charla --> 
+<h1> Título de la Charla </h1>
+
+<!--Fecha-->
+Fecha de la Charla
+
+<!--Presentadores-->
+<ul>
+	<li>Presentador 1</li>
+	<li>Presentador 2</li>
+	<li>Presentador 3</li>
+</ul>
+
+<!--Botones solo para el admin-->
+<button value="Editar">Editar</button>
+<button value="Cancelar">Cancelar</button>
+
+<!--Descripcion de la charla-->
+Descripción de la charla
+
+<!--Opcion solo para el usuario-->
+Suscribir
+
+<!--Opcion solo para el admin-->
+Usuarios suscritos
+
+<!--Boton de subir archivos solo para el admin-->
+<button value="SubirArchivo">Subir Archivo</button>
+
+<!--Archivos adjuntos-->
+<ul>
+	<li>Vídeo</li>
+	<li>Presentación</li>
+	<li>Fotos</li>
+	<li>Documentos</li>
+</ul>

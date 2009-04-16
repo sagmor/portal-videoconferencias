@@ -1,0 +1,50 @@
+<h1>Agregar nueva charla</h1>
+
+
+<form method="post" action="<?php echo $html->url('/speeches/add')?>">
+	<p>
+		<?php echo $form->input('Titulo:', array('size' => '20'))?>
+		<?php echo $html->tagErrorMsg('Titulo: ', 'Se requiere un título.') ?>
+	</p>
+	<p>
+		<table>
+			<tr>
+				<td>
+					Presentadores:
+				</td>
+				<td>
+					<?php echo $form->textarea('Presentadores:', array('rows'=>'5')) ?>
+					<?php echo $html->tagErrorMsg('Presentadores:', 'Se requiere al menos un presentador.') ?>
+				</td>
+			</tr>
+		</table>
+	</p>
+	<p>
+		<table>
+			<tr>
+				<td>
+					Descripción:
+				</td>
+				<td>
+					<?php echo $form->textarea('Descripción:', array('rows'=>'10')) ?>
+					<?php echo $html->tagErrorMsg('Descripción:', 'Se requiere al menos un presentador.') ?>
+				</td>
+			</tr>
+		</table>
+	</p>
+	<p>
+		<?php echo $form->input('Lugar:', array('size' => '20'))?>
+		<?php echo $html->tagErrorMsg('Lugar:', 'Se requiere un lugar donde se realizará la charla.') ?>
+	</p>
+	<p>
+		<?php echo $form->input('Fecha:', array('size' => '20'))?>
+		<?php echo $html->tagErrorMsg('Fecha:', 'Se requiere la fecha en que se realizará la charla.') ?>
+	</p>
+	<p>
+		Tags:
+		<!-- Supongo que habra que hacer una foreach con lo que haya en la tabla de los tags con un checkbox-->
+	</p>
+	<p>
+		<?php echo $form->submit('Guardar') ?>
+	</p>
+</form>

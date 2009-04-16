@@ -22,7 +22,7 @@ CREATE TABLE tags(
   PRIMARY KEY  (id)
 );
 
-CREATE TABLE speaches(
+CREATE TABLE speeches(
   id int(11) NOT NULL auto_increment,
   title varchar(255),
   date timestamp,
@@ -34,10 +34,10 @@ CREATE TABLE speaches(
   PRIMARY KEY  (id)
 );
 
-CREATE TABLE speach_subscriptions(
+CREATE TABLE speech_subscriptions(
   id int(11) NOT NULL auto_increment,
   user_id int(11),
-  speach_id int(11),
+  speech_id int(11),
   remember_at timestamp,
   resend_in timestamp,
   PRIMARY KEY  (id)
@@ -50,15 +50,15 @@ CREATE TABLE tag_subscriptions(
   PRIMARY KEY  (id)
 );
 
-CREATE TABLE tagged_speaches(
+CREATE TABLE tagged_speeches(
   tag_id int(11),
-  speach_id int(11)
+  speech_id int(11)
 );
 
 CREATE TABLE attachments(
   id int(11) NOT NULL auto_increment,
   name varchar(255),
-  speach_id int(11),
+  speech_id int(11),
   type varchar(50),
   location varchar(255),
   filename varchar(255),

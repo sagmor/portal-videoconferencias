@@ -35,5 +35,6 @@
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
+	Router::connect('/speeches/create', array('controller' => 'speeches', 'action' => 'create'));
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 ?>
