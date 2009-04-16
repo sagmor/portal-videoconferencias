@@ -11,6 +11,7 @@
   <?php echo $html->css('jquery-ui') ?>
   <?php echo $javascript->link('jquery') ?>
   <?php echo $javascript->link('jquery-ui') ?>
+  <?php echo $scripts_for_layout ?>
 </head>
 
 <body>
@@ -41,6 +42,10 @@
   		<ul>
   			<li>
   				<?php echo $this->renderElement('loginbox'); ?>
+  			</li>
+  			<li>
+  				<?php echo $this->renderElement('calendarbox'); ?>
+  			</li>
   			<li>
   				<?php echo $this->renderElement('next_speaches'); ?>
   			</li>

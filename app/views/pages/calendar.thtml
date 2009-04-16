@@ -1,0 +1,56 @@
+<?php $javascript->link('calendar', false) ?>
+
+<div id="filter">
+  <h2>F<br />i<br />l<br />t<br />r<br />o<br />s</h2>
+  
+  <form action="" method="get" accept-charset="utf-8">
+    <input type="checkbox" name="tag1" id="tag1" checked="checked"><label for="tag1">Tag 1</label><br />
+    <input type="checkbox" name="tag2" id="tag2" checked="checked"><label for="tag2">Tag 2</label><br />
+    <input type="checkbox" name="tag3" id="tag3" checked="checked"><label for="tag3">Tag 3</label><br />
+  </form>
+</div>
+
+<div id="calendar">
+  <a href="" class="prev">&larr; anterior</a>
+  <a href="" class="next">siguiente &rarr;</a>
+  <h2>Junio 2010</h2>
+  
+  <table border="0">
+    <tr>
+      <th>Lunes</th>
+      <th>Martes</th>
+      <th>Miércoles</th>
+      <th>Jueves</th>
+      <th>Viernes</th>
+      <th>Sábado</th>
+      <th>Domingo</th>
+    </tr>
+    <tr>
+      <td>1</td><td>2</td>
+      <td>3<br />
+        <span class="item tag1"><a href="">Charla XXX</a></span>
+      </td>
+      <td>4</td><td>5</td><td>6</td><td>7</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>9<br />
+        <span class="item tag2"><a href="">Charla YYY</a></span>
+      </td>
+      <td>10</td><td>11</td><td>12</td><td>13</td><td>14</td>
+    </tr>
+    <tr>
+      <td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td>
+    </tr>
+    <tr>
+      <td>22</td><td>23</td><td>24</td><td>25</td>
+      <td>26<br />
+        <span class="item tag3"><a href="">Charla ZZZ</a></span>
+      </td><td>27</td><td>28</td>
+    </tr>
+    <tr>
+      <td>19</td><td>30</td><td class="disabled">1</td><td class="disabled">2</td><td class="disabled">3</td><td class="disabled">4</td><td class="disabled">5</td>
+    </tr>
+  </table>
+  
+</div>
