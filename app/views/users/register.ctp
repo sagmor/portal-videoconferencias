@@ -1,25 +1,6 @@
 <h2><b class="text1">Registro</b></h2>
-<!--<form action="/portal-videoconferencias/users/register" method="post">
-	<label>Nombre:</label>
-		<input name="username" size="40" /><br />
-	<label>Correo Electrónico:</label>
-		<input name="email" size="40" maxlength="255" /><br />
-	<label>Contraseña:</label>
-		<input type="password" name="password" size="40"/><br />
-	<label>Confirmar contraseña:</label>
-		<input type="password" name="confirmed_password" size="40"/><br />
-	<label>Idioma:</label>
-		<select name="lang">
-  			<option value="Español">Español</option>
-  			<option value="English">English</option>
-		</select><br />
-	<input type="submit" value="register" />
-</form>-->
 <?php echo $form->create('User', array('url' =>
 											  array('controller' => 'users', 'action' => 'register')));?>
-<table border="0">
-	<tr>
-	<td>
 	<?php
     	echo $form->input('User.name', array( 'label' => 'Nombre: '));
     	echo $form->input('User.email', array( 'label' => 'Correo electónico: '));
@@ -30,13 +11,13 @@
     						     'options' => array('Español' => "Español", 
 													'English' => 'English')));
 	?>
-	</td>
-	<td>
-		<?php echo $form->checkbox('User.0.tag', array('type' => 'checkbox',
-													   'options' => array('Tag0 ' => 'Tag0 ',
-																		  'Tag1' => 'Tag1')));?>
-	</td>
-	</tr>
-</table>
+	<h3>Tags</h3>
+	<?php $tags = $this->requestAction('/tags/getTags');
+		  $i = 0;
+	      foreach($tags as $tag) {
+		  	echo $form->input("User."+ ($i++) +'tag', array('type' => 'checkbox',
+		  													'label' => $tag['Tag']['name']));
+	      }
+	?>
 <?php echo $form->end('Registrar');?>
 
