@@ -1,1 +1,3 @@
-asdf
+<form>
+<?php echo $form->output($this->'speeches')?>
+</form>
