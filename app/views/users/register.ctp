@@ -1,14 +1,23 @@
-<form action="/users/register" method="post">
-<p>Registro</p>
-<label>Nombre:</label>
-	<input name="username" size="40" />
-<label>Correo Electrónico:</label>
-	<input name="email" size="40" maxlength="255" />
-<label>Contraseña:</label>
-	<input type="password" name="password" size="40"/>
-<label>Confirmar contraseña:</label>
-	<input type="password" name="confirmed_password" size="40"/>
-<label>Idioma:</label>
-	<input name="lang" size="40" />
-<input type="submit" value="register" />
-</form>
+<h2><b class="text1">Registro</b></h2>
+<?php echo $form->create('User', array('url' =>
+											  array('controller' => 'users', 'action' => 'register')));?>
+	<?php
+    	echo $form->input('User.name', array( 'label' => 'Nombre: '));
+    	echo $form->input('User.email', array( 'label' => 'Correo electónico: '));
+   	 	echo $form->input('User.0.password', array( 'label' => 'Contraseña: '));
+    	echo $form->input('User.1.password', array( 'label' => 'Confirmar contraseña: '));
+    	echo $form->input('User.lang', 
+    					  array ('label' => 'Idioma: ',
+    						     'options' => array('Español' => "Español", 
+													'English' => 'English')));
+	?>
+	<h3>Tags</h3>
+	<?php $tags = $this->requestAction('/tags/getTags');
+		  $i = 0;
+	      foreach($tags as $tag) {
+		  	echo $form->input("User."+ ($i++) +'tag', array('type' => 'checkbox',
+		  													'label' => $tag['Tag']['name']));
+	      }
+	?>
+<?php echo $form->end('Registrar');?>
+

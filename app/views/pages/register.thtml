@@ -1,0 +1,27 @@
+<div class="mainform">
+  <form action="" method="post" accept-charset="utf-8">
+    <fieldset id="suscriptions" class="">
+      <legend>Suscripciones</legend>
+      <p>Suscripciones</p>
+      <input type="checkbox" name="tag1" value="" /><label for="tag1">Tag 1</label><br />
+      <input type="checkbox" name="tag2" value="" /><label for="tag2">Tag 2</label><br />
+      <input type="checkbox" name="tag3" value="" /><label for="tag3">Tag 3</label><br />
+      <input type="checkbox" name="tag4" value="" /><label for="tag4">Tag 4</label><br />
+      <input type="checkbox" name="tag5" value="" /><label for="tag5">Tag 5</label><br />
+    </fieldset>
+    
+    <p>
+      <label for="name">Nombre</label><br />
+      <input type="text" name="name" value="">
+    </p>
+    <p>
+      <label for="email">Correo Electrónico</label><br />
+      <input type="text" name="email" value="">
+    </p>
+    <p>
+      <label for="password">Contraseña</label><br />
+      <input type="password" name="password" value="">
+    </p>
+    <p><input type="submit" value="Registrar &rarr;"></p>
+  </form>
+</div>

@@ -1,0 +1,55 @@
+<div id="create" class="mainform">
+  <form action="" method="post" accept-charset="utf-8">
+    <p>
+      <label for="email">Título:</label><br />
+      <input type="text" name="title" value="">
+    </p>
+    <p>
+      <label for="speaker">Presentadores:</label><br />
+      <textarea name="speaker"></textarea>
+    </p>
+    <p>
+      <label for="desc">Descripción:</label><br />
+      <textarea name="desc"></textarea>
+    </p>
+    <p>
+      <label for="place">Lugar:</label><br />
+      <input type="text" name="place" value="">
+    </p>
+    <p>
+      <label for="date">Fecha:</label><br />
+      <select name="date1">
+        <option>Día</option>
+        <option disabled="disabled">----</option>
+        <option value="option2">1</option>  
+      </select>/
+      <select name="date1">
+        <option>Mes</option>
+        <option disabled="disabled">----</option>
+        <option value="option2">1</option>  
+      </select>/
+      <select name="date1">
+        <option>Año</option>
+        <option disabled="disabled">----</option>
+        <option value="option2">1</option>  
+      </select>
+      <select name="date1">
+        <option>Hora</option>
+        <option disabled="disabled">----</option>
+        <option value="option2">1</option>  
+      </select>:
+      <select name="date1">
+        <option>Minutos</option>
+        <option disabled="disabled">----</option>
+        <option value="option2">1</option>  
+      </select>
+      
+    </p>
+    <p>
+      <label for="tags">Tags:</label><br />
+      <input type="text" name="tags" value="">
+    </p>
+
+    <p><input type="submit" value="Crear"></p>
+  </form>
+</div>

@@ -392,3 +392,90 @@ html>body #footer {
   width: 35px;
   z-index: 10000;
 }
+
+a.prev {
+  float: left;
+}
+
+a.next {
+  float: right;
+}
+
+#filter {
+  
+  position: absolute;
+  top: 350px;
+  left: 0px;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
+  border-right: 3px solid #8FC511;
+  
+  padding: 5px;
+  background-color: #F5F5F5;
+  
+}
+
+#filter h2 {
+  float: right;
+}
+
+#filter form {
+  float: left;
+  display: none;
+  width: 150px;
+}
+
+#calendar {
+  text-align: center;
+}
+
+#calendar table {
+  width: 600px;
+}
+
+#calendar td {
+  text-align: left;
+  border: 1px dotted #999;
+  width: 85px;
+  height: 85px;
+  vertical-align: top;
+}
+
+#calendar h2 {
+  margin: 20px auto;
+}
+
+#calendarbox {
+  text-align: center;
+}
+
+#calendarbox table {
+  margin: 20px auto;
+  width: 200px;
+}
+
+.mainform {
+  border: 1px dotted #999;
+  width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+
+#suscriptions {
+  float: right;
+}
+
+#suscriptions p {
+  font-weight: bold;
+}
+
+#create input {
+  width: 300px;
+}
+
+#create textarea {
+  width: 300px;
+  height: 100px;
+}
+
