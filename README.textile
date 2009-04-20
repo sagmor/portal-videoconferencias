@@ -13,5 +13,3 @@ h2. Integrantes
 |Renata Faccilongo|Tester           |
 
 
-Hola Mundo.....
-
