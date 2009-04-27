@@ -44,6 +44,13 @@
 		<?php echo $form->input('Speech.tags', array('size' => '20'))?>
 		<?php echo $form->isFieldError('Speech.tags') ?>
 		<!-- Supongo que habra que hacer una foreach con lo que haya en la tabla de los tags con un checkbox-->
+        <?php $tags = $this->requestAction('/tags/getTags');
+            foreach($tags as $tag) {
+                echo $form->input('Speech.tags[]', array('type' => 'checkbox',
+	  													'label' => $tag['Tag']['name'],
+	  													'value' => $tag['Tag']['id']));
+            }
+        ?>
 	</p>
 	<p>
 		<?php echo $form->submit('Guardar') ?>

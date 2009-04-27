@@ -15,8 +15,9 @@
 	<?php $tags = $this->requestAction('/tags/getTags');
 		  $i = 0;
 	      foreach($tags as $tag) {
-		  	echo $form->input("User."+ ($i++) +'tag', array('type' => 'checkbox',
-		  													'label' => $tag['Tag']['name']));
+		  	echo $form->input('User.tag[]', array('type' => 'checkbox',
+		  													'label' => $tag['Tag']['name'],
+		  													'value' => $tag['Tag']['id']));
 	      }
 	?>
 <?php echo $form->end('Registrar');?>

@@ -1,3 +1,22 @@
 <form>
-<?php echo $form->output($this->'speeches')?>
+
+	<h1>Charlas agendadas</h1>
+	<table>
+		<tr>
+			<th>Título</th>
+			<th>Fecha</th>
+		</tr>
+		<!-- Here is where we loop through our $posts array, printing out post info -->
+		<?php foreach ($speeches as $speech): ?>
+		<tr>
+			<td>
+			<?php echo $html->link($speech['Speech']['title'],
+									"/speeches/view_speech/".$speech['Speech']['id']); ?>
+			</td>
+			<td><?php echo $speech['Speech']['date']; ?></td>
+		</tr>
+		<?php endforeach; ?>
+	 
+	</table>
+
 </form>

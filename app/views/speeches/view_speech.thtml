@@ -1,22 +1,27 @@
 <!-- Titulo de la charla --> 
-<h1> Título de la Charla </h1>
+<h1> <?php echo $speech['Speech']['title']?> </h1>
 
 <!--Fecha-->
-Fecha de la Charla
+<h3> Fecha de la Charla </h3>
+<?php echo $speech['Speech']['date']?>
 
 <!--Presentadores-->
+<h3> Presentadores </h3>
 <ul>
-	<li>Presentador 1</li>
-	<li>Presentador 2</li>
-	<li>Presentador 3</li>
+    <?php
+        $presentadores = split(',', $speech['Speech']['speakers']);
+        foreach ($presentadores as $presentador):
+    ?>
+    <li><?php echo $presentador ?></li>
+    <?php endforeach; ?>
 </ul>
 
-<!--Botones solo para el admin-->
-<button value="Editar">Editar</button>
-<button value="Cancelar">Cancelar</button>
-
+<!--links solo para el admin-->
+<?php echo $html->link('Editar', array('action'=>'edit', 'id'=>$speech['Speech']['id']));?>
+<?php echo $html->link('Borrar', array('action'=>'delete', 'id'=>$speech['Speech']['id']), null, '¿Está seguro?')?>
 <!--Descripcion de la charla-->
-Descripción de la charla
+<h3> Descripción </h3>
+<?php echo $speech['Speech']['description']?>
 
 <!--Opcion solo para el usuario-->
 Suscribir
@@ -29,8 +34,8 @@ Usuarios suscritos
 
 <!--Archivos adjuntos-->
 <ul>
-	<li>Vídeo</li>
-	<li>Presentación</li>
-	<li>Fotos</li>
-	<li>Documentos</li>
+    <li>Vídeo</li>
+    <li>Presentación</li>
+    <li>Fotos</li>
+    <li>Documentos</li>
 </ul>
