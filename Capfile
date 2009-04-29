@@ -13,6 +13,6 @@ namespace :deploy do
     end
     run "chmod -R a+w #{release_path}/app/tmp"
     
-   run "rm #{release_path}{.htaccess,app/.htaccess,app/webroot/.htaccess}"
+   run "rm #{release_path}/{.htaccess,app/.htaccess,app/webroot/.htaccess}"
   end
 end
