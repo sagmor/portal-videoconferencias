@@ -1,58 +1,42 @@
-<h1>Agregar nueva charla</h1>
-
-
-<form method="post" action="<?php echo $html->url('/speeches/add')?>">
-	<p>
-		<?php echo $form->input('Speech.title', array('size' => '20'))?>
-		<?php echo $form->isFieldError('Speech.title') ?>
-	</p>
-	<p>
-		<table>
-			<tr>
-				<td>
-					Presentadores:
-				</td>
-				<td>
-					<?php echo $form->textarea('Speech.speakers', array('rows'=>'5')) ?>
-					<?php echo $form->isFieldError('Speech.speakers') ?>
-				</td>
-			</tr>
-		</table>
-	</p>
-	<p>
-		<table>
-			<tr>
-				<td>
-					Descripción:
-				</td>
-				<td>
-					<?php echo $form->textarea('Speech.description', array('rows'=>'10')) ?>
-					<?php echo $form->isFieldError('Speech.description') ?>
-				</td>
-			</tr>
-		</table>
-	</p>
-	<p>
-		<?php echo $form->input('Speech.location', array('size' => '20'))?>
-		<?php echo $form->isFieldError('Speech.location') ?>
-	</p>
-	<p>
-		<?php echo $form->input('Speech.date', array('size' => '1'))?>
-		<?php echo $form->isFieldError('Speech.date') ?>
-	</p>
-	<p>
-		<?php echo $form->input('Speech.tags', array('size' => '20'))?>
-		<?php echo $form->isFieldError('Speech.tags') ?>
-		<!-- Supongo que habra que hacer una foreach con lo que haya en la tabla de los tags con un checkbox-->
-        <?php $tags = $this->requestAction('/tags/getTags');
-            foreach($tags as $tag) {
-                echo $form->input('Speech.tags[]', array('type' => 'checkbox',
-	  													'label' => $tag['Tag']['name'],
-	  													'value' => $tag['Tag']['id']));
-            }
-        ?>
-	</p>
-	<p>
-		<?php echo $form->submit('Guardar') ?>
-	</p>
-</form>
+<div id="create" class="mainform">
+  <form method="post" action="<?php echo $html->url('/speeches/add')?>">
+    <h1>Agregar nueva charla</h1>
+    <p>
+  		<?php echo $form->input('Speech.title', array('size' => '20'))?>
+  		<?php echo $form->isFieldError('Speech.title') ?>
+  	</p>
+  	
+    <p>
+      <label for="SpeechSpeakers">Presentadores:</label><br />
+      <?php echo $form->textarea('Speech.speakers', array('rows'=>'5')) ?>
+			<?php echo $form->isFieldError('Speech.speakers') ?>
+    </p>
+    <p>
+      <label for="SpeechDescription">Descripción:</label><br />
+      <?php echo $form->textarea('Speech.description', array('rows'=>'10')) ?>
+			<?php echo $form->isFieldError('Speech.description') ?>
+    </p>
+    <p>
+      <?php echo $form->input('Speech.location', array('size' => '20'))?>
+  		<?php echo $form->isFieldError('Speech.location') ?>
+    </p>
+    <p>
+      <?php echo $form->input('Speech.date', array('size' => '1'))?>
+  		<?php echo $form->isFieldError('Speech.date') ?>
+      
+    </p>
+    <p>
+      <?php echo $form->input('Speech.tags', array('size' => '20'))?>
+  		<?php echo $form->isFieldError('Speech.tags') ?>
+  		<!-- Supongo que habra que hacer una foreach con lo que haya en la tabla de los tags con un checkbox-->
+          <?php $tags = $this->requestAction('/tags/getTags');
+              foreach($tags as $tag) {
+                  echo $form->input('Speech.tags[]', array('type' => 'checkbox',
+  	  													'label' => $tag['Tag']['name'],
+  	  													'value' => $tag['Tag']['id']));
+              }
+          ?>
+    </p>
+    <p><?php echo $form->submit('Guardar') ?></p>
+  </form>
+</div>

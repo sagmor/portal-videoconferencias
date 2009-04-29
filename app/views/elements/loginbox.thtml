@@ -1,12 +1,15 @@
 <h2><b class="text1">Ingreso</b></h2>
-<form method="post" action="users/login" id="login">
+  <?php echo $form->create('User', array('url' =>
+  											  array('controller' => 'users', 'action' => 'login'),
+  											  'id' => 'login'));?>
 	<fieldset>
-		Usuario:
-		<input type="text" id="name" name="name" value="" /><br />
-		Password:
-		<input type="password" id="password" name="password" value="" /><br />
+	  <?php
+      	echo $form->input('User.email');
+     	 	echo $form->input('User.password');
+    ?>
 
-	  <input type="submit" id="x" value="Ingreso" />
-	  <a href="users/register">Registro</a>
-	</fieldset>
+	  <?php echo $form->submit('Ingresar') ?>
+	  <?php echo $html->link('Registro', array('controller' => 'users', 
+	                                      'action' => 'register')); ?>
+  </form>
 </form>

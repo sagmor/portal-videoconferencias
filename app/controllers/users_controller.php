@@ -6,29 +6,30 @@ class UsersController extends AppController
 	
 	function register()
 	{
-		if (!empty($this->data['User']))
-		{
-			if($this->data['User'][0]['password'] == $this->data['User'][1]['password']){
-				$this->data['User']['salt'] = md5(time());
-				$this->data['User']['password'] = md5($this->data['User']['salt'] + 
-													  $this->data['User'][0]['password']);
-				$this->data['User']['type'] = 'normal';
-				if ($this->User->save($this->data['User']))
-				{
-					#$result = $this->User->findByName($this->data['User']['name']);
-					#$tag_subscription['user_id'] = $result['Useer']['id'];
-					#$tag_subscription['tag_id'] = $this->data[]
-					$this->Session->write('user', $this->data['User']['name']);
-					$this->flash('Te haz registrado correctamente', '/');
-					$this->redirect('/');
-					exit();
-				}
-				else {
-					$this->flash('Hubo un problema mientras te registrabas', '/');
-					exit();
-				}
-			}
-		}
+	  echo debug($this->data['User']['tag']);
+    // if (!empty($this->data['User']))
+    // {
+    //  if($this->data['User'][0]['password'] == $this->data['User'][1]['password']){
+    //    $this->data['User']['salt'] = md5(time());
+    //    $this->data['User']['password'] = md5($this->data['User']['salt'] + 
+    //                        $this->data['User'][0]['password']);
+    //    $this->data['User']['type'] = 'normal';
+    //    if ($this->User->save($this->data['User']))
+    //    {
+    //      #$result = $this->User->findByName($this->data['User']['name']);
+    //      #$tag_subscription['user_id'] = $result['Useer']['id'];
+    //      #$tag_subscription['tag_id'] = $this->data[]
+    //      $this->Session->write('user', $this->data['User']['name']);
+    //      $this->flash('Te haz registrado correctamente', '/');
+    //      $this->redirect('/');
+    //      exit();
+    //    }
+    //    else {
+    //      $this->flash('Hubo un problema mientras te registrabas', '/');
+    //      exit();
+    //    }
+    //  }
+    // }
 	}
 	
 	function login()
