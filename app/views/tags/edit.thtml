@@ -1,0 +1,9 @@
+<h1>Editar Categoría</h1>
+
+<?php
+	echo $form->create('Tag', array('action' => 'edit'));
+	echo $form->input('Tag.name', array('size' => '20'));
+	echo $form->isFieldError('Tag.name');
+	echo $form->input('id', array('type'=>'hidden'));
+	echo $form->submit('Guardar');
+?>

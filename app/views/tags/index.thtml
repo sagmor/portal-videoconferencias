@@ -1,0 +1,29 @@
+<form>
+
+	<h1>Categorías</h1>
+
+	<?php echo $html->link('Crear Categoría', "/tags/add"); ?>
+
+	<table>
+		<tr>
+			<th>Nombre</th>
+		</tr>
+		<?php foreach ($tags as $tag): ?>
+		<tr>
+			<td>
+				<?php echo $tag['Tag']['name']; ?>
+			</td>
+			<td>
+				<?php echo $html->link('Editar',
+										"/tags/edit/".$tag['Tag']['id']); ?>
+			</td>
+			<td>
+				<?php echo $html->link('Borrar', array('action'=>'delete',
+										'id'=>$tag['Tag']['id']), null, '¿Está seguro?')?>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+
+	</table>
+
+</form>

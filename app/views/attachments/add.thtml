@@ -1,0 +1,5 @@
+<form action="/portalVC/attachments/add" enctype="multipart/form-data" method="post">
+	<input type="file" name="addAttachment" value="" />
+	<input type="submit" value="Subir" />
+	<!--<input type="file" name="atachment" value="" />-->
+</form>

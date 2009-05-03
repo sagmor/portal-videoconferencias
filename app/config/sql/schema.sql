@@ -43,16 +43,18 @@ CREATE TABLE speech_subscriptions(
   PRIMARY KEY  (id)
 );
 
-CREATE TABLE tag_subscriptions(
+CREATE TABLE users_tags(
  id int(11) NOT NULL auto_increment,
   user_id int(11),
   tag_id int(11),
   PRIMARY KEY  (id)
 );
 
-CREATE TABLE tagged_speeches(
+CREATE TABLE speeches_tags(
+  id int(11) NOT NULL auto_increment,
   tag_id int(11),
-  speech_id int(11)
+  speech_id int(11),
+  PRIMARY KEY  (id)
 );
 
 CREATE TABLE attachments(

@@ -1,0 +1,1 @@
+Sesión finalizada

@@ -14,6 +14,15 @@
 									"/speeches/view_speech/".$speech['Speech']['id']); ?>
 			</td>
 			<td><?php echo $speech['Speech']['date']; ?></td>
+			<?php if($this->requestAction('/users/getCurrentUserType') == 'admin'):?>
+				<td>
+					<?php echo $html->link('Editar', array('action'=>'edit', 'id'=>$speech['Speech']['id']));?>
+				</td>
+				<td>
+					<?php echo $html->link('Borrar', array('action'=>'delete',
+															'id'=>$speech['Speech']['id']), null, '¿Está seguro?')?>
+				</td>
+			<?php endif?>
 		</tr>
 		<?php endforeach; ?>
 	 
