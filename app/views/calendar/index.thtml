@@ -1,3 +1,5 @@
+
+
 <div id="calendar">
 </div>
 
@@ -6,3 +8,10 @@
 </div>
 
 <?php echo $javascript->link('calendar', false) ?>
+
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+  	loadCalendar(<?php echo $year; ?>,<?php echo $month; ?>);
+  });
+</script>

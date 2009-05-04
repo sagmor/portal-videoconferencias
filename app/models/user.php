@@ -38,8 +38,8 @@ class User extends AppModel
 						  
 
   function validatePassword() {
-    if (!array_key_exists('hashed_password', $this->data['User'])) {
-      if (!array_key_exists('password', $this->data['User'])) return false;
+    if (!array_key_exists('hashed_password', $this->data['User']) || strlen($this->data['User']['hashed_password']) == 0) {
+      if (!array_key_exists('password', $this->data['User']) || strlen($this->data['User']['password']) == 0) return false;
     }
     
     if (array_key_exists('password', $this->data['User']) && (strlen($this->data['User']['password']) > 0)) {
@@ -76,7 +76,7 @@ class User extends AppModel
 	    $this->data['User']['salt'] = md5(time());
 	  }
 	  
-	  if (array_key_exists('password', $this->data['User'])) {
+	  if (array_key_exists('password', $this->data['User']) && strlen($this->data['User']['password'])>0) {
 	    $this->data['User']['hashed_password'] = $this->encrypt($this->data['User']['salt'], $this->data['User']['password']);
 	  }
 	  

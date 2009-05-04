@@ -6,13 +6,13 @@ class CalendarController extends AppController {
 	
 	function index()
 	{
-	  
+	  $this->set('month', $this->params['month']);
+    $this->set('year', $this->params['year']);
 	}
 	
 	function table() {
 	  $this->layout = null;
-	  
-	  echo debug($this->params);
+	  Configure::write('debug',0);
 	  
     $this->set('month', $this->params['month']);
     $this->set('year', $this->params['year']);

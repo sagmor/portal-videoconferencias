@@ -495,3 +495,7 @@ a.next {
 	margin: 100px auto;
 }
 
+#calendar .empty {
+  background-color: #F5F5F5;
+}
+

@@ -5,19 +5,19 @@
   $daysInMonth = date("t", $date);
   
   // calculate the position of the first day in the calendar (sunday = 1st column, etc)
-  $offset = date("w", $date) - 1 % 7;
+  $offset = date("w", $date) - 1;
+  if ($offset == -1) { $offset = 6; }
   $rows = 1;
 
 ?>
-<div id="table">
-  <?php echo $html->link('&larr; anterior', 
+  <?php echo $html->link('← anterior', 
       array(  'action' => 'index', 
               'month' => date("n", $prev),
-              'year' => date("Y", $prev))); ?>
-  <?php echo $html->link('siguiente &rarr;', 
+              'year' => date("Y", $prev)), array('class' => 'prev')); ?>
+  <?php echo $html->link('siguiente →', 
       array(  'action' => 'index', 
               'month' => date("n", $next),
-              'year' => date("Y", $next))); ?>
+              'year' => date("Y", $next)), array('class' => 'next')); ?>
 <h2><?php echo date("F Y", $date) ?></h2>
 
 <table border="0">
@@ -59,10 +59,9 @@
     }
     
     while( ($day + $offset) <= $rows * 7){
-        echo "<td></td>";
+        echo "<td class=\"empty\"></td>";
         $day++;
     }
   ?>
   </tr>
 </table>
-</div>

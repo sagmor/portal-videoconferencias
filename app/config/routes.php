@@ -35,6 +35,8 @@
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
+  Router::parseExtensions('js');
+  
   Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
   Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
   Router::connect('/register', array('controller' => 'users', 'action' => 'register'));
@@ -49,5 +51,5 @@
   Router::connect('/calendar/table/:type/:year/:month/', 
               array(  'controller' => 'calendar', 'action' => 'table'), 
               array(  'year' => '[0-9]+', 'month' => '[0-9]+'));
-	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+  Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 ?>
