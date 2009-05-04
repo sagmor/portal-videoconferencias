@@ -7,8 +7,12 @@
   <?php echo $html->image('loading.gif') ?>
 </div>
 
-<?php echo $javascript->link('calendar', false) ?>
-
+<?php 
+	$this->addScript($javascript->output(sprintf($javascript->tags['javascriptlink'], $html->url(array(
+          'controller' => 'js',
+          'action' => 'calendar',
+          'ext' => 'js')))));
+?>
 
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
