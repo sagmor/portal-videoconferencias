@@ -41,7 +41,12 @@
   	<div id="sidebar">
   		<ul>
   			<li>
-  				<?php echo $this->renderElement('loginbox'); ?>
+  				<?php
+  				  if($current_user == null) {
+  				      echo $this->renderElement('loginbox');
+  				    } else {
+  				      echo $this->renderElement('user_data');
+  				    } ?>
   			</li>
   			<li>
   				<?php echo $this->renderElement('calendarbox'); ?>

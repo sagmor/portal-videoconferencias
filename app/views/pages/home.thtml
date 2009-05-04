@@ -1,1 +1,3 @@
 <h2>Page Content</h2>
+
+<?php echo debug($current_user); ?>

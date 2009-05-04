@@ -7,9 +7,8 @@
       	echo $form->input('User.email');
      	 	echo $form->input('User.password');
     ?>
-
-	  <?php echo $form->submit('Ingresar') ?>
-	  <?php echo $html->link('Registro', array('controller' => 'users', 
+	  <input type="submit" value="Ingresar" />
+	  <?php echo $html->link('Registrar', array('controller' => 'users', 
 	                                      'action' => 'register')); ?>
   </form>
 </form>

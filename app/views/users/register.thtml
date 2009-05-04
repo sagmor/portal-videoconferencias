@@ -1,7 +1,6 @@
 <div class="mainform">
-  <h2>Editar datos personales</h2>
   <?php echo $form->create('User', array('url' =>
-  									   array('controller' => 'users', 'action' => 'edit')));?>
+  									   array('controller' => 'users', 'action' => 'register')));?>
     <fieldset id="suscriptions" class="">
       <legend>Suscripciones</legend>
       <?php $tags = $this->requestAction('/tags/getTags');
@@ -31,7 +30,7 @@
 													'en' => 'English'
 													))); ?>
     </p>
-  <?php echo $form->end('Modificar');?>
+  <?php echo $form->end('Registrar');?>
 </div>
 
 

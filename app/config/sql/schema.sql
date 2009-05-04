@@ -1,3 +1,4 @@
+DROP TABLE app_sessions;
 CREATE TABLE app_sessions (
   id varchar(255) NOT NULL default '',
   data text,
@@ -5,9 +6,10 @@ CREATE TABLE app_sessions (
   PRIMARY KEY  (id)
 );
 
+DROP TABLE users;
 CREATE TABLE users(
   id int(11) NOT NULL auto_increment,
-  password varchar(255),
+  hashed_password varchar(255),
   salt varchar(255),
   email varchar(100),
   type varchar(50),
@@ -16,12 +18,14 @@ CREATE TABLE users(
   PRIMARY KEY  (id)
 );
 
+DROP TABLE ;
 CREATE TABLE tags(
   id int(11) NOT NULL auto_increment,
   name varchar(255),
   PRIMARY KEY  (id)
 );
 
+DROP TABLE speeches;
 CREATE TABLE speeches(
   id int(11) NOT NULL auto_increment,
   title varchar(255),
@@ -34,6 +38,7 @@ CREATE TABLE speeches(
   PRIMARY KEY  (id)
 );
 
+DROP TABLE speech_subscriptions;
 CREATE TABLE speech_subscriptions(
   id int(11) NOT NULL auto_increment,
   user_id int(11),
@@ -43,6 +48,7 @@ CREATE TABLE speech_subscriptions(
   PRIMARY KEY  (id)
 );
 
+DROP TABLE users_tags;
 CREATE TABLE users_tags(
  id int(11) NOT NULL auto_increment,
   user_id int(11),
@@ -50,6 +56,7 @@ CREATE TABLE users_tags(
   PRIMARY KEY  (id)
 );
 
+DROP TABLE speeches_tags;
 CREATE TABLE speeches_tags(
   id int(11) NOT NULL auto_increment,
   tag_id int(11),
@@ -57,6 +64,7 @@ CREATE TABLE speeches_tags(
   PRIMARY KEY  (id)
 );
 
+DROP TABLE attachments;
 CREATE TABLE attachments(
   id int(11) NOT NULL auto_increment,
   name varchar(255),

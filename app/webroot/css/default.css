@@ -461,6 +461,15 @@ a.next {
   padding: 20px;
 }
 
+.mainform input[type=text], .mainform input[type=password] {
+	width: 250px;
+	display: block;
+}
+
+#login label {
+	display: block;
+}
+
 
 #suscriptions {
   float: right;

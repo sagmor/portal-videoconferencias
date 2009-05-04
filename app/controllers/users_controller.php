@@ -4,72 +4,63 @@ class UsersController extends AppController
 	var $name = 'Users';
 	var $helpers = array('Html', 'Form' );
 
-	function register()
+	function register() {
+		if (!empty($this->data['User'])){
+		  if ($this->User->save($this->data)){
+		    $this->Session->write('user_id', $this->User->id);
+		    $this->flash('Tu usuario ha sido creado correctamente', '/');
+	    } else {
+	      $this->data['User']['password'] = $this->data['User']['password_confirmation'] = '';
+	    }
+		}
+	}
+
+	function edit($id = null){
+	  $current_user = $this->currentUser();
+	  
+	  if ($current_user == null) {
+	    $this->flash('Acción no autorizada', '/');
+	  } elseif ($id == null) {
+	    $this->User->id = $current_user['User']['id'];
+	  } elseif ( $current_user['User']['type'] != 'admin' && $id != $current_user['User']['id'] ) {
+	    $this->flash('Acción no autorizada', '/');
+	    return;
+	  } else {
+	    $this->User->id = $id;
+    }
+    
+    
+	    
+	  if (empty($this->data)) {
+	    $this->data = $this->User->read();
+    } else {
+      $this->User->read();
+      if ($this->User->save($this->data)) {
+        $this->flash('Se han actualizado los datos', '/');
+      }
+    }
+	}
+
+	function login()
 	{
-		//echo debug($this->data);
 		if (!empty($this->data['User'])){
-			if($this->data['User'][0]['password'] == $this->data['User'][1]['password']){
-				$this->data['User']['salt'] = md5(time());
-				$this->data['User']['password'] = md5($this->data['User']['salt'] +
-				$this->data['User'][0]['password']);
-				if($this->data['User']['Privilegios'][0] == 1){
-					$this->data['User']['type'] = 'admin';
-				}
-				else{
-					$this->data['User']['type'] = 'normal';
-				}
-				if ($this->User->save($this->data)){
-					$this->Session->write('user', $this->data['User']['name']);
-					$this->redirect('/');
-				}
-				else {
-					$this->data['User']['password'] = '';
-					$this->Session->setFlash('Hubo un problema al guardar sus datos');
-
-				}
+			$result = $this->User->authenticate($this->data['User']['email'], $this->data['User']['password']);
+			
+			if ($result != null) {
+			  $this->Session->write('user_id', $result['User']['id']);
+			  $this->flash('Bienvenido', '/');
+			} else {
+				$this->flash('El usuario no existe o la contraseña es incorrecta', array('action' => 'login'));
 			}
 		}
 	}
-
-	function edit(){
-		if (!empty($this->data['User'])){
-			$result = $this->User->findByName($this->Session->read('user'));
-			$this->data['User']['id'] = $result['User']['id'];
-			if($this->data['User'][0]['password'] == $this->data['User'][1]['password']){
-				$this->data['User']['salt'] = md5(time());
-				$this->data['User']['password'] = md5($this->data['User']['salt'] +
-				$this->data['User'][0]['password']);
-				if($this->data['User']['Privilegios'][0] == 1){
-					$this->data['User']['type'] = 'admin';
-				}
-				else{
-					$this->data['User']['type'] = 'normal';
-				}
-				if ($this->User->save($this->data)){
-					$this->Session->write('user', $this->data['User']['name']);
-					$this->redirect('/');
-					exit();
-				}
-				else {
-					$this->flash('Hubo un problema mientras editabas tus datos', '/');
-					exit();
-				}
-			}
-		}
-		else{
-			$result = $this->User->findByName($this->Session->read('user'));
-			$this->data['User']['name'] = $result['User']['name'];
-			$this->data['User']['email'] = $result['User']['email'];
-			$this->data['User']['lang'] = $result['User']['lang'];
-			$arrTags = array();
-			$i = 0;
-			foreach($result['Tag'] as $tag){
-				$arrTags[$i++] = $tag['id'];
-			}
-			$this->data['Tag']['Tag'] = $arrTags;
-		}
+	
+	function logout()
+	{
+		$this->Session->delete('user_id');
+		$this->flash('Hasta Pronto', '/');
 	}
-
+	
 	function verSuscripciones()
 	{
 		$subscripciones = $this->User
@@ -84,26 +75,6 @@ class UsersController extends AppController
 		$username = $this->Session->read('user');
 		$result = $this->User->findByName($username);
 		return $result['User']['type'];
-	}
-
-	function login()
-	{
-		if (!empty($this->data['User'])){
-			$result = $this->User->findByName($this->data['User']['name']);
-			if($result && $result['User']['password'] == md5($result['User']['salt'] +
-			$this->data['User']['password'])){
-				$this->Session->write('user', $result['User']['name']);
-				$this->redirect('/');
-			}
-			else{
-				$this->flash('El usuario no existe o la contraseña es incorrecta', 'users/login');
-			}
-		}
-	}
-	function logout()
-	{
-		$this->Session->delete('user');
-		//$this->redirect(array('action' => 'login'), null, true);
 	}
 
 }
