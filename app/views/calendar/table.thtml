@@ -1,0 +1,68 @@
+<?php
+  $date = mktime(12, 0, 0, $month, 1, $year);
+  $next = $date - mktime(0,0,0,0,0,0) + mktime(0,0,0,0,31,0); #mktime(12, 0, 0, $month+1%12, 0, $year);
+  $prev = $date + mktime(0,0,0,0,0,0) - mktime(0,0,0,0,10,0);
+  $daysInMonth = date("t", $date);
+  
+  // calculate the position of the first day in the calendar (sunday = 1st column, etc)
+  $offset = date("w", $date) - 1 % 7;
+  $rows = 1;
+
+?>
+<div id="table">
+  <?php echo $html->link('&larr; anterior', 
+      array(  'action' => 'index', 
+              'month' => date("n", $prev),
+              'year' => date("Y", $prev))); ?>
+  <?php echo $html->link('siguiente &rarr;', 
+      array(  'action' => 'index', 
+              'month' => date("n", $next),
+              'year' => date("Y", $next))); ?>
+<h2><?php echo date("F Y", $date) ?></h2>
+
+<table border="0">
+  <tr>
+  <?php if ( $type == big ) { ?>
+    <th>Lunes</th>
+    <th>Martes</th>
+    <th>Miércoles</th>
+    <th>Jueves</th>
+    <th>Viernes</th>
+    <th>Sábado</th>
+    <th>Domingo</th>
+  <?php } else { ?>
+    <th>L</th>
+    <th>M</th>
+    <th>M</th>
+    <th>J</th>
+    <th>V</th>
+    <th>S</th>
+    <th>D</th>
+  <?php } ?>
+  </tr>
+  <tr>
+  <?php
+    for($i = 1; $i <= $offset; $i++) {
+      echo "<td class=\"empty\"></td>";
+    }
+    
+    for($day = 1; $day <= $daysInMonth; $day++)
+    {
+        if( ($day + $offset - 1) % 7 == 0 && $day != 1)
+        {
+            echo "</tr>\n\t<tr>";
+            $rows++;
+        }
+
+
+        echo "<td id=\"day$day\">$day</td>";
+    }
+    
+    while( ($day + $offset) <= $rows * 7){
+        echo "<td></td>";
+        $day++;
+    }
+  ?>
+  </tr>
+</table>
+</div>

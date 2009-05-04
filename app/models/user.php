@@ -84,7 +84,7 @@ class User extends AppModel
 	}
 	
 	function encrypt($salt,$password) {
-	  return md5($salt.$password);
+	  return md5($salt.'-'.$password);
 	}
 	
 	public function authenticate($email, $password) {

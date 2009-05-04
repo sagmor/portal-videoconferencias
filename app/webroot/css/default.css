@@ -488,3 +488,10 @@ a.next {
   height: 100px;
 }
 
+#loading {
+	display: none;
+	width: 100%;
+	text-align: center;
+	margin: 100px auto;
+}
+

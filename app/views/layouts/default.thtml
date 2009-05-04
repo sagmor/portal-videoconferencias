@@ -23,9 +23,14 @@
   	</div>
   	<div id="menu">
   		<ul>
-  			<li class="active"><a href="">Inicio</a></li>
-  			<li><a href="">Calendario</a></li>
-  			<li><a href="">Acerca de</a></li>
+  			<li>
+  			  <?php echo $html->link('Inicio', array('controller' => 'pages', 'action' => 'display', 'home')); ?>
+        </li>
+  			<li>
+  			  <?php echo $html->link('Calendatio', array('controller' => 'calendar', 'action' => 'index')); ?>
+  			<li>
+  			  <?php echo $html->link('Acerca de', array('controller' => 'pages', 'action' => 'display', 'about')); ?>
+        </li>
   		</ul>
   	</div>
   </div>
@@ -48,9 +53,11 @@
   				      echo $this->renderElement('user_data');
   				    } ?>
   			</li>
-  			<li>
-  				<?php echo $this->renderElement('calendarbox'); ?>
-  			</li>
+  			<?php
+  			  if ($this->params['controller'] != 'calendar') {
+  			   echo "<li>".$this->renderElement('calendarbox')."</li>";
+  			  }
+  			?>
   			<li>
   				<?php echo $this->renderElement('next_speaches'); ?>
   			</li>
