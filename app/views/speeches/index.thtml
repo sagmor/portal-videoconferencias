@@ -5,25 +5,27 @@
 		<tr>
 			<th>Título</th>
 			<th>Fecha</th>
+			<!--<th>Categorías</th>-->
 		</tr>
-		<!-- Here is where we loop through our $posts array, printing out post info -->
+
 		<?php foreach ($speeches as $speech): ?>
-		<tr>
-			<td>
-			<?php echo $html->link($speech['Speech']['title'],
-									"/speeches/view_speech/".$speech['Speech']['id']); ?>
-			</td>
-			<td><?php echo $speech['Speech']['date']; ?></td>
-			<?php if($this->requestAction('/users/getCurrentUserType') == 'admin'):?>
+			<tr>
 				<td>
-					<?php echo $html->link('Editar', array('action'=>'edit', 'id'=>$speech['Speech']['id']));?>
+				<?php echo $html->link($speech['Speech']['title'],
+										"/speeches/view_speech/".$speech['Speech']['id']); ?>
 				</td>
-				<td>
-					<?php echo $html->link('Borrar', array('action'=>'delete',
-															'id'=>$speech['Speech']['id']), null, '¿Está seguro?')?>
-				</td>
-			<?php endif?>
-		</tr>
+				<td><?php echo $speech['Speech']['date']; ?></td>
+				<!-- Sólo el administrador puede borrar o editar una charla -->
+				<?php if($this->requestAction('/users/getCurrentUserType') == 'admin'):?>
+					<td>
+						<?php echo $html->link('Editar', array('action'=>'edit', 'id'=>$speech['Speech']['id']));?>
+					</td>
+					<td>
+						<?php echo $html->link('Borrar', array('action'=>'delete',
+																'id'=>$speech['Speech']['id']), null, '¿Está seguro?')?>
+					</td>
+				<?php endif?>
+			</tr>
 		<?php endforeach; ?>
 	 
 	</table>

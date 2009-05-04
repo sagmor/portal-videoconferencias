@@ -23,5 +23,6 @@ class TagsController extends AppController
 	function eliminar($tag){
 		echo debug($tag);
 	}
+
 }
 ?>
