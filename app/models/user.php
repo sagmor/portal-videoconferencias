@@ -7,16 +7,15 @@ class User extends AppModel
             							   'joinTable' => 'users_tags',
             							   'foreignKey' => 'user_id',
             							   'associationForeignKey' => 'tag_id'));
-	var $validate = array('name' => array(
-						  'alphaNumeric' => array('rule' => 'alphaNumeric',
-												  'required' => true,
-												  'message' => 'Solo letras y números'),
+	var $validate = array('name' => array('alphaNumeric' => array('rule' => 'alphaNumeric',
+										  'required' => true,
+												  'message' => 'Solo letras y números')),
 						  'password' => array('rule' => array('minLength', '5'),
 											  'required' => true,
 											  'message' => 'Debe contener más de 5 caracteres'),
 						  'email' => array('rule' => 'email',
-													 'required' => true,
-													 'message' => 'Ingrese un correo válido')));
+						  				   'required' => true,
+						  				   'message' => 'Ingrese un correo válido'));
 
 
 	function beforeValidate() {

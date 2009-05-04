@@ -4,6 +4,10 @@ class UsersController extends AppController
 	var $name = 'Users';
 	var $helpers = array('Html', 'Form' );
 
+	function index(){
+		
+	}
+	
 	function register()
 	{
 		//echo debug($this->data);
@@ -12,7 +16,7 @@ class UsersController extends AppController
 				$this->data['User']['salt'] = md5(time());
 				$this->data['User']['password'] = md5($this->data['User']['salt'] +
 				$this->data['User'][0]['password']);
-				if($this->data['User']['Privilegios'][0] == 1){
+				if(!empty($this->data['User']['Privilegios']) && $this->data['User']['Privilegios'][0] == 1){
 					$this->data['User']['type'] = 'admin';
 				}
 				else{
@@ -20,7 +24,7 @@ class UsersController extends AppController
 				}
 				if ($this->User->save($this->data)){
 					$this->Session->write('user', $this->data['User']['name']);
-					$this->redirect('/');
+					$this->redirect(array('action' => 'index'));
 				}
 				else {
 					$this->data['User']['password'] = '';
@@ -39,7 +43,7 @@ class UsersController extends AppController
 				$this->data['User']['salt'] = md5(time());
 				$this->data['User']['password'] = md5($this->data['User']['salt'] +
 				$this->data['User'][0]['password']);
-				if($this->data['User']['Privilegios'][0] == 1){
+				if(!empty($this->data['User']['Privilegios']) && $this->data['User']['Privilegios'][0] == 1){
 					$this->data['User']['type'] = 'admin';
 				}
 				else{
@@ -47,7 +51,7 @@ class UsersController extends AppController
 				}
 				if ($this->User->save($this->data)){
 					$this->Session->write('user', $this->data['User']['name']);
-					$this->redirect('/');
+					$this->redirect(array('action' => 'index'));
 					exit();
 				}
 				else {
@@ -93,17 +97,19 @@ class UsersController extends AppController
 			if($result && $result['User']['password'] == md5($result['User']['salt'] +
 			$this->data['User']['password'])){
 				$this->Session->write('user', $result['User']['name']);
-				$this->redirect('/');
+				$this->redirect(array('action' => 'index'));
 			}
 			else{
 				$this->flash('El usuario no existe o la contraseña es incorrecta', 'users/login');
 			}
 		}
 	}
+	
+	
 	function logout()
 	{
 		$this->Session->delete('user');
-		//$this->redirect(array('action' => 'login'), null, true);
+		$this->redirect(array('action' => 'index'), null, true);
 	}
 
 }
