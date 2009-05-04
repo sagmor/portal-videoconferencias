@@ -1,6 +1,7 @@
 <h2><b class="text1">Administrar Categorias</b></h2>
 <?php echo $form->create('Tag', array('url' =>
-									   array('controller' => 'tags', 'action' => 'administrar')));?>
+									   array('controller' => 'tags', 'action' => 'administrar')));
+?>
 	<table>
 
 <?php
@@ -15,14 +16,12 @@ echo $html->tableHeaders(
 foreach($data as $tag)
 {
   echo $html->tableCells(
-      array(
-        array(
-          $tag,
-          $html->link('Eliminar',
-          			  array('controller' => 'tags',
-          			  		'action' => 'eliminar/'.$tag)))));
+      array($tag['Tag']['name'],
+      		$html->link('Eliminar', array('action'=>'delete',
+							 			  'id'=>$tag['Tag']['id']), null, '¿Está seguro?')));
 }
 ?>
 
 </table>
-<?php echo $form->input('Tag.name', array('label' => 'Nombre')); echo $form->end('Crear');?>
+<?php echo $form->input('Tag.name', array('label' => 'Nombre')); echo $form->submit('Crear');
+	  $form->end();?>

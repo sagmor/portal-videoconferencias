@@ -82,6 +82,14 @@ class User extends AppModel
 	  
 	  return true;
 	}
+
+  function afterCreate() {
+    mail($this->data['User']['email'], 
+			 "Subscripción portal video conferencias", 
+			 "Te haz registrado correctamente al portal de videoconferencias.\n".
+			 "Tu constraseña es".$this->data['User'][0]['password'], 
+			 "From: no-reply@remitente.com\nReply-To: no-reply@remitente.com\nX-Mailer: PHP/", phpversion());
+  }
 	
 	function encrypt($salt,$password) {
 	  return md5($salt.'-'.$password);

@@ -43,5 +43,34 @@ class SpeechesController extends AppController {
         $this->redirect(array('action' => '/'));
     }
 
+	function searchByTags() {
+		$this->set('speeches', '');
+		if(!empty($this->data)) {
+			$dataTags = $this->data['Tag'];
+			$allSpeeches = $this->Speech->find('all');
+			$i = 0;
+			$speeches = array();
+			foreach($allSpeeches as $speech){
+				$tags = $speech['Tag'];
+				foreach ($tags as $tag) {
+					foreach ($dataTags as $dataTag) {
+						if ($tag['id'] == $dataTag) {
+							$isAdded = false;
+							foreach ($speeches as $speechTagged) {
+								if($speechTagged == $speech['Speech']) {
+									$isAdded = true;
+								}
+							}
+							if(!$isAdded) {
+								$speeches[$i] = $speech['Speech'];
+								$i++;
+							}
+						}
+					}
+				}
+			}
+			$this->set('speeches', $speeches);
+		}
+	}
 }
 ?>

@@ -12,6 +12,7 @@ class UsersController extends AppController
 	    } else {
 	      $this->data['User']['password'] = $this->data['User']['password_confirmation'] = '';
 	    }
+
 		}
 	}
 
@@ -76,6 +77,5 @@ class UsersController extends AppController
 		$result = $this->User->findByName($username);
 		return $result['User']['type'];
 	}
-
 }
 ?>
