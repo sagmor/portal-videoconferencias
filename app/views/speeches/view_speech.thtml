@@ -39,12 +39,23 @@
 <?php if($this->requestAction('/users/getCurrentUserType') == 'admin'):?>
 	<p><a href="">Usuarios suscritos</a></p>
 <?php endif?>
+<?php
+    echo $form->create('Attachment', array('url'=>array('action' => 'upload',
+													$speech['Speech']['id'],
+													$speech['Speech']['location']),
+										'type' => 'file'));
+    echo $form->file('File');
+    echo $form->submit('Upload');
+    echo $form->end();
+?>
 
+	
 <!--Opción de subir archivos solo para el admin-->
 <?php if($this->requestAction('/users/getCurrentUserType') == 'admin'):?>
 	<form name="uploadFile" method="POST" enctype="multipart/form-data" action="/speeches/view_speech">
 
 		<p>
+			
 			<?php echo $form->input('Atachment.name', array('size' => '20'))?>
 			<?php echo $form->isFieldError('Atachment.name') ?>
 			<input type="file" name="AttachFile" value="" width="20" />
