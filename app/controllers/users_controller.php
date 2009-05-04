@@ -93,7 +93,10 @@ class UsersController extends AppController
 	function login()
 	{
 		if (!empty($this->data['User'])){
-			$result = $this->User->findByName($this->data['User']['name']);
+			$result = $this->User->find('first', 
+										array('conditions' => 
+											  array('User.email' => 
+											  		$this->data['User']['email'])));
 			if($result && $result['User']['password'] == md5($result['User']['salt'] +
 			$this->data['User']['password'])){
 				$this->Session->write('user', $result['User']['name']);
