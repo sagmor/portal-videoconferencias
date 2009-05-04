@@ -6,7 +6,8 @@
 
 <?php
 
-		echo $html->tableCells(array($html->link('Editar Datos Personales', array('action'=>'edit'))));?>
+		echo $html->tableCells(array($html->link('Editar Datos Personales', array('action'=>'edit'))));
+		echo $html->tableCells(array($html->link('Cambiar contraseña', array('action'=>'changePass'))));?>
 <?php 
 	if($this->requestAction('/users/getCurrentUserType') == 'admin'){
 		echo $html->tableCells(array($html->link('Administrar categorias',

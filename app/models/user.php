@@ -20,8 +20,8 @@ class User extends AppModel
 
 	function beforeValidate() {
 		if (!$this->id) {
-			if ($this->findCount(array('User.name' =>
-									   $this->data['User']['name'])) > 0) {
+			if (!empty($this->data['User']['name']) && $this->findCount(array('User.name' =>
+									   									$this->data['User']['name'])) > 0) {
 				$this->invalidate('username_unique');
 				return false;
 			}

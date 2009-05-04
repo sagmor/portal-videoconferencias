@@ -4,8 +4,6 @@
 	<?php
     	echo $form->input('User.name', array( 'label' => 'Nombre: '));
     	echo $form->input('User.email', array( 'label' => 'Correo electónico: '));
-   	 	echo $form->input('User.0.password', array( 'label' => 'Contraseña: '));
-    	echo $form->input('User.1.password', array( 'label' => 'Confirmar contraseña: '));
     	echo $form->input('User.lang', 
     					  array ('label' => 'Idioma: ',
     						     'options' => array('Español' => "Español", 

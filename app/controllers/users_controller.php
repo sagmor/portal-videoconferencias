@@ -14,8 +14,8 @@ class UsersController extends AppController
 		if (!empty($this->data['User'])){
 			if($this->data['User'][0]['password'] == $this->data['User'][1]['password']){
 				$this->data['User']['salt'] = md5(time());
-				$this->data['User']['password'] = md5($this->data['User']['salt'] +
-				$this->data['User'][0]['password']);
+				$this->data['User']['password'] = md5($this->data['User']['salt'].
+													  $this->data['User'][0]['password']);
 				if(!empty($this->data['User']['Privilegios']) && $this->data['User']['Privilegios'][0] == 1){
 					$this->data['User']['type'] = 'admin';
 				}
@@ -24,6 +24,11 @@ class UsersController extends AppController
 				}
 				if ($this->User->save($this->data)){
 					$this->Session->write('user', $this->data['User']['name']);
+					mail($this->data['User']['email'], 
+						 "Subscripción portal video conferencias", 
+						 "Te haz registrado correctamente al portal de videoconferencias. Tu constraseña es".$this->data['User'][0]['password'], 
+						 "From: remitente@remitente.com\nReply-To: remitente@remitente.com\nX-Mailer: PHP/",
+						 phpversion()); 
 					$this->redirect(array('action' => 'index'));
 				}
 				else {
@@ -34,31 +39,40 @@ class UsersController extends AppController
 			}
 		}
 	}
+	
+	function changePass(){
+		if(!empty($this->data)&& $this->data['User'][0]['password'] == $this->data['User'][1]['password']){
+			$pass = $this->data['User'][0]['password'];
+			$result = $this->User->findByName($this->Session->read('user'));
+			$this->data['User'] = $result['User'];
+			$this->data['User']['salt'] = md5(time());
+			$this->data['User']['password'] = md5($this->data['User']['salt'].
+												  $pass);
+			if ($this->User->save($this->data['User'])){
+				$this->redirect(array('action' => 'index'));
+				exit();
+			}
+		}
+	}
 
 	function edit(){
 		if (!empty($this->data['User'])){
 			$result = $this->User->findByName($this->Session->read('user'));
 			$this->data['User']['id'] = $result['User']['id'];
-			if($this->data['User'][0]['password'] == $this->data['User'][1]['password']){
-				$this->data['User']['salt'] = md5(time());
-				$this->data['User']['password'] = md5($this->data['User']['salt'] +
-				$this->data['User'][0]['password']);
-				if(!empty($this->data['User']['Privilegios']) && $this->data['User']['Privilegios'][0] == 1){
-					$this->data['User']['type'] = 'admin';
-				}
-				else{
-					$this->data['User']['type'] = 'normal';
-				}
-				if ($this->User->save($this->data)){
-					$this->Session->write('user', $this->data['User']['name']);
-					$this->redirect(array('action' => 'index'));
-					exit();
-				}
-				else {
-					$this->flash('Hubo un problema mientras editabas tus datos', '/');
-					exit();
-				}
+			if(!empty($this->data['User']['Privilegios']) && $this->data['User']['Privilegios'][0] == 1){
+				$this->data['User']['type'] = 'admin';
 			}
+			else{
+				$this->data['User']['type'] = 'normal';
+			}
+			if ($this->User->save($this->data)){
+				$this->redirect(array('action' => 'index'));
+				exit();
+			}
+			else {
+				$this->flash('Hubo un problema mientras editabas tus datos', '/');
+				exit();
+				}
 		}
 		else{
 			$result = $this->User->findByName($this->Session->read('user'));
@@ -97,8 +111,8 @@ class UsersController extends AppController
 										array('conditions' => 
 											  array('User.email' => 
 											  		$this->data['User']['email'])));
-			if($result && $result['User']['password'] == md5($result['User']['salt'] +
-			$this->data['User']['password'])){
+			if($result && $result['User']['password'] == md5($result['User']['salt'].
+															 $this->data['User']['password'])){
 				$this->Session->write('user', $result['User']['name']);
 				$this->redirect(array('action' => 'index'));
 			}
@@ -112,7 +126,7 @@ class UsersController extends AppController
 	function logout()
 	{
 		$this->Session->delete('user');
-		$this->redirect(array('action' => 'index'), null, true);
+		//$this->redirect(array('action' => '/'), null, true);
 	}
 
 }
