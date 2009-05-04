@@ -29,5 +29,6 @@ class TagsController extends AppController
         $this->flash('El tag: '.$tag_id.' ha sido borrar.', '/', 1);
         $this->redirect(array('action' => 'administrar'));
 	}
+
 }
 ?>
