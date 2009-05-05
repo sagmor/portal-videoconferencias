@@ -1,0 +1,97 @@
+<!-- Titulo de la charla --> 
+<h1> <?php echo $speech['Speech']['title']?> </h1>
+
+<!--Fecha-->
+<h3> Fecha de la Charla </h3>
+<?php echo $speech['Speech']['date']?>
+
+<!--Lugar de la charla-->
+<h3> Lugar de la charla</h3>
+<?php echo $speech['Speech']['location']?>
+
+<!--Presentadores-->
+<h3> Presentadores </h3>
+<ul>
+    <?php
+        $presentadores = split("[,]|[\n|\r]", $speech['Speech']['speakers']);
+        foreach ($presentadores as $presentador):
+			if($presentador != ''):
+    ?>
+    <li><?php echo $presentador ?></li>
+    <?php endif; endforeach; ?>
+</ul>
+
+<!--links solo para el admin-->
+<?php if($this->requestAction('/users/getCurrentUserType') == 'admin'):?>
+	<?php echo $html->link('Editar', array('action'=>'edit', 'id'=>$speech['Speech']['id']));?>
+	<?php echo $html->link('Borrar', array('action'=>'delete', 'id'=>$speech['Speech']['id']), null, '¿Está seguro?')?>
+<?php endif?>
+<!--Descripcion de la charla-->
+<h3> Descripción </h3>
+<?php echo $speech['Speech']['description']?>
+
+<!--Opcion solo para el usuario-->
+<?php if($this->requestAction('/users/getCurrentUserType') == 'user'):?>
+	<p><a href="">Suscribir</a></p>
+<?php endif?>
+
+<!--Opcion solo para el admin-->
+<?php if($this->requestAction('/users/getCurrentUserType') == 'admin'):?>
+	<p><a href="">Usuarios suscritos</a></p>
+<?php endif?>
+
+
+	
+<!--Opción de subir archivos solo para el admin-->
+<?php if($this->requestAction('/users/getCurrentUserType') == 'admin'):?>
+	<?php
+		$folder = '/files/'.$speech['Speech']['title'].'/';
+		echo $form->create('Attachment', array(
+											'url'=>array(
+														'action' => 'upload',
+														$speech['Speech']['id'],
+														$folder,
+														$speech['Speech']['title']
+														),
+											'type' => 'file'));
+		echo $form->input('Attachment.name', array('size' => '20', 'label' => 'Tipo de archivo (vídeo, presentación, etc.)'));
+		echo $form->file('File');
+		echo $form->submit('Subir');
+		echo $form->end();
+	?>
+<?php endif?>
+
+
+<!--Archivos adjuntos-->
+<h3>Archivos adjuntos</h3>
+	<ul>
+	<?php
+		$files = $this->requestAction('/attachments/getFiles/'.$speech['Speech']['id']);
+		if ($files) :
+		foreach ($files as $file) :
+		//$attachedFiles = $this->requestAction('/attachments/getAttachmentFiles', $speech['Speech']['id']);
+	?>
+		<li>
+			<?php
+				echo $html->link($file['Attachment']['name'],
+										"/attachments/download/".$file['Attachment']['id']);
+			?>
+		</li>
+	</ul>
+
+	<?php
+		endforeach;
+		else :
+			echo 'Esta charla no posee archivos adjuntos';
+		
+		endif;
+	?>
+
+<!--
+<ul>
+    <li>Vídeo</li>
+    <li>Presentación</li>
+    <li>Fotos</li>
+    <li>Documentos</li>
+</ul>
+-->
