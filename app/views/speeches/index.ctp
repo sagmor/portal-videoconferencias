@@ -12,7 +12,7 @@
 			<tr>
 				<td>
 				<?php echo $html->link($speech['Speech']['title'],
-										"/speeches/view_speech/".$speech['Speech']['id']); ?>
+										"/speeches/show/".$speech['Speech']['id']); ?>
 				</td>
 				<td><?php echo $speech['Speech']['date']; ?></td>
 				<!-- Sólo el administrador puede borrar o editar una charla -->

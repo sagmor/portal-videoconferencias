@@ -1,8 +1,5 @@
 <div id="create" class="mainform">
 	<form method="post" action="<?php echo $html->url('/speeches/add')?>">
-
-		<!-- Solo un admin puede crear una charla -->
-		<?php if($this->requestAction('/users/getCurrentUserType') == 'admin'):?>
 			<h1>Agregar nueva charla</h1>
 			<p>
 				<!--Título de la charla -->
@@ -50,8 +47,5 @@
 												   'options' => $tags));
 			?>
 			<p><?php echo $form->submit('Guardar') ?></p>
-		<?php else:?>
-			<?php echo 'No tiene permiso para crear una charla'?>
-		<?php endif?>
 	</form>
 </div>

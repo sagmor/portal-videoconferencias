@@ -17,6 +17,7 @@ class AttachmentsController extends AppController {
 	}
 
 	function add() {
+	  if ($this->validateAdmin()) {
         if (!empty($this->params['form']) &&
              is_uploaded_file($this->params['form']['Attachment']['tmp_name']))
         {
@@ -28,6 +29,7 @@ class AttachmentsController extends AppController {
 
             $this->redirect('speeches/view_speech');
         }
+      }
     }
 
 }

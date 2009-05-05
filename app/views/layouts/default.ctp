@@ -24,7 +24,7 @@
   	<div id="menu">
   		<ul>
   			<li>
-  			  <?php echo $html->link('Inicio', array('controller' => 'pages', 'action' => 'display', 'home')); ?>
+  			  <?php echo $html->link('Inicio', '/'); ?>
         </li>
   			<li>
   			  <?php echo $html->link('Calendatio', array('controller' => 'calendar', 'action' => 'index')); ?>
