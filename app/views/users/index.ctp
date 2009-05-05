@@ -1,19 +1,26 @@
-<?php echo $form->create('Tag', array('url' =>
-									   array('controller' => 'users', 'action' => 'index')));
-?>
-<h2><b class="text1">Bienvenido</b></h2>
-<table>
-
-<?php
-
-		echo $html->tableCells(array($html->link('Editar Datos Personales', array('action'=>'edit'))));
-		echo $html->tableCells(array($html->link('Cambiar contraseña', array('action'=>'changePass'))));?>
-<?php 
-	if($this->requestAction('/users/getCurrentUserType') == 'admin'){
-		echo $html->tableCells(array($html->link('Administrar categorias',
-										   array('controller' => 'tags', 'action' => 'administrar'))));
-		echo $html->tableCells(array($html->link('Crear usuario', 
-										   array('action' => 'register'))));
-	}
-?>
-</table>
+<div class="mainform">
+  <h2>Configurar permisos</h2>
+  <?php echo $form->create('Tag', array('url' =>
+									   array('controller' => 'users', 'action' => 'index')));?>
+  <p>
+    <table width = "75%">
+      <?php
+		echo $html->tableHeaders(array('Nombre',
+									   'email',
+									   'Tipo',
+									   '',
+									   ''));
+		foreach($users as $user){
+			echo $html->tableCells(array($user['User']['name'],
+										 $user['User']['email'],
+										 $user['User']['type'],
+										 $html->link('Cambiar',
+													 array('action' => 'cambiarPermiso',
+													 	   'id' => $user['User']['id'])),
+										 $html->link('Eliminar',
+													 array('action' => 'eliminar',
+													 	   'id' => $user['User']['id']))));
+		}?>
+    </table>
+  </p> 
+</div>

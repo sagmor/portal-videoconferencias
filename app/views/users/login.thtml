@@ -1,6 +1,6 @@
 <div class="mainform">
   
-  <h2><b class="text1">Ingreso</b></h2>
+  <h2>Ingreso</h2>
   <?php echo $form->create('User', array('url' =>
   											  array('controller' => 'users', 'action' => 'login')));?>
 
@@ -10,4 +10,10 @@
     ?>
     
   <?php echo $form->end('Ingresar');?>
+  
+  <p>
+    Todavía no tienes una cuenta?
+    <?php echo $html->link('Crear una cuenta!', array('controller' => 'users', 
+	                                      'action' => 'register')); ?>
+  </p>
 </div>

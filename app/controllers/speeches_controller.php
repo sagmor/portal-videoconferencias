@@ -13,12 +13,16 @@ class SpeechesController extends AppController {
     }
 
     function add() {
+      if ($current_user == null || $current_user->type != 'admin') {
+        $this->flash('Acción no autorizada', '/');
+      } else {
         if(!empty($this->data)) {
             if($this->Speech->save($this->data)) {
                 $this->flash('Nueva charla creada', '', 1);
                 $this->redirect(array('action' => '/'));
             }
         }
+      }
     }
 
     function edit($id = null) {

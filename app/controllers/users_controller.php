@@ -3,98 +3,86 @@ class UsersController extends AppController
 {
 	var $name = 'Users';
 	var $helpers = array('Html', 'Form' );
-
+	
 	function index(){
-		
-	}
-	
-	function register()
-	{
-		//echo debug($this->data);
-		if (!empty($this->data['User'])){
-			if($this->data['User'][0]['password'] == $this->data['User'][1]['password']){
-				$this->data['User']['salt'] = md5(time());
-				$this->data['User']['password'] = md5($this->data['User']['salt'].
-													  $this->data['User'][0]['password']);
-				if(!empty($this->data['User']['Privilegios']) && $this->data['User']['Privilegios'][0] == 1){
-					$this->data['User']['type'] = 'admin';
-				}
-				else{
-					$this->data['User']['type'] = 'normal';
-				}
-				if ($this->User->save($this->data)){
-					$this->Session->write('user', $this->data['User']['name']);
-					mail($this->data['User']['email'], 
-						 "Subscripción portal video conferencias", 
-						 "Te haz registrado correctamente al portal de videoconferencias. Tu constraseña es".$this->data['User'][0]['password'], 
-						 "From: remitente@remitente.com\nReply-To: remitente@remitente.com\nX-Mailer: PHP/",
-						 phpversion()); 
-					$this->redirect(array('action' => 'index'));
-				}
-				else {
-					$this->data['User']['password'] = '';
-					$this->Session->setFlash('Hubo un problema al guardar sus datos');
-
-				}
-			}
-		}
-	}
-	
-	function changePass(){
-		if(!empty($this->data)&& $this->data['User'][0]['password'] == $this->data['User'][1]['password']){
-			$pass = $this->data['User'][0]['password'];
-			$result = $this->User->findByName($this->Session->read('user'));
-			$this->data['User'] = $result['User'];
-			$this->data['User']['salt'] = md5(time());
-			$this->data['User']['password'] = md5($this->data['User']['salt'].
-												  $pass);
-			if ($this->User->save($this->data['User'])){
-				$this->redirect(array('action' => 'index'));
-				exit();
-			}
-		}
-	}
-
-	function edit(){
-		if (!empty($this->data['User'])){
-			$result = $this->User->findByName($this->Session->read('user'));
-			$this->data['User']['id'] = $result['User']['id'];
-			if(!empty($this->data['User']['Privilegios']) && $this->data['User']['Privilegios'][0] == 1){
-				$this->data['User']['type'] = 'admin';
-			}
-			else{
-				$this->data['User']['type'] = 'normal';
-			}
-			if ($this->User->save($this->data)){
-				$this->redirect(array('action' => 'index'));
-				exit();
-			}
-			else {
-				$this->flash('Hubo un problema mientras editabas tus datos', '/');
-				exit();
-				}
+		$current_user = $this->currentUser();
+		if($current_user == null || $current_user['User']['type'] != 'admin'){
+			$this->flash('Acción no autorizada', '/');
 		}
 		else{
-			$result = $this->User->findByName($this->Session->read('user'));
-			$this->data['User']['name'] = $result['User']['name'];
-			$this->data['User']['email'] = $result['User']['email'];
-			$this->data['User']['lang'] = $result['User']['lang'];
-			$arrTags = array();
-			$i = 0;
-			foreach($result['Tag'] as $tag){
-				$arrTags[$i++] = $tag['id'];
-			}
-			$this->data['Tag']['Tag'] = $arrTags;
+			$users = $this->User->find('all', 
+									   array('fields' => array('User.id',
+									   						   'User.name',
+								  							   'User.email',
+															   'User.type')));
+			$this->set('users', $users);
 		}
 	}
 
+	function register() {
+		if (!empty($this->data['User'])){
+		  if ($this->User->save($this->data)){
+		    $this->Session->write('user_id', $this->User->id);
+		    $this->flash('Tu usuario ha sido creado correctamente', '/');
+	    } else {
+	      $this->data['User']['password'] = $this->data['User']['password_confirmation'] = '';
+	    }
+
+		}
+	}
+
+	function edit($id = null){
+	  $current_user = $this->currentUser();
+	  
+	  if ($current_user == null) {
+	    $this->flash('Acción no autorizada', '/');
+	  } elseif ($id == null) {
+	    $this->User->id = $current_user['User']['id'];
+	  } elseif ( $current_user['User']['type'] != 'admin' && $id != $current_user['User']['id'] ) {
+	    $this->flash('Acción no autorizada', '/');
+	    return;
+	  } else {
+	    $this->User->id = $id;
+    }
+    
+    
+	    
+	  if (empty($this->data)) {
+	    $this->data = $this->User->read();
+    } else {
+      $this->User->read();
+      if ($this->User->save($this->data)) {
+        $this->flash('Se han actualizado los datos', '/');
+      }
+    }
+	}
+
+	function login()
+	{
+		if (!empty($this->data['User'])){
+			$result = $this->User->authenticate($this->data['User']['email'], $this->data['User']['password']);
+			
+			if ($result != null) {
+			  $this->Session->write('user_id', $result['User']['id']);
+			  $this->flash('Bienvenido', '/');
+			} else {
+				$this->flash('El usuario no existe o la contraseña es incorrecta', array('action' => 'login'));
+			}
+		}
+	}
+	
+	function logout()
+	{
+		$this->Session->delete('user_id');
+		$this->flash('Hasta Pronto', '/');
+	}
+	
 	function verSuscripciones()
 	{
 		$subscripciones = $this->User
 							   ->find('all',
 									  array('fields' =>
 									  array('User.name', 'Tag.name')));
-		echo debug($subscripciones);
 
 	}
 
@@ -103,31 +91,19 @@ class UsersController extends AppController
 		$result = $this->User->findByName($username);
 		return $result['User']['type'];
 	}
-
-	function login()
-	{
-		if (!empty($this->data['User'])){
-			$result = $this->User->find('first', 
-										array('conditions' => 
-											  array('User.email' => 
-											  		$this->data['User']['email'])));
-			if($result && $result['User']['password'] == md5($result['User']['salt'].
-															 $this->data['User']['password'])){
-				$this->Session->write('user', $result['User']['name']);
-				$this->redirect(array('action' => 'index'));
-			}
-			else{
-				$this->flash('El usuario no existe o la contraseña es incorrecta', 'users/login');
-			}
-		}
+	
+	function cambiarPermiso($user_id){
+		$user = $this->User->find('first',
+								  array('conditions' => array('User.id' => $user_id)));
+		$user['User']['type'] = $user['User']['type'] == 'admin'? 'normal':'admin';
+		$this->User->save($user);
+		$this->redirect(array('action' => 'index'));
 	}
 	
-	
-	function logout()
-	{
-		$this->Session->delete('user');
-		//$this->redirect(array('action' => '/'), null, true);
+	function eliminar($user_id){
+		$this->User->del($user_id);
+		$this->redirect(array('action' => 'index'));
 	}
-
+	
 }
 ?>
