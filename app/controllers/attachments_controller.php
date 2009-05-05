@@ -20,8 +20,12 @@ class AttachmentsController extends AppController {
 		$file = $this->Attachment->findById($id);
 		$filePath = str_replace('\\', '/', $file['Attachment']['location']).'/'.str_replace('\\', '/', $file['Attachment']['filename']);
 		
-		debug($filePath);
-		#$this->redirect(array('url' => $filePath));
+		debug(WWW_ROOT.$filePath);
+		$this->layout=null;
+		$this->set('file',$filePath);
+		// $this->redirect(array('controller' => '',));
+		#return WWW_ROOT.$filePath;
+		
 		#exit();
 	}
 
@@ -91,7 +95,7 @@ class AttachmentsController extends AppController {
 		$this->data['Attachment']['location'] = $rel_url;
 		$this->Attachment->save($this->data);
 
-		$this->redirect('/speeches/view_speech/'.$speech_id);
+		$this->redirect('/speeches/show/'.$speech_id);
 		
 
 //
@@ -109,7 +113,7 @@ class AttachmentsController extends AppController {
 //            $this->data['Attachment']['data'] = $fileData;
 //            $this->Attachment->save($this->data);
 //
-//            $this->redirect('/speeches/view_speech/'.$speech_id);
+//            $this->redirect('/speeches/show/'.$speech_id);
 //        }
 
 	}
