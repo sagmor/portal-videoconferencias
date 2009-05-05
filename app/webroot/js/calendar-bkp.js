@@ -9,7 +9,6 @@ $(document).ready(function() {
       } else {
         $('.'+this.id).hide("fast");
       }
-      
     });
   });
   
@@ -23,7 +22,6 @@ $(document).ready(function() {
       $('#filter form').show("fast");
       
     }
-    
   });
 
 });

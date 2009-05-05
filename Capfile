@@ -12,6 +12,8 @@ namespace :deploy do
       run "ln -s #{shared_path}/config/#{config}.php #{release_path}/app/config/#{config}.php"      
     end
     run "chmod -R a+w #{release_path}/app/tmp"
+    run "ln -s #{shared_path}/files #{release_path}/app/webroot/files"      
+    
     
    run "rm #{release_path}/{.htaccess,app/.htaccess,app/webroot/.htaccess}"
   end
