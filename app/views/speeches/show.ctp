@@ -34,14 +34,15 @@
     	</li>
 	  </ul>
 	  <h3>Subir Archivo</h3>
-    <form name="uploadFile" method="POST" enctype="multipart/form-data" action="/speeches/view_speech">
-      <p>
-    	  <?php echo $form->input('Atachment.name', array('size' => '20'))?>
-    	  <?php echo $form->isFieldError('Atachment.name') ?>
-    	  <input type="file" name="AttachFile" value="" width="20" />
-    	  <input type="submit" value="Subir" name="uploadFile" />
-      </p>
-    </form>
+    <?php
+      echo $form->create('Attachment', array('url'=>array('action' => 'upload',
+  													$speech['Speech']['id'],
+  													$speech['Speech']['location']),
+  										'type' => 'file'));
+      echo $form->file('File');
+      echo $form->submit('Upload');
+      echo $form->end();
+    ?>
     <hr />
 	<?php } ?>
 	  

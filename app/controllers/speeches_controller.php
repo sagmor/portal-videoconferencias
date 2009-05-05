@@ -89,5 +89,8 @@ class SpeechesController extends AppController {
 			$this->set('speeches', $speeches);
 		}
 	}
+
+	
+	
 }
 ?>
