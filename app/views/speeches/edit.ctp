@@ -1,5 +1,3 @@
-<!-- Solo un admin puede crear una charla -->
-<?php if($this->requestAction('/users/getCurrentUserType') == 'admin'):?>
 	<h1>Editar Charla</h1>
 
 	<?php echo $form->create('Speech', array('action' => 'edit')); ?>
@@ -52,6 +50,3 @@
 			<?php echo $form->submit('Guardar') ?>
 		</p>
 	<?php echo $form->input('id', array('type'=>'hidden')); ?>
-<?php else:?>
-	<?php echo 'No tiene permiso para editar una charla'?>
-<?php endif?>
