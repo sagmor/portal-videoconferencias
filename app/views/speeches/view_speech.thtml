@@ -39,26 +39,26 @@
 <?php if($this->requestAction('/users/getCurrentUserType') == 'admin'):?>
 	<p><a href="">Usuarios suscritos</a></p>
 <?php endif?>
-<?php
-	$folder = '/files/'.$speech['Speech']['title'].'/';
-    echo $form->create('Attachment', array(
-										'url'=>array(
-													'action' => 'upload',
-													$speech['Speech']['id'],
-													$folder,
-													$speech['Speech']['title']
-													),
-										'type' => 'file'));
-	echo $form->input('Attachment.name', array('size' => '20', 'label' => 'Tipo de archivo (vídeo, presentación, etc.)'));
-    echo $form->file('File');
-    echo $form->submit('Subir');
-    echo $form->end();
-?>
+
 
 	
 <!--Opción de subir archivos solo para el admin-->
 <?php if($this->requestAction('/users/getCurrentUserType') == 'admin'):?>
-	
+	<?php
+		$folder = '/files/'.$speech['Speech']['title'].'/';
+		echo $form->create('Attachment', array(
+											'url'=>array(
+														'action' => 'upload',
+														$speech['Speech']['id'],
+														$folder,
+														$speech['Speech']['title']
+														),
+											'type' => 'file'));
+		echo $form->input('Attachment.name', array('size' => '20', 'label' => 'Tipo de archivo (vídeo, presentación, etc.)'));
+		echo $form->file('File');
+		echo $form->submit('Subir');
+		echo $form->end();
+	?>
 <?php endif?>
 
 

@@ -21,7 +21,7 @@ class AttachmentsController extends AppController {
 		$filePath = str_replace('\\', '/', $file['Attachment']['location']).'/'.str_replace('\\', '/', $file['Attachment']['filename']);
 		
 		debug($filePath);
-		$this->redirect(array('url' => $filePath));
+		#$this->redirect(array('url' => $filePath));
 		#exit();
 	}
 
