@@ -72,9 +72,14 @@
 		//$attachedFiles = $this->requestAction('/attachments/getAttachmentFiles', $speech['Speech']['id']);
 	?>
 		<li>
+			<a href="<?php $this->requestAction('/attachments/download/'.$file['Attachment']['id']) ?>">
+				<?php
+					echo $file['Attachment']['name'];
+				?>
+			</a>
 			<?php
-				echo $html->link($file['Attachment']['name'],
-										"/attachments/download/".$file['Attachment']['id']);
+				#echo $html->link($file['Attachment']['name'],
+				#						"/attachments/download/".$file['Attachment']['id']);
 			?>
 		</li>
 	</ul>

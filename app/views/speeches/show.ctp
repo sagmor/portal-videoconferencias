@@ -19,6 +19,8 @@
 		<p>Descripción de la charla<br />
 		  <?php echo $speech['Speech']['description']?></p>
 	</div>
+	
+
 	<div class="attachments">
 	<?php if($current_user['User']['type'] == 'admin'){ ?>
 	  <h3>Administración</h3>
@@ -35,13 +37,19 @@
 	  </ul>
 	  <h3>Subir Archivo</h3>
     <?php
-      echo $form->create('Attachment', array('url'=>array('action' => 'upload',
-  													$speech['Speech']['id'],
-  													$speech['Speech']['location']),
-  										'type' => 'file'));
-      echo $form->file('File');
-      echo $form->submit('Upload');
-      echo $form->end();
+      $folder = '/files/'.$speech['Speech']['title'].'/';
+		echo $form->create('Attachment', array(
+											'url'=>array(
+														'action' => 'upload',
+														$speech['Speech']['id'],
+														$folder,
+														$speech['Speech']['title']
+														),
+											'type' => 'file'));
+		echo $form->input('Attachment.name', array('size' => '20', 'label' => 'Tipo de archivo (vídeo, presentación, etc.)'));
+		echo $form->file('File');
+		echo $form->submit('Subir');
+		echo $form->end();
     ?>
     <hr />
 	<?php } ?>
@@ -65,6 +73,29 @@
 		    <div id="attachment-4" class="overlay"></div>
 		  </li>
 		</ul>
+
+		<ul>
+	<?php
+		$files = $this->requestAction('/attachments/getFiles/'.$speech['Speech']['id']);
+		if ($files) :
+		foreach ($files as $file) :
+		//$attachedFiles = $this->requestAction('/attachments/getAttachmentFiles', $speech['Speech']['id']);
+	?>
+		<li>
+			<?php
+				echo $html->link($file['Attachment']['name'],
+										"/attachments/download/".$file['Attachment']['id']);
+			?>
+		</li>
+	</ul>
+
+	<?php
+		endforeach;
+		else :
+			echo 'Esta charla no posee archivos adjuntos';
+
+		endif;
+	?>
 	
 	</div>
 </div>
