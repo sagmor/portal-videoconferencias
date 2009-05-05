@@ -10,14 +10,18 @@
   $rows = 1;
 
 ?>
-  <?php echo $html->link('← anterior', 
+  <?php 
+   if ( $type == big ) {
+    echo $html->link('← anterior', 
       array(  'action' => 'index', 
               'month' => date("n", $prev),
-              'year' => date("Y", $prev)), array('class' => 'prev')); ?>
-  <?php echo $html->link('siguiente →', 
+              'year' => date("Y", $prev)), array('class' => 'prev'));
+    echo $html->link('siguiente →', 
       array(  'action' => 'index', 
               'month' => date("n", $next),
-              'year' => date("Y", $next)), array('class' => 'next')); ?>
+              'year' => date("Y", $next)), array('class' => 'next'));
+              
+    } ?>
 <h2><?php echo date("F Y", $date) ?></h2>
 
 <table border="0">

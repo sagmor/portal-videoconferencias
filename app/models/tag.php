@@ -3,9 +3,11 @@ class Tag extends AppModel
 {
 	var $name = 'Tag';
 	
-	var $validate = array('name' => array('alphaNumeric' => array('rule' => 'alphaNumeric',
-																  'required' => true,
-																  'message' => 'Solo letras y números')));
+	var $validate = array('name' => array( 
+                'rule' => '/.+/',
+                'required' => true,
+                'message' => 'Debes ingresar Algo'
+              ));
 
 }
 ?>

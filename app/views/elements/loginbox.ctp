@@ -11,4 +11,3 @@
 	  <?php echo $html->link('Registrar', array('controller' => 'users', 
 	                                      'action' => 'register')); ?>
   </form>
-</form>

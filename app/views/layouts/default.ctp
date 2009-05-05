@@ -27,7 +27,7 @@
   			  <?php echo $html->link('Inicio', '/'); ?>
         </li>
   			<li>
-  			  <?php echo $html->link('Calendatio', array('controller' => 'calendar', 'action' => 'index')); ?>
+  			  <?php echo $html->link('Calendario', array('controller' => 'calendar', 'action' => 'index')); ?>
   			<li>
   			  <?php echo $html->link('Acerca de', array('controller' => 'pages', 'action' => 'display', 'about')); ?>
         </li>
