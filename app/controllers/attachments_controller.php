@@ -28,6 +28,7 @@ class AttachmentsController extends AppController {
 
 	function upload($speech_id, $folder, $speech_title) {
 
+
 //		debug($this->data);
 //		debug($folder);
 //		debug($speech_title);
@@ -110,7 +111,7 @@ class AttachmentsController extends AppController {
 //
 //            $this->redirect('/speeches/view_speech/'.$speech_id);
 //        }
-	}
 
+	}
 }
 ?>

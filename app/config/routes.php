@@ -31,7 +31,7 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/views/pages/home.ctp)...
  */
-	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+	Router::connect('/', array('controller' => 'speeches', 'action' => 'index'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
@@ -43,6 +43,14 @@
   Router::connect('/calendar/:year/:month', 
           array(  'controller' => 'calendar', 
                   'action' => 'index',
+                  'year' => date("Y"),
+                  'month' => date("n")), 
+          array(  'year'=>'[0-9]+', 
+                  'month'=>'[0-9]+')
+              );
+  Router::connect('/speeches/js/:year/:month', 
+          array(  'controller' => 'speeches', 
+                  'action' => 'index_json',
                   'year' => date("Y"),
                   'month' => date("n")), 
           array(  'year'=>'[0-9]+', 

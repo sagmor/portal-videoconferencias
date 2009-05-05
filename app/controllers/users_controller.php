@@ -5,11 +5,7 @@ class UsersController extends AppController
 	var $helpers = array('Html', 'Form' );
 	
 	function index(){
-		$current_user = $this->currentUser();
-		if($current_user == null || $current_user['User']['type'] != 'admin'){
-			$this->flash('Acción no autorizada', '/');
-		}
-		else{
+	  if ($this->validateAdmin()) {
 			$users = $this->User->find('all', 
 									   array('fields' => array('User.id',
 									   						   'User.name',
@@ -32,30 +28,27 @@ class UsersController extends AppController
 	}
 
 	function edit($id = null){
-	  $current_user = $this->currentUser();
-	  
-	  if ($current_user == null) {
-	    $this->flash('Acción no autorizada', '/');
-	  } elseif ($id == null) {
-	    $this->User->id = $current_user['User']['id'];
-	  } elseif ( $current_user['User']['type'] != 'admin' && $id != $current_user['User']['id'] ) {
-	    $this->flash('Acción no autorizada', '/');
-	    return;
-	  } else {
-	    $this->User->id = $id;
-    }
-    
-    
+	  if ($this->validateUser()) {
+	    $current_user = $this->currentUser();
 	    
-	  if (empty($this->data)) {
-	    $this->data = $this->User->read();
-    } else {
-      $this->User->read();
-      if ($this->User->save($this->data)) {
-        $this->flash('Se han actualizado los datos', '/');
+	    if ($id == null) {
+	      $this->User->id = $current_user['User']['id'];
+	    } elseif ($id != $current_user['User']['id'] && $this->validateAdmin() ) {
+	      return;
+	    } else {
+	      $this->User->id = $id;
       }
-    }
-	}
+
+	    if (empty($this->data)) {
+	      $this->data = $this->User->read();
+      } else {
+        $this->User->read();
+        if ($this->User->save($this->data)) {
+          $this->flash('Se han actualizado los datos', '/');
+        }
+      }
+	  }
+  }
 
 	function login()
 	{
@@ -93,16 +86,20 @@ class UsersController extends AppController
 	}
 	
 	function cambiarPermiso($user_id){
-		$user = $this->User->find('first',
+	  if ($this->validateAdmin()) {
+		  $user = $this->User->find('first',
 								  array('conditions' => array('User.id' => $user_id)));
-		$user['User']['type'] = $user['User']['type'] == 'admin'? 'normal':'admin';
-		$this->User->save($user);
-		$this->redirect(array('action' => 'index'));
+		  $user['User']['type'] = $user['User']['type'] == 'admin'? 'normal':'admin';
+		  $this->User->save($user);
+		  $this->redirect(array('action' => 'index'));
+	  }
 	}
 	
 	function eliminar($user_id){
-		$this->User->del($user_id);
-		$this->redirect(array('action' => 'index'));
+	  if ($this->validateAdmin()) {
+		  $this->User->del($user_id);
+		  $this->redirect(array('action' => 'index'));
+	  }
 	}
 	
 }

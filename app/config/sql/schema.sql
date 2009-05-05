@@ -74,3 +74,7 @@ CREATE TABLE attachments(
   filename varchar(255),
   PRIMARY KEY  (id)
 );
+
+INSERT INTO users (id, hashed_password, salt, email, type, name, lang) VALUES
+(1, 'd4500e2b4e8021a92653999e24d706d3', '0d23af15757c9dcf9a953479e497b684', 'admin@example.com', 'admin', 'Admin', 'es'),
+(2, 'd4500e2b4e8021a92653999e24d706d3', '0d23af15757c9dcf9a953479e497b684', 'user@example.com', 'normal', 'User', 'es');

@@ -15,18 +15,22 @@ class TagsController extends AppController
 	}
 
 	function administrar(){
-		$this->data['Tag']['tags'] = $this->Tag->find('all');
-		$this->set('data', $this->data['Tag']['tags']);
-		if(!empty($this->data['Tag']['name'])){
-			$this->Tag->save($this->data);
-			$this->redirect(array('action' => 'administrar'));
-			echo 'hola';
-		}
+	  if ($this->validateAdmin()) {
+		  $this->data['Tag']['tags'] = $this->Tag->find('all');
+		  $this->set('data', $this->data['Tag']['tags']);
+		  
+		  if(!empty($this->data['Tag']['name'])){
+			  $this->Tag->save($this->data);
+			  $this->flash('Se ha creado el Tag', array('action' => 'administrar'));
+		  }
+	  }
 	}
 
 	function delete($tag_id){
-		$this->Tag->del($tag_id, true);
-        $this->redirect(array('action' => 'administrar'));
+	  if ($this->validateAdmin()) {
+		  $this->Tag->del($tag_id, true);
+      $this->flash('Se ha eliminado el Tag', array('action' => 'administrar'));
+    }
 	}
 
 }

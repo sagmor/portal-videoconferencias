@@ -2,20 +2,20 @@
 class SpeechesController extends AppController {
     var $helpers = array('Html', 'Javascript', 'Form');
     var $name = 'Speeches';
+    
+    var $components = array('json');
 
     function index() {
         $this->set('speeches', $this->Speech->find('all'));
     }
 
-    function view_speech($id = null) {
+    function show($id = null) {
         $this->Speech->id = $id;
         $this->set('speech', $this->Speech->read());
     }
 
     function add() {
-      if ($current_user == null || $current_user->type != 'admin') {
-        $this->flash('Acción no autorizada', '/');
-      } else {
+      if ($this->validateAdmin()) {
         if(!empty($this->data)) {
             if($this->Speech->save($this->data)) {
                 $this->flash('Nueva charla creada', '', 1);
@@ -24,8 +24,22 @@ class SpeechesController extends AppController {
         }
       }
     }
+    
+    function index_json() {
+      $this->layout = null;
+         Configure::write('debug',0);
+         
+      $month = $this->params['month'];
+      $year = $this->params['year'];
+      
+      $result = $this->Speech->find('all', array(
+        'condittions'=>array('date BETWEEN ? AND ?' => array("$year-$month-01", "$year-$month-31"))));
+      
+      $this->set('result', $this->json->encode($result));
+    }
 
     function edit($id = null) {
+      if ($this->validateAdmin()) {
         $this->Speech->id = $id;
         if (empty($this->data)) {
             $this->data = $this->Speech->read();
@@ -35,12 +49,15 @@ class SpeechesController extends AppController {
                 $this->redirect(array('action' => '/'));
             }
         }
+      }
     }
 
     function delete($id) {
+      if ($this->validateAdmin()) {
         $this->Speech->del($id);
         $this->flash('The speech with id: '.$id.' has been deleted.', '/speeches/', 0);
         $this->redirect(array('action' => '/'));
+      }
     }
 
 	function searchByTags() {
