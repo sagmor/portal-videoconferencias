@@ -19,7 +19,6 @@
 		<p>Descripción de la charla<br />
 		  <?php echo $speech['Speech']['description']?></p>
 	</div>
-	
 
 	<div class="attachments">
 	<?php if($current_user['User']['type'] == 'admin'){ ?>
@@ -32,12 +31,16 @@
 	      <?php echo $html->link('Editar', array('action'=>'edit', 'id'=>$speech['Speech']['id']));?>
 	    </li>
     	<li>
-    	  <?php echo $html->link('Borrar', array('action'=>'delete', 'id'=>$speech['Speech']['id']), null, '¿Está seguro?')?>
+    	  <?php echo $html->link('Borrar', array(
+											'action'=>'delete',
+											'id'=>$speech['Speech']['id']),
+											null,
+											'¿Está seguro?')?>
     	</li>
 	  </ul>
 	  <h3>Subir Archivo</h3>
     <?php
-      $folder = '/files/'.$speech['Speech']['title'].'/';
+      $folder = DS.'files'.DS.$speech['Speech']['title'].DS;
 		echo $form->create('Attachment', array(
 											'url'=>array(
 														'action' => 'upload',
@@ -46,7 +49,8 @@
 														$speech['Speech']['title']
 														),
 											'type' => 'file'));
-		echo $form->input('Attachment.name', array('size' => '20', 'label' => 'Tipo de archivo (vídeo, presentación, etc.)'));
+		echo $form->input('Attachment.name', array('size' => '20',
+													'label' => 'Tipo de archivo (vídeo, presentación, etc.)'));
 		echo $form->file('File');
 		echo $form->submit('Subir');
 		echo $form->end();

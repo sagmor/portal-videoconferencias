@@ -18,7 +18,8 @@ class AttachmentsController extends AppController {
 
 	function download($id) {
 		$file = $this->Attachment->findById($id);
-		$filePath = str_replace('\\', '/', $file['Attachment']['location']).'/'.str_replace('\\', '/', $file['Attachment']['filename']);
+
+		$filePath = $file['Attachment']['location'].DS.$file['Attachment']['filename'];
 		
 		debug(WWW_ROOT.$filePath);
 		$this->layout=null;
@@ -36,7 +37,7 @@ class AttachmentsController extends AppController {
 //		debug($this->data);
 //		debug($folder);
 //		debug($speech_title);
-		$folder = $folder.'\\'.$speech_title;
+		$folder = $folder.DS.$speech_title;
 		$folder_url = WWW_ROOT.$folder;
 
 		//reemplazo los espacios por _ en caso de ser necesario.
@@ -56,10 +57,10 @@ class AttachmentsController extends AppController {
 
 			case 0:
 			// check filename already exists
-				if(!file_exists($folder_url.'/'.$filename)) {
+				if(!file_exists($folder_url.DS.$filename)) {
 					// create full filename
-					$full_url = $folder_url.'/'.$filename;
-					$url = $rel_url.'/'.$filename;
+					$full_url = $folder_url.DS.$filename;
+					$url = $rel_url.DS.$filename;
 					debug($url);
 					// upload the file
 					$success = move_uploaded_file($file['tmp_name'], $url);
@@ -67,8 +68,8 @@ class AttachmentsController extends AppController {
 					// create unique filename and upload file
 					ini_set('date.timezone', 'Europe/London');
 					$now = date('Y-m-d-His');
-					$full_url = $folder_url.'/'.$now.$filename;
-					$url = $rel_url.'/'.$now.$filename;
+					$full_url = $folder_url.DS.$now.$filename;
+					$url = $rel_url.DS.$now.$filename;
 					$success = move_uploaded_file($file['tmp_name'], $url);
 				}
 				// if upload was successful
