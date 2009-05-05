@@ -40,42 +40,58 @@
 	<p><a href="">Usuarios suscritos</a></p>
 <?php endif?>
 <?php
-    echo $form->create('Attachment', array('url'=>array('action' => 'upload',
+	$folder = '/files/'.$speech['Speech']['title'].'/';
+    echo $form->create('Attachment', array(
+										'url'=>array(
+													'action' => 'upload',
 													$speech['Speech']['id'],
-													$speech['Speech']['location']),
+													$folder,
+													$speech['Speech']['title']
+													),
 										'type' => 'file'));
+	echo $form->input('Attachment.name', array('size' => '20', 'label' => 'Tipo de archivo (vídeo, presentación, etc.)'));
     echo $form->file('File');
-    echo $form->submit('Upload');
+    echo $form->submit('Subir');
     echo $form->end();
 ?>
 
 	
 <!--Opción de subir archivos solo para el admin-->
 <?php if($this->requestAction('/users/getCurrentUserType') == 'admin'):?>
-	<form name="uploadFile" method="POST" enctype="multipart/form-data" action="/speeches/view_speech">
-
-		<p>
-			
-			<?php echo $form->input('Atachment.name', array('size' => '20'))?>
-			<?php echo $form->isFieldError('Atachment.name') ?>
-			<input type="file" name="AttachFile" value="" width="20" />
-			<input type="submit" value="Subir" name="uploadFile" />
-		</p>
-
-	</form>
+	
 <?php endif?>
 
 
 <!--Archivos adjuntos-->
+<h3>Archivos adjuntos</h3>
+	<ul>
 	<?php
+		$files = $this->requestAction('/attachments/getFiles/'.$speech['Speech']['id']);
+		if ($files) :
+		foreach ($files as $file) :
 		//$attachedFiles = $this->requestAction('/attachments/getAttachmentFiles', $speech['Speech']['id']);
 	?>
+		<li>
+			<?php
+				echo $html->link($file['Attachment']['name'],
+										"/attachments/download/".$file['Attachment']['id']);
+			?>
+		</li>
+	</ul>
 
-<h3>Archivos adjuntos</h3>
+	<?php
+		endforeach;
+		else :
+			echo 'Esta charla no posee archivos adjuntos';
+		
+		endif;
+	?>
 
+<!--
 <ul>
     <li>Vídeo</li>
     <li>Presentación</li>
     <li>Fotos</li>
     <li>Documentos</li>
 </ul>
+-->
