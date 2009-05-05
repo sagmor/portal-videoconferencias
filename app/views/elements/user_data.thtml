@@ -4,6 +4,14 @@ Saludos: <br />
 <ul>
 	<li><?php echo $html->link('Editar Datos', array('controller' => 'users', 
                                       'action' => 'edit')); ?></li>
+    <li><?php if($current_user['User']['type'] == 'admin'){
+    			echo $html->link('Configurar permisos', array('controller' => 'users', 
+                                        					  'action' => 'index'));
+    		  }?></li>
+   	<li><?php if($current_user['User']['type'] == 'admin'){
+    			echo $html->link('Configurar categorías', array('controller' => 'tags', 
+                                        					  'action' => 'administrar'));
+    		  }?></li>
 	<li><?php echo $html->link('Salir', array('controller' => 'users', 
                                         'action' => 'logout')); ?></li>
 </ul>

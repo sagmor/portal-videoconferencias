@@ -3,6 +3,21 @@ class UsersController extends AppController
 {
 	var $name = 'Users';
 	var $helpers = array('Html', 'Form' );
+	
+	function index(){
+		$current_user = $this->currentUser();
+		if($current_user == null || $current_user['User']['type'] != 'admin'){
+			$this->flash('Acción no autorizada', '/');
+		}
+		else{
+			$users = $this->User->find('all', 
+									   array('fields' => array('User.id',
+									   						   'User.name',
+								  							   'User.email',
+															   'User.type')));
+			$this->set('users', $users);
+		}
+	}
 
 	function register() {
 		if (!empty($this->data['User'])){
@@ -68,7 +83,6 @@ class UsersController extends AppController
 							   ->find('all',
 									  array('fields' =>
 									  array('User.name', 'Tag.name')));
-		echo debug($subscripciones);
 
 	}
 
@@ -77,5 +91,19 @@ class UsersController extends AppController
 		$result = $this->User->findByName($username);
 		return $result['User']['type'];
 	}
+	
+	function cambiarPermiso($user_id){
+		$user = $this->User->find('first',
+								  array('conditions' => array('User.id' => $user_id)));
+		$user['User']['type'] = $user['User']['type'] == 'admin'? 'normal':'admin';
+		$this->User->save($user);
+		$this->redirect(array('action' => 'index'));
+	}
+	
+	function eliminar($user_id){
+		$this->User->del($user_id);
+		$this->redirect(array('action' => 'index'));
+	}
+	
 }
 ?>
