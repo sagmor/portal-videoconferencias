@@ -12,7 +12,7 @@ Saludos: <br />
       	<?php echo $html->link('Configurar permisos', array('controller' => 'users', 'action' => 'index')); ?>
       </li>
    	  <li>
-   	    <?echo $html->link('Configurar categorías', array('controller' => 'tags', 'action' => 'administrar')); ?>
+   	    <?php echo $html->link('Configurar categorías', array('controller' => 'tags', 'action' => 'administrar')); ?>
    	  </li>
    	<?php } ?>
 	<li><?php echo $html->link('Salir', array('controller' => 'users', 
