@@ -499,3 +499,11 @@ a.next {
   background-color: #F5F5F5;
 }
 
+#calendar td {
+  overflow: hidden;
+}
+
+.daynumber {
+  display: block;
+}
+

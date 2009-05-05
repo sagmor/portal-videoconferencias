@@ -59,7 +59,7 @@
         }
 
 
-        echo "<td id=\"day$day\">$day</td>";
+        echo "<td id=\"day$day\"><span class=\"daynumber\">$day</span></td>";
     }
     
     while( ($day + $offset) <= $rows * 7){
