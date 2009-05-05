@@ -48,7 +48,7 @@
           array(  'year'=>'[0-9]+', 
                   'month'=>'[0-9]+')
               );
-  Router::connect('/speeches/js/:year/:month', 
+  Router::connect('/speeches/index_json/:year/:month', 
           array(  'controller' => 'speeches', 
                   'action' => 'index_json',
                   'year' => date("Y"),
