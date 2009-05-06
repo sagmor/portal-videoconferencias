@@ -5,6 +5,8 @@ app/config/secret.php
 # User Content Files
 app/webroot/resources/**/*
 !app/webroot/resources/**/empty
+app/webroot/files/**/*
+!app/webroot/files/**/empty
 
 # Temporal Files
 app/tmp/**/*
