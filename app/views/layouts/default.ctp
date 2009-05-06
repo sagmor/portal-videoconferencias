@@ -27,7 +27,7 @@
   			  <?php echo $html->link('Inicio', '/'); ?>
 			</li>
 			<li>
-  			  <?php echo $html->link('Buscar', '/speeches/searchByTags'); ?>
+			  <?php echo $html->link('Buscar', array('controller' => 'speeches', 'action' => 'search')); ?>
 			</li>
   			<li>
   			  <?php echo $html->link('Calendario', array('controller' => 'calendar', 'action' => 'index')); ?>

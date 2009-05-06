@@ -42,7 +42,7 @@
 
 			<!-- Tags -->
 			<?php $tags = $this->requestAction('/tags/getTags');
-					echo $form->input('Tag', array('label' => 'Subscripciones',
+					echo $form->input('Tag', array('label' => 'Categorías',
 												   'multiple' => 'checkbox',
 												   'options' => $tags));
 			?>

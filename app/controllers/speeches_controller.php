@@ -63,6 +63,60 @@ class SpeechesController extends AppController {
       }
     }
 
+	function searchBySpeaker() {
+		$this->set('speeches', '');
+		if(!empty($this->data)) {
+			$speaker = $this->data['Speech']['Speaker'];
+			$speeches = $this->Speech->find('all', array(
+												'conditions' => 'Speech.speakers LIKE \'%'.$speaker.'%\''));
+			$this->set('speeches', $speeches);
+		}
+	}
+
+	function search() {
+
+	}
+
+	function getLocations() {
+		$speeches = $this->Speech->find('all');
+		$arrLocations = array();
+		foreach($speeches as $speech){
+			$arrLocations[$speech['Speech']['location']] = $speech['Speech']['location'];
+		}
+		return $arrLocations;
+	}
+
+	function searchByLocation() {
+		$this->set('speeches', '');
+		if(!empty($this->data)) {
+			#debug($this->data);
+			$dataLocations = $this->data['Speech']['Location'];
+			#debug($dataLocations);
+			$allSpeeches = $this->Speech->find('all');
+			$i = 0;
+			$speeches = array();
+			foreach($allSpeeches as $speech){
+				$location = $speech['Speech']['location'];
+				#debug($location);
+				foreach ($dataLocations as $dataLocation) {
+					if ($location == $dataLocation) {
+						$isAdded = false;
+						foreach ($speeches as $speechSelected) {
+							if($speechSelected == $speech['Speech']) {
+								$isAdded = true;
+							}
+						}
+						if(!$isAdded) {
+							$speeches[$i] = $speech['Speech'];
+							$i++;
+						}
+					}
+				}
+			}
+			$this->set('speeches', $speeches);
+		}
+	}
+
 	function searchByTags() {
 		$this->set('speeches', '');
 		if(!empty($this->data)) {

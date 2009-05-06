@@ -1,15 +1,19 @@
-<form method="post" action="<?php echo $html->url('/speeches/searchByTags')?>">
-	<h1>Búsqueda de Charlas por categoría</h1>
-	<h3>Seleccione la o las categorías por las que desea realizar la búsqueda</h3>
-	<?php
-		$tags = $this->requestAction('/tags/getTags');
-		echo $form->input('Tag', array('label' => '',
-									   'multiple' => 'checkbox',
-									   'options' => $tags));
+<h1>Búsqueda de Charlas por sala</h1>
 
-		echo $form->submit('Buscar');
-	?>
-	<?php if($speeches != ''):?>
+<?php
+	echo $form->create('Speech', array('action' => 'searchByLocation'));
+
+	$locations = $this->requestAction(array('controller' => 'speeches',
+											'action' => 'getLocations'));
+	echo $form->input('Location', array('label' => '',
+									   'multiple' => 'checkbox',
+									   'options' => $locations));
+
+	echo $form->submit('Buscar');
+
+?>
+
+<?php if($speeches != ''):?>
 		<table>
 			<tr>
 				<th>Título</th>
@@ -37,5 +41,7 @@
 			<?php endforeach; ?>
 		</table>
 	<?php endif ?>
-</form>
 
+<?php
+	$form->end();
+?>
