@@ -9,7 +9,9 @@
 
 		echo $form->submit('Buscar');
 	?>
-	<?php if($speeches != ''):?>
+	<?php
+		if($speeches != array()):
+	?>
 		<table>
 			<tr>
 				<th>Título</th>
@@ -36,6 +38,9 @@
 					</tr>
 			<?php endforeach; ?>
 		</table>
-	<?php endif ?>
+	<?php
+		else :
+			echo 'Se encuentran charlas asociadas a esta categoría';
+	endif ?>
 </form>
 

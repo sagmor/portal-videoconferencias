@@ -2,7 +2,9 @@
 	<form method="post" action="<?php echo $html->url('/tags/add')?>">
 		<h1>Agregar nueva categoría</h1>
 		<p>
-			<?php echo $form->input('Tag.name', array('size' => '20'))?>
+			<?php echo $form->input('Tag.name', array(
+													'size' => '20',
+													'maxlength' => '50'))?>
 			<?php echo $form->isFieldError('Tag.name') ?>
 		</p>
 		<p><?php echo $form->submit('Guardar') ?></p>

@@ -1,14 +1,19 @@
-<h1>Búsqueda de Charlas por orador</h1>
+<h1>Búsqueda de Charlas por mes y año</h1>
+
 <?php
-	echo $form->create('Speech', array('action' => 'searchBySpeaker'));
+	echo $form->create('Speech', array('action' => 'searchByDate'));
 
-	echo $form->input('Speaker', array('label' => 'Ingrese el nombre del orador'));
-
+	echo $form->input('date', array(
+								'label' => 'Fecha (mes - año)',
+								'size' => '1',
+								'type' => 'date',
+								'dateFormat' => 'MY',
+								'selected' => array('year'=>'2009'),
+								));
 	echo $form->submit('Buscar');
-
 ?>
 
-<?php
+<?php 
 	if($speeches != array()):
 ?>
 	<table>
@@ -17,7 +22,9 @@
 			<th>Fecha</th>
 		</tr>
 		<?php
-			foreach ($speeches as $speech): ?>
+			foreach ($speeches as $speech):
+				#debug($speech);
+		?>
 				<tr>
 					<td>
 					<?php echo $html->link($speech['Speech']['title'],
@@ -39,7 +46,7 @@
 	</table>
 <?php
 	else :
-		echo 'Se encuentra registrado este orador';
+		echo 'No hay charlas agendadas para este mes';
 endif ?>
 
 <?php

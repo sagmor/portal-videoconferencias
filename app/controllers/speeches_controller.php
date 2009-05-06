@@ -77,6 +77,13 @@ class SpeechesController extends AppController {
 
 	}
 
+	function getTagsBySpeechId($speechId) {
+		$tags = $this->Speech->find('all', array(
+											'conditions' => array(
+																'Speech.id' => $speechId)));
+		return $tags[0]['Tag'];
+	}
+
 	function getLocations() {
 		$speeches = $this->Speech->find('all');
 		$arrLocations = array();
@@ -147,7 +154,18 @@ class SpeechesController extends AppController {
 		}
 	}
 
-	
+	function searchByDate() {
+		#debug($this->data);
+		$year = $this->data['Speech']['date']['year'];
+		$month = $this->data['Speech']['date']['month'];
+		$result = $this->Speech->find('all', array(
+												'conditions'=>array(
+															'date BETWEEN ? AND ?' => array(
+																						"$year-$month-01",
+																						"$year-$month-31"))));
+		#debug($result);
+		$this->set('speeches', $result);
+	}
 	
 }
 ?>

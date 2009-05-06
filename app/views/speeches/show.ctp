@@ -17,7 +17,20 @@
     </ul>
     
 		<p>Descripción de la charla<br />
-		  <?php echo $speech['Speech']['description']?></p>
+			<?php echo $speech['Speech']['description']?>
+		</p>
+
+			<p>Categorías</p>
+			<?php
+				$tags = $this->requestAction('speeches/getTagsBySpeechId/'.$speech['Speech']['id']);
+				foreach ($tags as $tag) :
+			?>
+			<ul>
+				<li><?php echo $tag['name']?></li>
+			</ul>
+			<?php endforeach; ?>
+			
+
 	</div>
 
 	<div class="attachments">
@@ -93,10 +106,10 @@
 					}
 				?>
 			</li>
+			<?php endforeach;?>
 		</ul>
 
 		<?php
-			endforeach;
 			else :
 				echo 'Esta charla no posee archivos adjuntos';
 
@@ -104,5 +117,3 @@
 		?>
 	</div>
 </div>
-
-

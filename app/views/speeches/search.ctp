@@ -14,6 +14,11 @@
 															'controller' => 'speeches',
 															'action' => 'searchByLocation')); ?>
 		</li>
+		<li>
+		  <?php echo $html->link('Buscar por fecha', array(
+															'controller' => 'speeches',
+															'action' => 'searchByDate')); ?>
+		</li>
 	</ul>
 </div>
 <div id="content">
