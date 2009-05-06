@@ -1,4 +1,4 @@
-<div id="menu">
+<div id="menu" style="float:left">
 	<ul>
 		<li>
 		  <?php echo $html->link('Buscar por categoría', array(

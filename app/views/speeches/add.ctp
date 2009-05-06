@@ -45,6 +45,7 @@
 					echo $form->input('Tag', array('label' => 'Categorías',
 												   'multiple' => 'checkbox',
 												   'options' => $tags));
+					echo $form->isFieldError('Tag');
 			?>
 			<p><?php echo $form->submit('Guardar') ?></p>
 	</form>

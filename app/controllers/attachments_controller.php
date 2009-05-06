@@ -30,10 +30,11 @@ class AttachmentsController extends AppController {
 		#exit();
 	}
 
+	function delete($attachment) {
+		
+	}
 
 	function upload($speech_id, $folder, $speech_title) {
-
-
 //		debug($this->data);
 //		debug($folder);
 //		debug($speech_title);
@@ -97,26 +98,6 @@ class AttachmentsController extends AppController {
 		$this->Attachment->save($this->data);
 
 		$this->redirect('/speeches/show/'.$speech_id);
-		
-
-//
-//		if (!empty($this->data) &&
-//             is_uploaded_file($this->data['Attachment']['File']['tmp_name'])) {
-//
-//			$fileData = fread(fopen($this->data['Speech']['File']['tmp_name'], "r"),
-//                                     $this->data['Speech']['File']['size']);
-//
-//            $this->data['Attachment']['filename'] = $this->data['Attachment']['File']['name'];
-//            $this->data['Attachment']['type'] = $this->data['Attachment']['File']['type'];
-//            $this->data['Attachment']['size'] = $this->data['Attachment']['File']['size'];
-//			$this->data['Attachment']['speech_id'] = $speech_id;
-//			$this->data['Attachment']['location'] = $speech_location;
-//            $this->data['Attachment']['data'] = $fileData;
-//            $this->Attachment->save($this->data);
-//
-//            $this->redirect('/speeches/show/'.$speech_id);
-//        }
-
 	}
 }
 ?>

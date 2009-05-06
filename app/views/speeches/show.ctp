@@ -21,86 +21,87 @@
 	</div>
 
 	<div class="attachments">
-	<?php if($current_user['User']['type'] == 'admin'){ ?>
-	  <h3>Administración</h3>
-	  <ul>
-	    <li>
-	      <a href="">Usuarios suscritos</a>
-	    </li>
-	    <li>
-	      <?php echo $html->link('Editar', array('action'=>'edit', 'id'=>$speech['Speech']['id']));?>
-	    </li>
-    	<li>
-    	  <?php echo $html->link('Borrar', array(
-											'action'=>'delete',
-											'id'=>$speech['Speech']['id']),
-											null,
-											'¿Está seguro?')?>
-    	</li>
-	  </ul>
-	  <h3>Subir Archivo</h3>
-    <?php
-      $folder = DS.'files'.DS.$speech['Speech']['title'].DS;
-		echo $form->create('Attachment', array(
-											'url'=>array(
-														'action' => 'upload',
-														$speech['Speech']['id'],
-														$folder,
-														$speech['Speech']['title']
-														),
-											'type' => 'file'));
-		echo $form->input('Attachment.name', array('size' => '20',
-													'label' => 'Tipo de archivo (vídeo, presentación, etc.)'));
-		echo $form->file('File');
-		echo $form->submit('Subir');
-		echo $form->end();
-    ?>
-    <hr />
-	<?php } ?>
-	  
-	  <h3>Adjuntos</h3>
+		<?php if($current_user['User']['type'] == 'admin'){ ?>
+			<h3>Administración</h3>
+			<ul>
+				<li>
+					<a href="">Usuarios suscritos</a>
+				</li>
+				<li>
+					<?php echo $html->link('Editar', array('action'=>'edit', 'id'=>$speech['Speech']['id']));?>
+				</li>
+				<li>
+					<?php echo $html->link('Borrar', array(
+													'action'=>'delete',
+													'id'=>$speech['Speech']['id']),
+													null,
+													'¿Está seguro?')?>
+				</li>
+			</ul>
+			<h3>Subir Archivo</h3>
+			<?php
+				$folder = DS.'files'.DS.$speech['Speech']['id'].DS;
+				echo $form->create('Attachment', array(
+													'url'=>array(
+																'action' => 'upload',
+																$speech['Speech']['id'],
+																$folder,
+																$speech['Speech']['title']
+																),
+													'type' => 'file'));
+				echo $form->input('Attachment.name', array('size' => '20',
+															'label' => 'Tipo de archivo (vídeo, presentación, etc.)'));
+				echo $form->file('File');
+				echo $form->submit('Subir');
+				echo $form->end();
+			?>
+			<hr />
+		<?php } ?>
+
+		<h3>Adjuntos</h3>
 		<ul>
-		  <li class="video">
-		    <a href="" rel="#attachment-1">Video de la Presentacion</a>
-		    <div id="attachment-1" class="overlay"></div>
-		  </li>
-		  <li class="document">
-		    <a href="" rel="#attachment-2">Presentación</a>
-		    <div id="attachment-2" class="overlay"></div>
-		  </li>
-		  <li class="image">
-		    <a href="" rel="#attachment-3">Una Foto</a>
-		    <div id="attachment-3" class="overlay"></div>
-		  </li>
-		  <li class="audio">
-		    <a href="" rel="#attachment-4">Un archivo de Audio</a>
-		    <div id="attachment-4" class="overlay"></div>
-		  </li>
+			<li class="video">
+				<a href="" rel="#attachment-1">Video de la Presentacion</a>
+				<div id="attachment-1" class="overlay"></div>
+			</li>
+			<li class="document">
+				<a href="" rel="#attachment-2">Presentación</a>
+				<div id="attachment-2" class="overlay"></div>
+			</li>
+			<li class="image">
+				<a href="" rel="#attachment-3">Una Foto</a>
+				<div id="attachment-3" class="overlay"></div>
+			</li>
+			<li class="audio">
+				<a href="" rel="#attachment-4">Un archivo de Audio</a>
+				<div id="attachment-4" class="overlay"></div>
+			</li>
 		</ul>
 
 		<ul>
-	<?php
-		$files = $this->requestAction('/attachments/getFiles/'.$speech['Speech']['id']);
-		if ($files) :
-		foreach ($files as $file) :
-		//$attachedFiles = $this->requestAction('/attachments/getAttachmentFiles', $speech['Speech']['id']);
-	?>
-		<li>
 			<?php
-				echo $html->link($file['Attachment']['name'],
-										"/attachments/download/".$file['Attachment']['id']);
+				$files = $this->requestAction('/attachments/getFiles/'.$speech['Speech']['id']);
+				if ($files) :
+				foreach ($files as $file) :
 			?>
-		</li>
-	</ul>
+			<li>
+				<?php
+					echo $html->link($file['Attachment']['name'],
+											"/attachments/download/".$file['Attachment']['id']);
+					if($current_user['User']['type'] == 'admin'){
+						echo $html->link('Borrar', "attachments/delete/".$file);
+					}
+				?>
+			</li>
+		</ul>
 
-	<?php
-		endforeach;
-		else :
-			echo 'Esta charla no posee archivos adjuntos';
+		<?php
+			endforeach;
+			else :
+				echo 'Esta charla no posee archivos adjuntos';
 
-		endif;
-	?>
-	
+			endif;
+		?>
 	</div>
 </div>
 
