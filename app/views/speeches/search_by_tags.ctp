@@ -10,7 +10,7 @@
 		echo $form->submit('Buscar');
 	?>
 	<?php
-		if($speeches != array()):
+		if($speeches != array() && $speeches != ''):
 	?>
 		<table>
 			<tr>
@@ -18,6 +18,7 @@
 				<th>Fecha</th>
 			</tr>
 			<?php
+				debug($speeches);
 				foreach ($speeches as $speech): ?>
 					<tr>
 						<td>
@@ -40,7 +41,7 @@
 		</table>
 	<?php
 		else :
-			echo 'Se encuentran charlas asociadas a esta categoría';
+			echo 'No se encuentran charlas asociadas a esta categoría';
 	endif ?>
 </form>
 

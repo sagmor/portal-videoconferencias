@@ -97,48 +97,20 @@ class SpeechesController extends AppController {
 		$this->set('speeches', '');
 		if(!empty($this->data)) {
 			#debug($this->data);
-			$dataLocations = $this->data['Speech']['Location'];
-			#debug($dataLocations);
-			$allSpeeches = $this->Speech->find('all');
-			$i = 0;
-			$speeches = array();
-			foreach($allSpeeches as $speech){
-				$location = $speech['Speech']['location'];
-				#debug($location);
-				foreach ($dataLocations as $dataLocation) {
-					if ($location == $dataLocation) {
-						$isAdded = false;
-						foreach ($speeches as $speechSelected) {
-							if($speechSelected == $speech['Speech']) {
-								$isAdded = true;
-							}
-						}
-						if(!$isAdded) {
-							$speeches[$i] = $speech['Speech'];
-							$i++;
-						}
-					}
-				}
-			}
-			$this->set('speeches', $speeches);
-		}
-	}
-
-	function searchByTags() {
-		$this->set('speeches', '');
-		if(!empty($this->data)) {
-			$dataTags = $this->data['Tag'];
-			$allSpeeches = $this->Speech->find('all');
-			$i = 0;
-			$speeches = array();
-			foreach($allSpeeches as $speech){
-				$tags = $speech['Tag'];
-				foreach ($tags as $tag) {
-					foreach ($dataTags as $dataTag) {
-						if ($tag['id'] == $dataTag) {
+			if(!empty($this->data['Speech']['Location'])) {
+				$dataLocations = $this->data['Speech']['Location'];
+				#debug($dataLocations);
+				$allSpeeches = $this->Speech->find('all');
+				$i = 0;
+				$speeches = array();
+				foreach($allSpeeches as $speech){
+					$location = $speech['Speech']['location'];
+					#debug($location);
+					foreach ($dataLocations as $dataLocation) {
+						if ($location == $dataLocation) {
 							$isAdded = false;
-							foreach ($speeches as $speechTagged) {
-								if($speechTagged == $speech['Speech']) {
+							foreach ($speeches as $speechSelected) {
+								if($speechSelected == $speech['Speech']) {
 									$isAdded = true;
 								}
 							}
@@ -149,8 +121,40 @@ class SpeechesController extends AppController {
 						}
 					}
 				}
+				$this->set('speeches', $speeches);
 			}
-			$this->set('speeches', $speeches);
+		}
+	}
+
+	function searchByTags() {
+		$this->set('speeches', '');
+		if(!empty($this->data)) {
+			if(!empty($this->data['Tag'])){
+				$dataTags = $this->data['Tag'];
+				$allSpeeches = $this->Speech->find('all');
+				$i = 0;
+				$speeches = array();
+				foreach($allSpeeches as $speech){
+					$tags = $speech['Tag'];
+					foreach ($tags as $tag) {
+						foreach ($dataTags as $dataTag) {
+							if ($tag['id'] == $dataTag) {
+								$isAdded = false;
+								foreach ($speeches as $speechTagged) {
+									if($speechTagged == $speech['Speech']) {
+										$isAdded = true;
+									}
+								}
+								if(!$isAdded) {
+									$speeches[$i] = $speech['Speech'];
+									$i++;
+								}
+							}
+						}
+					}
+				}
+				$this->set('speeches', $speeches);
+			}
 		}
 	}
 

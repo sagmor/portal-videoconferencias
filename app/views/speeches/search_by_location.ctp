@@ -14,7 +14,7 @@
 ?>
 
 <?php
-	if($speeches != array()):
+	if($speeches != array() && $speeches != ''):
 ?>
 	<table>
 		<tr>

@@ -9,7 +9,7 @@
 ?>
 
 <?php
-	if($speeches != array()):
+	if($speeches != array() && $speeches != ''):
 ?>
 	<table>
 		<tr>
@@ -39,7 +39,7 @@
 	</table>
 <?php
 	else :
-		echo 'Se encuentra registrado este orador';
+		echo 'No se encuentra registrado este orador';
 endif ?>
 
 <?php
