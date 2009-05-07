@@ -28,4 +28,28 @@ function loadCalendar(year,month) {
                  $('#loading').hide();
                });
 	        });
+	        
+
+	
+	$('input.tag').each(function(i,cb) {
+	  $(cb).click(function() {
+	    if ($(this).is(":checked")) {
+        $('.'+this.name).show("fast");
+      } else {
+        $('.'+this.name).hide("fast");
+      }
+	  });
+	});
+  
+  $('#filter h2').click(function() {
+    if($('#filter form').is(':visible'))
+    {
+      $('#filter form').hide("fast");
+    } else {
+      $('#filter form').css('float', 'left')
+      $('#filter form').css('display', 'block')
+      $('#filter form').show("fast");
+      
+    }
+  });
 }
