@@ -4,9 +4,11 @@
   
   <form action="" method="get" accept-charset="utf-8">
     <?php $tags = $this->requestAction('/tags/getTags');
-      foreach ($tags as $tag) { ?>
+      foreach ($tags as $tag) {
+        $t = str_replace(" ", "-", $tag);
+        ?>
         
-        <input type="checkbox" name="<?php echo $tag ?>" id="<?php echo $tag ?>" checked="checked" class="tag"><label for="<?php echo $tag ?>"><?php echo $tag ?></label><br />
+        <input type="checkbox" name="<?php echo $t ?>" id="<?php echo $t ?>" checked="checked" class="tag"><label for="<?php echo $t ?>"><?php echo $tag ?></label><br />
       <?php } ?>
   </form>
 </div>

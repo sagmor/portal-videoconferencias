@@ -15,7 +15,7 @@ function loadCalendar(year,month) {
 
                    tags = "item";
                    $.each(e.Tag, function(j, t) {
-                     tags += ' '+t.name;
+                     tags += ' '+t.name.replace(" ", "-");
                    });
 
                    day = parseInt(s.date.substring(8,10));
