@@ -10,7 +10,7 @@
       <?php echo $form->input('User.name', array( 'label' => 'Nombre:')); ?>
     </p>
     <p>
-      <?php echo $form->input('User.email', array( 'label' => 'Correo electónico:')); ?>
+      <?php echo $form->input('User.email', array( 'label' => 'Correo electrónico:')); ?>
     </p>
     <p>
       <?php echo $form->input('User.password', array( 'label' => 'Contraseña:')); ?>
