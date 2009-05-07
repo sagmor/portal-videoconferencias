@@ -19,9 +19,8 @@ class AttachmentsController extends AppController {
 	function download($id) {
 		$file = $this->Attachment->findById($id);
 
-		$filePath = $file['Attachment']['location'].DS.$file['Attachment']['filename'];
+		$filePath = $file['Attachment']['location'].'/'.$file['Attachment']['filename'];
 		
-		debug(WWW_ROOT.$filePath);
 		$this->layout=null;
 		$this->set('file',$filePath);
 		// $this->redirect(array('controller' => '',));
@@ -38,7 +37,7 @@ class AttachmentsController extends AppController {
 //		debug($this->data);
 //		debug($folder);
 //		debug($speech_title);
-		$folder = $folder.DS.$speech_title;
+		$folder = $folder.'/'.$speech_title;
 		$folder_url = WWW_ROOT.$folder;
 
 		//reemplazo los espacios por _ en caso de ser necesario.
@@ -48,6 +47,7 @@ class AttachmentsController extends AppController {
 //		debug($folder_url);
 		if(!is_dir($folder_url)) {
 			mkdir($folder_url);
+			chmod($folder_url, 0757); //en unix, permisos.
 		}
 
 		$file = $this->data['Attachment']['File'];
@@ -58,19 +58,19 @@ class AttachmentsController extends AppController {
 
 			case 0:
 			// check filename already exists
-				if(!file_exists($folder_url.DS.$filename)) {
+				if(!file_exists($folder_url.'/'.$filename)) {
 					// create full filename
-					$full_url = $folder_url.DS.$filename;
-					$url = $rel_url.DS.$filename;
-					debug($url);
+					$full_url = $folder_url.'/'.$filename;
+					$url = $rel_url.'/'.$filename;
 					// upload the file
-					$success = move_uploaded_file($file['tmp_name'], $url);
+					$success = move_uploaded_file($file['tmp_name'], $full_url);
+					// despues de mover, cambiar permisos del file a 0757.
 				} else {
 					// create unique filename and upload file
 					ini_set('date.timezone', 'Europe/London');
 					$now = date('Y-m-d-His');
 					$full_url = $folder_url.DS.$now.$filename;
-					$url = $rel_url.DS.$now.$filename;
+					$url = $rel_url.'/'.$now.$filename;
 					$success = move_uploaded_file($file['tmp_name'], $url);
 				}
 				// if upload was successful

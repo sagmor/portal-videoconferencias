@@ -4,7 +4,8 @@
 			<p>
 				<!--Título de la charla -->
 				<?php
-					echo $form->input('Speech.title', array('size' => '20'));
+					echo $form->input('Speech.title', array('size' => '20',
+															'label' => 'Título'));
 					echo $form->isFieldError('Speech.title');
 				?>
 			</p>
@@ -28,14 +29,16 @@
 			<p>
 				<!-- Lugar -->
 				<?php
-					echo $form->input('Speech.location', array('size' => '20'));
+					echo $form->input('Speech.location', array('size' => '20',
+															'label' => 'Lugar'));
 					echo $form->isFieldError('Speech.location');
 				?>
 			</p>
 			<p>
 				<!-- Fecha -->
 				<?php
-					echo $form->input('Speech.date', array('size' => '1'));
+					echo $form->input('Speech.date', array('size' => '1',
+															'label' => 'Fecha'));
 					echo $form->isFieldError('Speech.date');
 				?>
 			</p>
@@ -45,7 +48,6 @@
 					echo $form->input('Tag', array('label' => 'Categorías',
 												   'multiple' => 'checkbox',
 												   'options' => $tags));
-					echo $form->isFieldError('Tag');
 			?>
 			<p><?php echo $form->submit('Guardar') ?></p>
 	</form>

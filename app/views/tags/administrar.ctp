@@ -15,7 +15,10 @@
     </table>
   </p>
   <p>
-    <?php echo $form->input('Tag.name', array('label' => 'Nombre'));
+    <?php echo $form->input('Tag.name', array(
+											'label' => 'Nombre',
+											'size' => '26',
+											'maxlength' => '25'));
     	  echo $form->submit('Crear');
 	  	  $form->end();?>
   </p> 

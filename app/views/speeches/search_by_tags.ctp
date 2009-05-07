@@ -18,7 +18,6 @@
 				<th>Fecha</th>
 			</tr>
 			<?php
-				debug($speeches);
 				foreach ($speeches as $speech): ?>
 					<tr>
 						<td>

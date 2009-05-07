@@ -5,7 +5,7 @@
   											  array('controller' => 'users', 'action' => 'login')));?>
 
     <?php
-      	echo $form->input('User.email', array( 'label' => 'Correo electónico: '));
+      	echo $form->input('User.email', array( 'label' => 'Correo electrónico: '));
      	 	echo $form->input('User.password', array( 'label' => 'Contraseña: '));
     ?>
     

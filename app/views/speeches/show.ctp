@@ -2,13 +2,16 @@
 	<h1 class="title"><?php echo $speech['Speech']['title']?></h1>
 	<div class="meta">
 		<p class="at"><?php echo $speech['Speech']['date']?> en <?php echo $speech['Speech']['location']?></p>
-		<p class="links"> 32 Subscritos &nbsp; <a href="" class="comments">Subscribir!</a></p>
+		<p class="links"> 32 Subscritos &nbsp;
+		<?php if($current_user['User']['type'] == 'normal') {?>
+			<a href="" class="comments">Subscribir!</a>
+		<?php }?></p>
 	</div>
 	<div class="description">
 	  <p>Presentadores</p>
 	  <ul>
         <?php
-            $presentadores = split("[,]|[\n|\r]", $speech['Speech']['speakers']);
+            $presentadores = split("[,]|[\n]|[;]", $speech['Speech']['speakers']);
             foreach ($presentadores as $presentador):
     			if($presentador != ''):
         ?>
@@ -20,16 +23,15 @@
 			<?php echo $speech['Speech']['description']?>
 		</p>
 
-			<p>Categorías</p>
-			<?php
-				$tags = $this->requestAction('speeches/getTagsBySpeechId/'.$speech['Speech']['id']);
-				foreach ($tags as $tag) :
-			?>
-			<ul>
-				<li><?php echo $tag['name']?></li>
-			</ul>
-			<?php endforeach; ?>
-			
+		<p>Categorías</p>
+		<?php
+			$tags = $this->requestAction('speeches/getTagsBySpeechId/'.$speech['Speech']['id']);
+			foreach ($tags as $tag) :
+		?>
+		<ul>
+			<li><?php echo $tag['name']?></li>
+		</ul>
+		<?php endforeach; ?>
 
 	</div>
 
@@ -53,7 +55,7 @@
 			</ul>
 			<h3>Subir Archivo</h3>
 			<?php
-				$folder = DS.'files'.DS.$speech['Speech']['id'].DS;
+				$folder = '/files/'.$speech['Speech']['id'].'/';
 				echo $form->create('Attachment', array(
 													'url'=>array(
 																'action' => 'upload',
@@ -102,6 +104,9 @@
 					echo $html->link($file['Attachment']['name'],
 											"/attachments/download/".$file['Attachment']['id']);
 					if($current_user['User']['type'] == 'admin'){
+				?>
+				&nbsp;
+				<?php
 						echo $html->link('Borrar', "attachments/delete/".$file);
 					}
 				?>

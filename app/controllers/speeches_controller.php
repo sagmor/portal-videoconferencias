@@ -17,10 +17,10 @@ class SpeechesController extends AppController {
     function add() {
       if ($this->validateAdmin()) {
         if(!empty($this->data)) {
-            if($this->Speech->save($this->data)) {
-                $this->flash('Nueva charla creada', '', 1);
-                $this->redirect(array('action' => '/'));
-            }
+			if($this->Speech->save($this->data)) {
+				$this->flash('Nueva charla creada', '', 1);
+				$this->redirect(array('action' => '/'));
+			}
         }
       }
     }
@@ -45,12 +45,16 @@ class SpeechesController extends AppController {
       if ($this->validateAdmin()) {
         $this->Speech->id = $id;
         if (empty($this->data)) {
-            $this->data = $this->Speech->read();
+				$this->data = $this->Speech->read();
         } else {
-            if ($this->Speech->save($this->data)) {
-                $this->flash('La charla ha sido modificada exitosamente.', '/', 1);
-                $this->redirect(array('action' => '/'));
-            }
+			if(!empty($this->data['Tag'])){
+				if ($this->Speech->save($this->data)) {
+					$this->flash('La charla ha sido modificada exitosamente.', '/', 1);
+					$this->redirect(array('action' => '/'));
+				}
+			} else {
+				$this->flash('Requiere tener al menos una categoría', '', 10);
+			}
         }
       }
     }
@@ -66,10 +70,12 @@ class SpeechesController extends AppController {
 	function searchBySpeaker() {
 		$this->set('speeches', '');
 		if(!empty($this->data)) {
-			$speaker = $this->data['Speech']['Speaker'];
-			$speeches = $this->Speech->find('all', array(
-												'conditions' => 'Speech.speakers LIKE \'%'.$speaker.'%\''));
-			$this->set('speeches', $speeches);
+			if(!empty($this->data['Speech']['Speaker'])) {
+				$speaker = $this->data['Speech']['Speaker'];
+				$speeches = $this->Speech->find('all', array(
+													'conditions' => 'Speech.speakers LIKE \'%'.$speaker.'%\''));
+				$this->set('speeches', $speeches);
+			}
 		}
 	}
 

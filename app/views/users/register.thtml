@@ -1,14 +1,7 @@
 <div class="mainform">
   <?php echo $form->create('User', array('url' =>
   									   array('controller' => 'users', 'action' => 'register')));?>
-    <fieldset id="suscriptions" class="">
-      <legend>Suscripciones</legend>
-      <?php $tags = $this->requestAction('/tags/getTags');
-    		  	echo $form->input('Tag', array('label' => 'Subscripciones',
-    		  								   'multiple' => 'checkbox',
-    		  								   'options' => $tags));
-    	?>
-    </fieldset>
+    
     
     <p>
       <?php echo $form->input('User.name', array( 'label' => 'Nombre:')); ?>
@@ -26,10 +19,18 @@
       <?php echo $form->input('User.lang', 
     					  array ('label' => 'Idioma: ',
     						     'options' => array(
-    						          'es' => "Español", 
+													'es' => "Español",
 													'en' => 'English'
 													))); ?>
     </p>
+	
+    <p>
+	</p>
+		<?php $tags = $this->requestAction('/tags/getTags');
+    		  	echo $form->input('Tag', array('label' => 'Subscripciones',
+    		  								   'multiple' => 'checkbox',
+    		  								   'options' => $tags));
+		?>
   <?php echo $form->end('Registrar');?>
 </div>
 
