@@ -16,11 +16,15 @@
 <?php 
 	if($speeches != array()):
 ?>
-	<table>
-		<tr>
-			<th>Título</th>
-			<th>Fecha</th>
-		</tr>
+	<table class="sortable">
+		<thead>
+			<tr>
+				<th>Título</th>
+				<th>Fecha</th>
+				<th>Lugar</th>
+				<th>Presentadores</th>
+			</tr>
+		</thead>
 		<?php
 			foreach ($speeches as $speech):
 				#debug($speech);
@@ -31,8 +35,10 @@
 											"/speeches/show/".$speech['Speech']['id']); ?>
 					</td>
 					<td><?php echo $speech['Speech']['date']; ?></td>
+					<td><?php echo $speech['Speech']['location']; ?></td>
+					<td><?php echo $speech['Speech']['speakers']; ?></td>
 					<!-- Sólo el administrador puede borrar o editar una charla -->
-					<?php if($this->requestAction('/users/getCurrentUserType') == 'admin'):?>
+					<?php if($current_user['User']['type'] == 'admin'):?>
 						<td>
 							<?php echo $html->link('Editar', array('action'=>'edit', 'id'=>$speech['Speech']['id']));?>
 						</td>

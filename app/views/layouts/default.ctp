@@ -11,6 +11,9 @@
   <?php echo $html->css('jquery-ui') ?>
   <?php echo $javascript->link('jquery') ?>
   <?php echo $javascript->link('jquery-ui') ?>
+  <?php echo $javascript->link("standardista-table-sorting/common"); ?>
+  <?php echo $javascript->link("standardista-table-sorting/css"); ?>
+  <?php echo $javascript->link("standardista-table-sorting/standardista-table-sorting"); ?>
   <?php echo $scripts_for_layout ?>
 </head>
 
@@ -18,7 +21,7 @@
   <!-- start header -->
   <div id="header">
   	<div id="logo">
-  		<h1><a href="#">Portal Videoconferencias<sup></sup></a></h1>
+  		<h1><a href="#">Portal Conferencias<sup></sup></a></h1>
   		<h2>Departamento de Ciencias de la Computación</h2>
   	</div>
   	<div id="menu">

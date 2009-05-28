@@ -10,7 +10,7 @@
 															'action' => 'searchBySpeaker')); ?>
 		</li>
 		<li>
-		  <?php echo $html->link('Buscar por sala', array(
+		  <?php echo $html->link('Buscar por lugar', array(
 															'controller' => 'speeches',
 															'action' => 'searchByLocation')); ?>
 		</li>

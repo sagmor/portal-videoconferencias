@@ -5,9 +5,32 @@ class SpeechesController extends AppController {
     
     var $components = array('json');
 
+	function paginator($speeches) {
+		$tableSpeeches;
+		$page = 0;
+		for ($i = 0, $j = 0; $i < count($speeches) ; $i++, $j++) {
+			if($j == 10){
+				$j = 0;
+				$page++;
+			}
+			$tableSpeeches[$page][$j] = $speeches[$i];
+		}
+		$this->set('tableSpeeches', $tableSpeeches);
+	}
+
     function index() {
-        $this->set('speeches', $this->Speech->find('all'));
+		$speeches = $this->Speech->find('all', array('order' => 'Speech.date'));
+		$this->paginator($speeches);
     }
+
+	function nextPage($actualPage) {
+		$this->set('actualPage', $actualPage + 1);
+		$this->redirect(array('action' => '/'));
+	}
+
+	function prevPage($actualPage) {
+		$this->set('actualPage', $actualPage - 1);
+	}
 
     function show($id = null) {
         $this->Speech->id = $id;
@@ -47,13 +70,9 @@ class SpeechesController extends AppController {
         if (empty($this->data)) {
 				$this->data = $this->Speech->read();
         } else {
-			if(!empty($this->data['Tag'])){
-				if ($this->Speech->save($this->data)) {
-					$this->flash('La charla ha sido modificada exitosamente.', '/', 1);
-					$this->redirect(array('action' => '/'));
-				}
-			} else {
-				$this->flash('Requiere tener al menos una categoría', '', 10);
+			if ($this->Speech->save($this->data)) {
+				$this->flash('La charla ha sido modificada exitosamente.', '/', 1);
+				$this->redirect(array('action' => '/'));
 			}
         }
       }
@@ -73,7 +92,8 @@ class SpeechesController extends AppController {
 			if(!empty($this->data['Speech']['Speaker'])) {
 				$speaker = $this->data['Speech']['Speaker'];
 				$speeches = $this->Speech->find('all', array(
-													'conditions' => 'Speech.speakers LIKE \'%'.$speaker.'%\''));
+													'conditions' => 'Speech.speakers LIKE \'%'.$speaker.'%\'',
+													'order' => 'Speech.date'));
 				$this->set('speeches', $speeches);
 			}
 		}
@@ -102,16 +122,13 @@ class SpeechesController extends AppController {
 	function searchByLocation() {
 		$this->set('speeches', '');
 		if(!empty($this->data)) {
-			#debug($this->data);
 			if(!empty($this->data['Speech']['Location'])) {
 				$dataLocations = $this->data['Speech']['Location'];
-				#debug($dataLocations);
-				$allSpeeches = $this->Speech->find('all');
+				$allSpeeches = $this->Speech->find('all', array('order' => 'Speech.date'));
 				$i = 0;
 				$speeches = array();
 				foreach($allSpeeches as $speech){
 					$location = $speech['Speech']['location'];
-					#debug($location);
 					foreach ($dataLocations as $dataLocation) {
 						if ($location == $dataLocation) {
 							$isAdded = false;
@@ -137,7 +154,7 @@ class SpeechesController extends AppController {
 		if(!empty($this->data)) {
 			if(!empty($this->data['Tag'])){
 				$dataTags = $this->data['Tag'];
-				$allSpeeches = $this->Speech->find('all');
+				$allSpeeches = $this->Speech->find('all', array('order' => 'Speech.date'));
 				$i = 0;
 				$speeches = array();
 				foreach($allSpeeches as $speech){
@@ -165,17 +182,26 @@ class SpeechesController extends AppController {
 	}
 
 	function searchByDate() {
-		#debug($this->data);
 		$year = $this->data['Speech']['date']['year'];
 		$month = $this->data['Speech']['date']['month'];
 		$result = $this->Speech->find('all', array(
 												'conditions'=>array(
 															'date BETWEEN ? AND ?' => array(
 																						"$year-$month-01",
-																						"$year-$month-31"))));
-		#debug($result);
+																						"$year-$month-31")
+															 ),
+												'order' => 'Speech.date'));
 		$this->set('speeches', $result);
 	}
-	
+
+	function next($maxSpeech, $arraySpeeches, $actualSpeech) {
+		$speechTable;
+		for ($i = 0 ; $i < count($maxSpeech) ; $i++) {
+			$speechTable[i] = $arraySpeeches[$actualSpeech + $i + 1];
+		}
+
+		$this->set('speechesTable', $speechTable);
+	}
+
 }
 ?>

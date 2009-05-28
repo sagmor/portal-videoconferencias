@@ -1,5 +1,7 @@
+<a href="calendar">
 <div id="calendarbox">
 </div>
+</a>
 
 <script type="text/javascript" charset="utf-8">
   $('#calendarbox').load("<?php echo $html->url(array(
