@@ -2,6 +2,8 @@
 
 	<h1>Charlas agendadas</h1>
 	<?php
+		if (!isset ($this->params['url']['actualPage']))
+			$this->params['url']['actualPage'] = 0;
 		if ($this->params['url']['actualPage'] != 0) {
 			echo $html->link('← Charlas anteriores',
 								'/?actualPage='.($this->params['url']['actualPage'] - 1),
