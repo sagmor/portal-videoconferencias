@@ -1,36 +1,21 @@
 <?php
 class SpeechesController extends AppController {
-    var $helpers = array('Html', 'Javascript', 'Form');
+    var $helpers = array('Html', 'Javascript', 'Form', 'Paginator');
     var $name = 'Speeches';
+	var $scaffold;
+	var $paginate = array('limit' => 10, 
+						'order' => array('Speech.date' => 'asc'),
+						'fields' => array('Speech.id',
+										'Speech.date',
+										'Speech.title',
+										'Speech.location',
+										'Speech.speakers',
+										));
     
-    var $components = array('json');
+    var $components = array('RequestHandler','json');
 
-	function paginator($speeches) {
-		$tableSpeeches;
-		$page = 0;
-		for ($i = 0, $j = 0; $i < count($speeches) ; $i++, $j++) {
-			if($j == 10){
-				$j = 0;
-				$page++;
-			}
-			$tableSpeeches[$page][$j] = $speeches[$i];
-		}
-		$this->set('tableSpeeches', $tableSpeeches);
-	}
-
-    function index() {
-		$speeches = $this->Speech->find('all', array('order' => 'Speech.date'));
-		$this->paginator($speeches);
-    }
-
-	function nextPage($actualPage) {
-		$this->set('actualPage', $actualPage + 1);
-		$this->redirect(array('action' => '/'));
-	}
-
-	function prevPage($actualPage) {
-		$this->set('actualPage', $actualPage - 1);
-	}
+	var $uses = array('Speech', 'SpeechesTags');
+	var $speakerSearched;
 
     function show($id = null) {
         $this->Speech->id = $id;
@@ -86,21 +71,11 @@ class SpeechesController extends AppController {
       }
     }
 
-	function searchBySpeaker() {
-		$this->set('speeches', '');
-		if(!empty($this->data)) {
-			if(!empty($this->data['Speech']['Speaker'])) {
-				$speaker = $this->data['Speech']['Speaker'];
-				$speeches = $this->Speech->find('all', array(
-													'conditions' => 'Speech.speakers LIKE \'%'.$speaker.'%\'',
-													'order' => 'Speech.date'));
-				$this->set('speeches', $speeches);
-			}
-		}
-	}
+	function index() {
+		$this->set('data',  $this->paginate('Speech'));
+    }
 
 	function search() {
-
 	}
 
 	function getTagsBySpeechId($speechId) {
@@ -119,89 +94,58 @@ class SpeechesController extends AppController {
 		return $arrLocations;
 	}
 
-	function searchByLocation() {
-		$this->set('speeches', '');
-		if(!empty($this->data)) {
-			if(!empty($this->data['Speech']['Location'])) {
-				$dataLocations = $this->data['Speech']['Location'];
-				$allSpeeches = $this->Speech->find('all', array('order' => 'Speech.date'));
-				$i = 0;
-				$speeches = array();
-				foreach($allSpeeches as $speech){
-					$location = $speech['Speech']['location'];
-					foreach ($dataLocations as $dataLocation) {
-						if ($location == $dataLocation) {
-							$isAdded = false;
-							foreach ($speeches as $speechSelected) {
-								if($speechSelected == $speech['Speech']) {
-									$isAdded = true;
-								}
-							}
-							if(!$isAdded) {
-								$speeches[$i] = $speech['Speech'];
-								$i++;
-							}
-						}
-					}
-				}
-				$this->set('speeches', $speeches);
-			}
+	function searchBySpeaker() {
+		$speaker = $this->data['Speech']['speaker'];
+		if(isset($this->passedArgs['speaker'])) {
+			$speaker = $this->passedArgs['speaker'];
 		}
-	}
-
-	function searchByTags() {
-		$this->set('speeches', '');
-		if(!empty($this->data)) {
-			if(!empty($this->data['Tag'])){
-				$dataTags = $this->data['Tag'];
-				$allSpeeches = $this->Speech->find('all', array('order' => 'Speech.date'));
-				$i = 0;
-				$speeches = array();
-				foreach($allSpeeches as $speech){
-					$tags = $speech['Tag'];
-					foreach ($tags as $tag) {
-						foreach ($dataTags as $dataTag) {
-							if ($tag['id'] == $dataTag) {
-								$isAdded = false;
-								foreach ($speeches as $speechTagged) {
-									if($speechTagged == $speech['Speech']) {
-										$isAdded = true;
-									}
-								}
-								if(!$isAdded) {
-									$speeches[$i] = $speech['Speech'];
-									$i++;
-								}
-							}
-						}
-					}
-				}
-				$this->set('speeches', $speeches);
-			}
-		}
+		$this->set('data',  $this->paginate('Speech', array('Speech.speakers LIKE' => '%'.$speaker.'%')));
 	}
 
 	function searchByDate() {
 		$year = $this->data['Speech']['date']['year'];
 		$month = $this->data['Speech']['date']['month'];
-		$result = $this->Speech->find('all', array(
-												'conditions'=>array(
-															'date BETWEEN ? AND ?' => array(
-																						"$year-$month-01",
-																						"$year-$month-31")
-															 ),
-												'order' => 'Speech.date'));
-		$this->set('speeches', $result);
-	}
-
-	function next($maxSpeech, $arraySpeeches, $actualSpeech) {
-		$speechTable;
-		for ($i = 0 ; $i < count($maxSpeech) ; $i++) {
-			$speechTable[i] = $arraySpeeches[$actualSpeech + $i + 1];
+		if(isset($this->passedArgs['year'])) {
+			$year = $this->passedArgs['year'];
+			$month = $this->passedArgs['month'];
 		}
 
-		$this->set('speechesTable', $speechTable);
+		$this->set('data',  $this->paginate('Speech', array('Speech.date BETWEEN ? AND ?' => array(
+																						"$year-$month-01",
+																						"$year-$month-31"))));
 	}
 
+	function searchByLocation() {
+		$locations = $this->data['Speech']['locations'];
+		if(isset($this->passedArgs) && $this->passedArgs != array()) {
+			$locations = $this->passedArgs;
+		}
+
+		$this->set('data',  $this->paginate('Speech', array('Speech.location' => $locations)));
+
+	}
+
+	function searchByTags() {
+		debug($this->data);
+		$tags = $this->data['Tag']['Tag'];
+		debug($this->passedArgs);
+		if(isset($this->passedArgs)) {
+
+		}
+		$tagsSQL = '';
+		foreach ($tags as $tag) {
+			if($tagsSQL == '') {
+				$tagsSQL = $tag;
+			} else {
+				$tagsSQL = $tagsSQL.' OR '.$tag;
+			}
+		}
+//		$SQLquery = 'SELECT SpeechesTags.speech_id FROM SpeechesTags WHERE SpeechesTags.tag_id IS '.$tagsSQL;
+//		$speechesIds = $this->Speech->find('all', array('conditions' => array('Speech.id' => $SQLquery)));
+		$speechesIds = $this->Speech->Tag->find('all', array('conditions' => array('Tag.id' => $tags)));
+		debug($speechesIds);
+		
+//		$this->set('data',  $this->paginate('Speech', array('Speech.id' => $SQLquery)));
+	}
 }
 ?>
