@@ -8,6 +8,10 @@
 	echo $form->submit('Buscar');
 
 ?>
+<?php if ($isSearch) {
+		if(empty($data)) {
+			echo 'No se encuentra el orador asociado a ninguna conferencia';
+		} else {?>
 <div id="resultSearch">
 <p>
 	<?php
@@ -16,6 +20,13 @@
 		$paginator->options(array('url'=>$this->data['Speech']));
 	?>
 </p>
+<div  class="paging">
+	<?php
+
+		echo  $paginator->prev('← Charlas anteriores', null, null,  array('class'=>'disabled'));?>
+	|
+	<?php echo  $paginator->next('Charlas siguientes →', null, null,  array('class'=>'disabled'));?>
+</div>
 <table  class="scaffold" cellpadding="2"  cellspacing="0">
 <thead>
 	<tr>
@@ -71,13 +82,7 @@ if(is_array($data)) {
 </tbody>
 </table>
 </div>
-<div  class="paging">
-	<?php
-		
-		echo  $paginator->prev('← Charlas anteriores', null, null,  array('class'=>'disabled'));?>
-	|
-	<?php echo  $paginator->next('Charlas siguientes →', null, null,  array('class'=>'disabled'));?>
-</div>
+
 <?php if($current_user['User']['type'] == 'admin') { ?>
 <div  class="actions">
 	<ul>
@@ -86,7 +91,9 @@ if(is_array($data)) {
 		</li>
 	</ul>
 </div>
-<?php } ?>
+<?php }
+	}
+}?>
 
 <?php
 	$form->end();

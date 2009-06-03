@@ -95,57 +95,95 @@ class SpeechesController extends AppController {
 	}
 
 	function searchBySpeaker() {
+		$this->set('isSearch', false);
 		$speaker = $this->data['Speech']['speaker'];
 		if(isset($this->passedArgs['speaker'])) {
 			$speaker = $this->passedArgs['speaker'];
 		}
-		$this->set('data',  $this->paginate('Speech', array('Speech.speakers LIKE' => '%'.$speaker.'%')));
+		if (!empty($speaker)) {
+			$this->set('isSearch', true);
+			$this->set('data',  $this->paginate('Speech', array('Speech.speakers LIKE' => '%'.$speaker.'%')));
+		}
 	}
 
 	function searchByDate() {
+		$this->set('isSearch', false);
 		$year = $this->data['Speech']['date']['year'];
 		$month = $this->data['Speech']['date']['month'];
 		if(isset($this->passedArgs['year'])) {
 			$year = $this->passedArgs['year'];
 			$month = $this->passedArgs['month'];
 		}
-
-		$this->set('data',  $this->paginate('Speech', array('Speech.date BETWEEN ? AND ?' => array(
-																						"$year-$month-01",
-																						"$year-$month-31"))));
+		if (!empty($year)) {
+			$this->set('isSearch', true);
+			$this->set('data',  $this->paginate('Speech', array('Speech.date BETWEEN ? AND ?' => array(
+																							"$year-$month-01",
+																							"$year-$month-31"))));
+		}
 	}
 
 	function searchByLocation() {
+		$this->set('isSearch', false);
 		$locations = $this->data['Speech']['locations'];
 		if(isset($this->passedArgs) && $this->passedArgs != array()) {
 			$locations = $this->passedArgs;
 		}
-
-		$this->set('data',  $this->paginate('Speech', array('Speech.location' => $locations)));
+		if (!empty($locations)) {
+			$this->set('isSearch', true);
+			$this->set('data',  $this->paginate('Speech', array('Speech.location' => $locations)));
+		}
 
 	}
-
+//FIXME: muy mala implementación de la consulta, hecha así para aprovechar el paginamiento de cake
 	function searchByTags() {
-		debug($this->data);
-		$tags = $this->data['Tag']['Tag'];
-		debug($this->passedArgs);
-		if(isset($this->passedArgs)) {
-
+		$dataTags = '';
+		$speechesIds = '';
+		$this->set('isSearch', false);
+		if(isset($this->data['Tag']) && !empty($this->data['Tag'])){
+			$dataTags = $this->data['Tag']['Tag'];
 		}
-		$tagsSQL = '';
-		foreach ($tags as $tag) {
-			if($tagsSQL == '') {
-				$tagsSQL = $tag;
-			} else {
-				$tagsSQL = $tagsSQL.' OR '.$tag;
+		if(isset($this->passedArgs) && $this->passedArgs != array()) {
+			for($i = 0; $i < count($this->passedArgs); $i++)
+				if($this->passedArgs[$i] != '')
+					$dataTags[$i] = $this->passedArgs[$i];
+		}
+		if ($dataTags != '') {
+			$this->set('isSearch', true);
+			$allSpeeches = $this->Speech->find('all', array('order' => 'Speech.date'));
+			$i = 0;
+			$speeches = array();
+			foreach($allSpeeches as $speech){
+				$tags = $speech['Tag'];
+				foreach ($tags as $tag) {
+					foreach ($dataTags as $dataTag) {
+						if ($tag['id'] == $dataTag) {
+							$isAdded = false;
+							foreach ($speeches as $speechTagged) {
+								if($speechTagged == $speech['Speech']) {
+									$isAdded = true;
+								}
+							}
+							if(!$isAdded) {
+								$speeches[$i] = $speech['Speech'];
+								$speechesIds[$i] = $speech['Speech']['id'];
+								$i++;
+							}
+						}
+					}
+				}
 			}
+			$this->set('data',  $this->paginate('Speech', array('Speech.id' => $speechesIds)));
 		}
-//		$SQLquery = 'SELECT SpeechesTags.speech_id FROM SpeechesTags WHERE SpeechesTags.tag_id IS '.$tagsSQL;
-//		$speechesIds = $this->Speech->find('all', array('conditions' => array('Speech.id' => $SQLquery)));
-		$speechesIds = $this->Speech->Tag->find('all', array('conditions' => array('Tag.id' => $tags)));
-		debug($speechesIds);
-		
-//		$this->set('data',  $this->paginate('Speech', array('Speech.id' => $SQLquery)));
+	}
+
+	function nextSpeeches() {
+		$currentTime = date('Y-m-d-His');
+		$nextSpeeches = $this->Speech->find('all', array(
+											'conditions' => array(
+																'Speech.date >=' => $currentTime),
+																'limit' => 5,
+																'order' => 'Speech.date'));
+		return $nextSpeeches;
 	}
 }
 ?>

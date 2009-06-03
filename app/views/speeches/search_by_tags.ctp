@@ -8,15 +8,28 @@
 	echo $form->input('Tag', array('label' => '',
 										   'multiple' => 'checkbox',
 										   'options' => $tags));
-	debug($this->data);
+	if(isset($this->params['pass']) && $this->params['pass'] != array()) {
+		$this->data['Tag']['Tag'] = $this->params['pass'];
+	}
 	echo $form->submit('Buscar');
 ?>
+<?php if ($isSearch) { 
+		if(empty($data)) {
+			echo 'No existen conferencias asociadas a esta(s) categoría(s)';
+		} else {?>
+
 <div id="resultSearch">
 	<p><?php
 		echo $paginator->counter(array('format' => 'Pagina %page% de %pages%,  mostrando %current% conferencias de %count%'));
-		$paginator->options(array('url'=>$this->data['Tag']));
+		$paginator->options(array('url'=>$this->data['Tag']['Tag']));
 		?>
 	</p>
+	<div  class="paging">
+	<?php
+		echo  $paginator->prev('← Charlas anteriores', null, null,  array('class'=>'disabled'));?>
+	|
+	<?php echo  $paginator->next('Charlas siguientes →', null, null,  array('class'=>'disabled'));?>
+	</div>
 	<table  class="scaffold" cellpadding="2"  cellspacing="0">
 		<thead>
 			<tr>
@@ -72,12 +85,7 @@ if(is_array($data)) {
 		</tbody>
 	</table>
 </div>
-<div  class="paging">
-	<?php
-	echo  $paginator->prev('← Charlas anteriores', null, null,  array('class'=>'disabled'));?>
-	|
-	<?php echo  $paginator->next('Charlas siguientes →', null, null,  array('class'=>'disabled'));?>
-</div>
+
 <?php if($current_user['User']['type'] == 'admin') { ?>
 <div  class="actions">
 	<ul>
@@ -86,7 +94,9 @@ if(is_array($data)) {
 		</li>
 	</ul>
 </div>
-<?php } ?>
+<?php }
+	}
+} ?>
 <?php
 $form->end();
 ?>

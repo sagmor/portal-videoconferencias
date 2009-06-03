@@ -1,8 +1,6 @@
-<a href="calendar">
+<?php echo $html->link('Ver Calendario', '/calendar', array('class'=>'button')); ?>
 <div id="calendarbox">
 </div>
-</a>
-
 <script type="text/javascript" charset="utf-8">
   $('#calendarbox').load("<?php echo $html->url(array(
 	        'controller' => 'calendar', 

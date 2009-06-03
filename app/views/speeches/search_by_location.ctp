@@ -15,13 +15,22 @@
 	echo $form->submit('Buscar');
 
 ?>
-
+<?php if ($isSearch) {
+		if(empty($data)) {
+			echo 'No existen conferencias asociadas a este(os) lugar(es)';
+		} else {?>
 <div id="resultSearch">
 <p><?php  
 	echo $paginator->counter(array('format' => 'Pagina %page% de %pages%,  mostrando %current% conferencias de %count%'));
 	$paginator->options(array('url'=>$this->data['Speech']['locations']));
 	?>
 </p>
+<div  class="paging">
+	<?php
+		echo  $paginator->prev('← Charlas anteriores', null, null,  array('class'=>'disabled'));?>
+	|
+	<?php echo  $paginator->next('Charlas siguientes →', null, null,  array('class'=>'disabled'));?>
+</div>
 <table  class="scaffold" cellpadding="2"  cellspacing="0">
 <thead>
 	<tr>
@@ -77,12 +86,7 @@ if(is_array($data)) {
 </tbody>
 </table>
 </div>
-<div  class="paging">
-	<?php
-		echo  $paginator->prev('← Charlas anteriores', null, null,  array('class'=>'disabled'));?>
-	|
-	<?php echo  $paginator->next('Charlas siguientes →', null, null,  array('class'=>'disabled'));?>
-</div>
+
 <?php if($current_user['User']['type'] == 'admin') { ?>
 <div  class="actions">
 	<ul>
@@ -91,7 +95,9 @@ if(is_array($data)) {
 		</li>
 	</ul>
 </div>
-<?php } ?>
+<?php }
+	}
+}?>
 <?php
 	$form->end();
 ?>
