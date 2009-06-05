@@ -20,6 +20,10 @@ class SpeechesController extends AppController {
     function show($id = null) {
         $this->Speech->id = $id;
         $this->set('speech', $this->Speech->read());
+        $this->set('speech_subscriptions',
+		           $this->Speech->SpeechesUser->find('count',
+		                                              array('conditions' =>
+		                                                    array('speech_id' => $id))));
     }
 
     function add() {
@@ -185,5 +189,24 @@ class SpeechesController extends AppController {
 																'order' => 'Speech.date'));
 		return $nextSpeeches;
 	}
+	
+	function subscribe($speech_id){
+		
+		$this->set('speech',
+		           $this->Speech->findById($speech_id));
+		if(!empty($this->data['SpeechesUser'])){
+			$user_id = $this->Session->read('user_id');
+			$this->data['SpeechesUser']['user_id'] = $user_id;
+			$this->data['SpeechesUser']['speech_id'] = $speech_id;
+			if($this->data['SpeechesUser']['resend_in'] != 0){
+				$this->data['SpeechesUser']['resend_at'] = date('Y-m-d H:i:s',
+				                                                time()+$this->data['SpeechesUser']['resend_in']*24*60*60);
+			}
+			if ($this->Speech->SpeechesUser->save($this->data)) {
+				$this->flash('Te has suscrito a la charla', '/');
+			}
+		}
+	}
+	
 }
 ?>
