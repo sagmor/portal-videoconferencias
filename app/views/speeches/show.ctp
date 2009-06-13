@@ -1,14 +1,17 @@
 <div class="speech">
 	<h1 class="title"><?php echo $speech['Speech']['title']?></h1>
 	<div class="meta">
+<<<<<<< HEAD:app/views/speeches/show.ctp
 		<p class="at">
 			<?php echo $speech['Speech']['date']?>
 			<?php __('at')?>
 			<?php echo $speech['Speech']['location']?></p>
-		<p class="links"> 32 Subscritos &nbsp;
-		<?php if($current_user['User']['type'] == 'normal') {?>
-			<a href="" class="comments">Subscribir!</a>
-		<?php }?></p>
+		<p class="links"> <?php echo $speech_subscriptions.' '.__('users_suscribed')?>&nbsp;
+		<?php if($current_user['User']['type'] == 'normal') {
+		    echo $html->link(__('suscribe', true),
+                             '/speeches/subscribe/'.$speech['Speech']['id']);
+		      }?>
+		</p>
 	</div>
 	<div class="description">
 	  <p><?php __('speakers')?></p>

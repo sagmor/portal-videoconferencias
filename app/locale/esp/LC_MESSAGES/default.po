@@ -152,6 +152,12 @@ msgstr "Subir Archivo"
 msgid "upload"
 msgstr "Subir"
 
+msgid "users_suscribed"
+msgstr "usuarios suscritos"
+
+msgid "suscribe"
+msgstr "¡Subscribirse a esta charla!"
+
 msgid "attachments"
 msgstr "Adjuntos"
 

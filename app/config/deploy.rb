@@ -3,7 +3,7 @@ set :user, 'cc51ag2'
 
 default_run_options[:pty] = true
 set :scm, "git"
-set :repository,  "git://github.com/SagMor/portal-videoconferencias.git"
+set :repository,  "git://github.com/sagmor/portal-videoconferencias.git"
 set :branch, "master"
 set :deploy_via, :remote_cache
 set :deploy_to, '/u/c/cc51ag2/portalvcs'

@@ -7,7 +7,12 @@ class Speech extends AppModel {
 												'className' => 'Tag',
 												'joinTable' => 'speeches_tags',
 												'foreignKey' => 'speech_id',
-												'associationForeignKey' => 'tag_id'));
+												'associationForeignKey' => 'tag_id'),
+            					     'User' =>
+									 array('className' => 'User',
+            							   'joinTable' => 'speeches_users',
+            							   'foreignKey' => 'speech_id',
+            							   'associationForeignKey' => 'user_id'));
 
 	var $validate = array(
 						'title' => array('rule' => 'notEmpty',
@@ -36,5 +41,36 @@ class Speech extends AppModel {
 			}
 		}
 	}
+	
+//	function beforeSave(){
+//
+//		/*$relatedUsers = $this->find('all',
+//		 array('conditions' => array('Speech.id' => $this->data['Speech']['id'])),
+//		 array('fields' => array('User.name', 'User.email')));
+//		 if($oldTag[''])*/
+//
+//	}
+
+        function afterSave($created){
+
+                if($created){
+                        $userIds = $this->User->UsersTag->find('list',
+                                                                    array('conditions' =>
+                                                                          array('tag_id' => $this->data['Tag']),
+                                                                          'fields' => 
+                                                                          array('UsersTag.user_id'))); 
+                        $userIds = array_unique($userIds);
+                        echo debug($this->data['Tag']);                                                  
+                        echo debug(array_unique($userIds));
+                        foreach($userIds as $user_id){
+                        	$user = $this->User->findById($user_id);
+                        	echo debug($user);
+                        }
+                }
+                
+                return false;
+
+        }
+        
 }
 ?>
