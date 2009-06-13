@@ -17,11 +17,13 @@ class SpeechesController extends AppController {
 	var $uses = array('Speech', 'SpeechesTags');
 	var $speakerSearched;
 
+	//función que muestra ek contenigo de una conferencia
     function show($id = null) {
         $this->Speech->id = $id;
         $this->set('speech', $this->Speech->read());
     }
 
+	//función para agregar una conferencia
     function add() {
       if ($this->validateAdmin()) {
         if(!empty($this->data)) {
@@ -49,6 +51,7 @@ class SpeechesController extends AppController {
       $this->set('result', $this->json->encode($result));
     }
 
+	//función para editar una conferencia
     function edit($id = null) {
       if ($this->validateAdmin()) {
         $this->Speech->id = $id;
@@ -63,14 +66,16 @@ class SpeechesController extends AppController {
       }
     }
 
+	//función para eliminar una conferencia
     function delete($id) {
       if ($this->validateAdmin()) {
         $this->Speech->del($id);
-        $this->flash('The speech with id: '.$id.' has been deleted.', '/speeches/', 0);
+        $this->flash('La conferencia ha sido eliminada.', '/speeches/', 0);
         $this->redirect(array('action' => '/'));
       }
     }
 
+	//función que muestra las conferencias en el index
 	function index() {
 		$this->set('data',  $this->paginate('Speech'));
     }
@@ -78,6 +83,7 @@ class SpeechesController extends AppController {
 	function search() {
 	}
 
+	//función que recupera las categorías de una conferencia
 	function getTagsBySpeechId($speechId) {
 		$tags = $this->Speech->find('all', array(
 											'conditions' => array(
@@ -85,6 +91,7 @@ class SpeechesController extends AppController {
 		return $tags[0]['Tag'];
 	}
 
+	//función que entrega todos los lugares donde se realizan charlas
 	function getLocations() {
 		$speeches = $this->Speech->find('all');
 		$arrLocations = array();
@@ -94,6 +101,7 @@ class SpeechesController extends AppController {
 		return $arrLocations;
 	}
 
+	//función que busca todas las conferencias asociadas a uno o más oradores
 	function searchBySpeaker() {
 		$this->set('isSearch', false);
 		$speaker = $this->data['Speech']['speaker'];
@@ -106,6 +114,7 @@ class SpeechesController extends AppController {
 		}
 	}
 
+	//función que busca todas las conferencias asociadas a una fecha
 	function searchByDate() {
 		$this->set('isSearch', false);
 		$year = $this->data['Speech']['date']['year'];
@@ -122,6 +131,7 @@ class SpeechesController extends AppController {
 		}
 	}
 
+	//función que busca todas las conferencias asociadas a un lugar
 	function searchByLocation() {
 		$this->set('isSearch', false);
 		$locations = $this->data['Speech']['locations'];
@@ -144,7 +154,7 @@ class SpeechesController extends AppController {
 		}
 		if(isset($this->passedArgs) && $this->passedArgs != array()) {
 			for($i = 0; $i < count($this->passedArgs); $i++)
-				if($this->passedArgs[$i] != '')
+				if(isset($this->passedArgs[$i]) && $this->passedArgs[$i] != '')
 					$dataTags[$i] = $this->passedArgs[$i];
 		}
 		if ($dataTags != '') {
@@ -176,6 +186,7 @@ class SpeechesController extends AppController {
 		}
 	}
 
+	//función que entrega las próximas 5 charlas, para cambiar esto sólo es necesario cambiar el valor de 'limit'
 	function nextSpeeches() {
 		$currentTime = date('Y-m-d-His');
 		$nextSpeeches = $this->Speech->find('all', array(

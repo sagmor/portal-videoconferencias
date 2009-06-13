@@ -1,16 +1,16 @@
-<h1>Búsqueda de Charlas por mes y año</h1>
+<h1><?php __('title_search_by_date')?></h1>
 
 <?php
 	echo $form->create('Speech', array('action' => 'searchByDate'));
 
 	echo $form->input('date', array(
-								'label' => 'Fecha (mes - año)',
+								'label' => __('search_message_date', true),
 								'size' => '1',
 								'type' => 'date',
 								'dateFormat' => 'MY',
 								'selected' => array('year'=>'2009'),
 								));
-	echo $form->submit('Buscar');
+	echo $form->submit(__('search', true));
 	if(isset($this->params['named']['year'])) {
 		$this->data['Speech']['date']['year'] = $this->params['named']['year'];
 		$this->data['Speech']['date']['month'] = $this->params['named']['month'];
@@ -18,29 +18,35 @@
 ?>
 <?php if ($isSearch) {
 		if(empty($data)) {
-			echo 'No existen conferencias agendadas en este mes';
+			echo __('not_founded_by_date', true);
 		} else {?>
 <div id="resultSearch">
 <p>
-	<?php  echo $paginator->counter(array('format' => 'Pagina %page% de %pages%,  mostrando %current% conferencias de %count%'));
+	<?php  echo $paginator->counter(array('format' =>
+										__('table_page', true).' %page% '.
+										__('of', true).' %pages%, '.
+										__('showing', true).' %current% '.
+										__('speeches', true).' '.
+										__('of', true).' %count%'));
 		$paginator->options(array('url'=>$this->data['Speech']['date']));
 	?>
 </p>
 <div  class="paging">
 	<?php
-		echo  $paginator->prev('← Charlas anteriores', null, null,  array('class'=>'disabled'));?>
+		echo  $paginator->prev(__('prev_speeches', true) , null, null,  array('class'=>'disabled'));
+	?>
 	|
-	<?php echo  $paginator->next('Charlas siguientes →', null, null,  array('class'=>'disabled'));?>
+	<?php echo  $paginator->next(__('next_speeches', true), null, null,  array('class'=>'disabled'));?>
 </div>
 <table  class="scaffold" cellpadding="2"  cellspacing="0">
 <thead>
 	<tr>
-		<th><?php echo  $paginator->sort('Titulo','title'); ?></th>
-		<th><?php echo  $paginator->sort('Fecha','date'); ?></th>
-		<th><?php echo  $paginator->sort('Oradores','speakers'); ?></th>
-		<th><?php echo  $paginator->sort('Lugar','location'); ?></th>
+		<th><?php echo  $paginator->sort(__('title', true),'title'); ?></th>
+		<th><?php echo  $paginator->sort(__('date', true),'date'); ?></th>
+		<th><?php echo  $paginator->sort(__('speakers', true),'speakers'); ?></th>
+		<th><?php echo  $paginator->sort(__('location', true),'location'); ?></th>
 		<?php if($current_user['User']['type'] == 'admin'){?>
-			<th>Acciones</th>
+			<th><?php __('actions') ?></th>
 		<?php }?>
 	</tr>
 </thead>
@@ -77,9 +83,9 @@ if(is_array($data)) {
 	</td>
 	<td>
 		<?php if($current_user['User']['type'] == 'admin') { ?>
-			<?php echo  $html->link('Editar', array('action' => 'edit', $id));?>
-			<?php echo  $html->link('Borrar', array('action' => 'delete', $id),null,
-				sprintf("¿Está  seguro que quiere borrar '%s'?", $title));?>
+			<?php echo  $html->link(__('edit', true), array('action' => 'edit', $id));?>
+			<?php echo  $html->link(__('delete', true) , array('action' => 'delete', $id),null,
+				sprintf(__('are_you_sure_delete', true).' %s?', $title));?>
 		<?php } ?>
 	</td>
 	<?php }
@@ -88,15 +94,16 @@ if(is_array($data)) {
 </table>
 </div>
 
-<?php if($current_user['User']['type'] == 'admin') { ?>
 <div  class="actions">
 	<ul>
-		<li>
-			<?php echo  $html->link('Agregar Charla', array('action' => 'add')); ?>
-		</li>
+		<?php if($current_user['User']['type'] == 'admin') { ?>
+			<li>
+				<?php echo  $html->link(__('add_speech', true), array('action' => 'add')); ?>
+			</li>
+		<?php }?>
 	</ul>
 </div>
-<?php }
+<?php 
 	}
 }?>
 <?php

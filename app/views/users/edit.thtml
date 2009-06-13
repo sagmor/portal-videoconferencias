@@ -1,37 +1,34 @@
 <div class="mainform">
-  <h2>Editar datos personales</h2>
+  <h2><?php __('title_edit_user')?></h2>
   <?php echo $form->create('User', array('url' =>
   									   array('controller' => 'users', 'action' => 'edit')));?>
-   
-      
-    
     
     <p>
-      <?php echo $form->input('User.name', array( 'label' => 'Nombre:')); ?>
+      <?php echo $form->input('User.name', array( 'label' => __('user_name', true))); ?>
     </p>
     <p>
-      <?php echo $form->input('User.email', array( 'label' => 'Correo electrónico:')); ?>
+      <?php echo $form->input('User.email', array( 'label' => __('email', true))); ?>
     </p>
     <p>
-      <?php echo $form->input('User.password', array( 'label' => 'Contraseña:')); ?>
+      <?php echo $form->input('User.password', array( 'label' => __('password', true))); ?>
     </p>
     <p>
-      <?php echo $form->input('User.password_confirmation', array( 'label' => 'Confirmar contraseña:', 'type'=>'password')); ?>
+      <?php echo $form->input('User.password_confirmation', array( 'label' => __('confirm_pass', true), 'type'=>'password')); ?>
     </p>
     <p>
       <?php echo $form->input('User.lang', 
     					  array ('label' => 'Idioma: ',
     						     'options' => array(
-    						          'es' => "Español", 
-													'en' => 'English'
+    						          'esp' => __('spanish', true),
+													'eng' => __('english', true)
 													))); ?>
     </p>
 	<?php $tags = $this->requestAction('/tags/getTags');
-    		  	echo $form->input('Tag', array('label' => 'Subscripciones',
+    		  	echo $form->input('Tag', array('label' => __('subscriptions', true),
     		  								   'multiple' => 'checkbox',
     		  								   'options' => $tags));
     	?>
-  <?php echo $form->end('Modificar');?>
+  <?php echo $form->end(__('save', true));?>
 </div>
 
 	

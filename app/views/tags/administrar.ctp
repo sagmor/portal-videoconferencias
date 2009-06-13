@@ -1,13 +1,14 @@
 <div class="mainform">
-  <h2>Administrar Categorias</h2>
+  <h2><?php __('title_admin')?></h2>
   <?php echo $form->create('Tag', array('url' =>
-									   array('controller' => 'tags', 'action' => 'administrar')));?>
+									   array('label' => __('tag', true),
+											'controller' => 'tags', 'action' => 'administrar')));?>
   <p>
     <table>
       <?php
         foreach($data as $tag){
   			echo $html->tableCells(array($tag['Tag']['name'],
-  								   $html->link('Eliminar', array('action'=>'delete',
+  								   $html->link(__('delete', true), array('action'=>'delete',
   								   								 'id'=>$tag['Tag']['id']),
   								   								 null,
   								   								 '¿Está seguro?')));
@@ -16,10 +17,10 @@
   </p>
   <p>
     <?php echo $form->input('Tag.name', array(
-											'label' => 'Nombre',
+											'label' => __('tag', true),
 											'size' => '26',
 											'maxlength' => '25'));
-    	  echo $form->submit('Crear');
+    	  echo $form->submit(__('save', true));
 	  	  $form->end();?>
   </p> 
 </div>

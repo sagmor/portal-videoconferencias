@@ -27,21 +27,22 @@
 		<!-- start header -->
 		<div id="header">
 			<div id="logo">
-				<h1><a href="#">Portal Conferencias<sup></sup></a></h1>
-				<h2>Departamento de Ciencias de la Computación</h2>
+				<h1><a href="#"><?php __('default_title', true)?><sup></sup></a></h1>
+				<h2><?php __('default_subtitle', true)?></h2>
 			</div>
 			<div id="menu">
 				<ul>
 					<li>
-						<?php echo $html->link('Inicio', '/'); ?>
+						<?php echo $html->link(__('home', true), '/'); ?>
 					</li>
 					<li>
-						<?php echo $html->link('Buscar', array('controller' => 'speeches', 'action' => 'search')); ?>
+						<?php echo $html->link(__('search', true), array('controller' => 'speeches', 'action' => 'search')); ?>
 					</li>
 					<li>
-					<?php echo $html->link('Calendario', array('controller' => 'calendar', 'action' => 'index')); ?>
+						<?php echo $html->link(__('calendar', true), array('controller' => 'calendar', 'action' => 'index')); ?>
+					</li>
 					<li>
-						<?php echo $html->link('Acerca de', array('controller' => 'pages', 'action' => 'display', 'about')); ?>
+						<?php echo $html->link(__('about_us', true), array('controller' => 'pages', 'action' => 'display', 'about')); ?>
 					</li>
 				</ul>
 			</div>
@@ -76,7 +77,7 @@
 					}
 					?>
 					<li>
-						<?php echo $this->renderElement('next_speaches'); ?>
+						<?php echo $this->renderElement('next_speeches'); ?>
 					</li>
 				</ul>
 			</div>

@@ -1,1 +1,1 @@
-Sesión finalizada
+<?php __('title_logout')?>

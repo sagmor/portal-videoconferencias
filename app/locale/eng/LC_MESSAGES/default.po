@@ -1,0 +1,33 @@
+#speeches common
+msgid "title"
+msgstr "Title"
+
+msgid "speakers"
+msgstr "Speakers"
+
+msgid "description"
+msgstr "Description"
+
+msgid "location"
+msgstr "Location"
+
+msgid "date"
+msgstr "Date"
+
+msgid "tags"
+msgstr "Tags"
+
+msgid "save"
+msgstr "Save"
+
+#speeches/add
+msgid "title_add"
+msgstr "Add new speech"
+
+#speeches/edit
+msgid "title_edit"
+msgstr "Edit speech"
+
+#speeches/index
+msgid "title_index"
+msgstr "Speeches scheduled"

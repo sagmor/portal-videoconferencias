@@ -1,0 +1,397 @@
+#speeches common
+msgid "title"
+msgstr "Título"
+
+msgid "speakers"
+msgstr "Presentadores"
+
+msgid "description"
+msgstr "Descripción"
+
+msgid "location"
+msgstr "Lugar"
+
+msgid "date"
+msgstr "Fecha"
+
+msgid "actions"
+msgstr "Acciones"
+
+msgid "edit"
+msgstr "Editar"
+
+msgid "delete"
+msgstr "Borrar"
+
+msgid "are_you_sure_delete"
+msgstr "¿Está seguro que quiere borrar"
+
+msgid "add_speech"
+msgstr "Agregar conferencia"
+
+msgid "tags"
+msgstr "Categorías"
+
+msgid "tag"
+msgstr "Categoría"
+
+msgid "save"
+msgstr "Guardar"
+
+msgid "table_page"
+msgstr "Página"
+
+msgid "of"
+msgstr "de"
+
+msgid "at"
+msgstr "en"
+
+msgid "showing"
+msgstr "mostrando"
+
+msgid "speeches"
+msgstr "Conferencias"
+
+msgid "prev_speeches"
+msgstr "← Conferencias anteriores"
+
+msgid "next_speeches"
+msgstr "Conferencias siguientes →"
+
+msgid "administration"
+msgstr "Administración"
+
+msgid "email"
+msgstr "Correo electrónico"
+
+msgid "password"
+msgstr "Contraseña"
+
+msgid "search"
+msgstr "Buscar"
+
+#-------------------------------------------------
+#speeches/add
+msgid "title_add"
+msgstr "Agregar nueva conferencia"
+
+#-------------------------------------------------
+#speeches/edit
+msgid "title_edit"
+msgstr "Editar conferencia"
+
+#-------------------------------------------------
+#speeches/index
+msgid "title_index"
+msgstr "Conferencias agendadas"
+
+#-------------------------------------------------
+#speeches/search
+msgid "search_by_tag"
+msgstr "Buscar por Categoría"
+
+msgid "search_by_speaker"
+msgstr "Buscar por Orador"
+
+msgid "search_by_location"
+msgstr "Buscar por Lugar"
+
+msgid "search_by_date"
+msgstr "Buscar por Fecha"
+
+msgid "message"
+msgstr "Seleccione un criterio de búsqueda en el menú superior"
+
+#-------------------------------------------------
+#speeches/searchByDate
+msgid "title_search_by_date"
+msgstr "Búsqueda de conferencias por mes y año"
+
+msgid "search_message_date"
+msgstr "Fecha (mes - año)"
+
+msgid "not_founded_by_date"
+msgstr "No existen conferencias agendadas en este mes"
+
+#-------------------------------------------------
+#speeches/searchByLocation
+msgid "title_search_by_location"
+msgstr "Búsqueda de conferencias por lugar"
+
+msgid "not_founded_by_location"
+msgstr "No existen conferencias asociadas a este(os) lugar(es)"
+
+#-------------------------------------------------
+#speeches/searchBySpeaker
+msgid "title_search_by_speaker"
+msgstr "Búsqueda de conferencias por orador"
+
+msgid "search_message_speaker"
+msgstr "Ingrese el nombre del orador"
+
+msgid "not_founded_by_speaker"
+msgstr "No se encuentra el orador asociado a ninguna conferencia"
+
+#-------------------------------------------------
+#speeches/searchByTags
+msgid "title_search_by_tags"
+msgstr "Búsqueda de conferencias por categorías"
+
+msgid "search_message_tags"
+msgstr "Seleccione la o las categorías por las que desea realizar la búsqueda"
+
+msgid "not_founded_by_tags"
+msgstr "No existen conferencias asociadas a esta(s) categoría(s)"
+
+#-------------------------------------------------
+#speeches/show
+msgid "upload_file"
+msgstr "Subir Archivo"
+
+msgid "upload"
+msgstr "Subir"
+
+msgid "attachments"
+msgstr "Adjuntos"
+
+msgid "video_speech"
+msgstr "Video de la conferencia"
+
+msgid "file_speech"
+msgstr "Presentación"
+
+msgid "image_speech"
+msgstr "Una Foto"
+
+msgid "audio_speech"
+msgstr "Un archivo de Audio"
+
+msgid "not_attachment"
+msgstr "Esta conferencia no posee archivos adjuntos"
+
+#-------------------------------------------------
+#calendar/table
+msgid "prev"
+msgstr "← anterior"
+
+msgid "next"
+msgstr "siguiente →"
+
+#-------------------------------------------------
+#elements/calendarbox
+msgid "view_calendar"
+msgstr "Ver Calendario"
+
+#-------------------------------------------------
+#elements/loginbox
+msgid "user_in"
+msgstr "Ingreso"
+
+msgid "register"
+msgstr "Registrar"
+
+#-------------------------------------------------
+#elements/next_speeches
+msgid "next_speeches_element"
+msgstr "Próximas conferencias"
+
+msgid "not_next_speeches"
+msgstr "No hay conferencias agendadas próximas a venir"
+
+#-------------------------------------------------
+#elements/user_data
+msgid "user"
+msgstr "Usuario"
+
+msgid "user_edit"
+msgstr "Editar datos"
+
+msgid "config_access"
+msgstr "Configurar permisos"
+
+msgid "config_tags"
+msgstr "Configurar categorías"
+
+msgid "exit"
+msgstr "Salir"
+
+#-------------------------------------------------
+#layouts/default
+msgid "default_title"
+msgstr "Portal Conferencias"
+
+msgid "default_subtitle"
+msgstr "Departamento de Ciencias de la Computación"
+
+msgid "home"
+msgstr "Inicio"
+
+msgid "calendar"
+msgstr "Calendario"
+
+msgid "about_us"
+msgstr "Acerca de"
+
+#-------------------------------------------------
+#pages/about
+msgid "us"
+msgstr "Grupo 2"
+
+#-------------------------------------------------
+#tags/add
+msgid "add_tag"
+msgstr "Agregar nueva categoría"
+
+#-------------------------------------------------
+#tags/administrar
+msgid "title_admin"
+msgstr "Administrar Categorías"
+
+#-------------------------------------------------
+#users/change_pass
+msgid "title_chanche_pass"
+msgstr "Cambiar contraseña"
+
+msgid "new_pass"
+msgstr "Nueva contraseña: "
+
+msgid "confirm_new_pass"
+msgstr "Confirmar nueva contraseña: "
+
+msgid "change_pass_button"
+msgstr "Cambiar contraseña"
+
+#-------------------------------------------------
+#users/edit
+msgid "title_edit_user"
+msgstr "Editar datos personales"
+
+msgid "user_name"
+msgstr "Nombre: "
+
+msgid "confirm_pass"
+msgstr "Confirmar contraseña: "
+
+msgid "spanish"
+msgstr "Español"
+
+msgid "english"
+msgstr "English"
+
+msgid "subscriptions"
+msgstr "Susbscripciones"
+
+#-------------------------------------------------
+#users/index
+msgid "type"
+msgstr "Tipo"
+
+msgid "change_type"
+msgstr "Cambiar tipo"
+
+#-------------------------------------------------
+#users/login
+msgid "title_login"
+msgstr "Ingreso"
+
+msgid "button_login"
+msgstr "Ingresar"
+
+msgid "do_you_have_an_account"
+msgstr "¿Todavía no tienes una cuenta?"
+
+msgid "create_an_account"
+msgstr "¡Crear una cuenta!"
+
+#-------------------------------------------------
+#users/logout
+msgid "title_logout"
+msgstr "Sesión finalizada"
+
+#-------------------------------------------------
+#users/register
+msgid "case_sensitive"
+msgstr "¡Deben coincidir mayusculas y minusculas!"
+
+#-------------------------------------------------
+#months
+msgid "January"
+msgstr "Enero"
+
+msgid "February"
+msgstr "Febrero"
+
+msgid "March"
+msgstr "Marzo"
+
+msgid "April"
+msgstr "Abril"
+
+msgid "May"
+msgstr "Mayo"
+
+msgid "June"
+msgstr "Junio"
+
+msgid "July"
+msgstr "Julio"
+
+msgid "August"
+msgstr "Agosto"
+
+msgid "September"
+msgstr "Septiembre"
+
+msgid "October"
+msgstr "Octubre"
+
+msgid "November"
+msgstr "Nobiembre"
+
+msgid "December"
+msgstr "Diciembre"
+
+#-------------------------------------------------
+#days
+msgid "Monday"
+msgstr "Lunes"
+
+msgid "Tuesday"
+msgstr "Martes"
+
+msgid "Wednesday"
+msgstr "Miércoles"
+
+msgid "Thursday"
+msgstr "Jueves"
+
+msgid "Friday"
+msgstr "Viernes"
+
+msgid "Saturday"
+msgstr "Sábado"
+
+msgid "Sunday"
+msgstr "Domingo"
+
+msgid "Mon"
+msgstr "L"
+
+msgid "Tue"
+msgstr "M"
+
+msgid "Wed"
+msgstr "X"
+
+msgid "Thu"
+msgstr "J"
+
+msgid "Fri"
+msgstr "V"
+
+msgid "Sat"
+msgstr "S"
+
+msgid "Sun"
+msgstr "D"
