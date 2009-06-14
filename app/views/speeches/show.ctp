@@ -1,7 +1,6 @@
 <div class="speech">
 	<h1 class="title"><?php echo $speech['Speech']['title']?></h1>
 	<div class="meta">
-<<<<<<< HEAD:app/views/speeches/show.ctp
 		<p class="at">
 			<?php echo $speech['Speech']['date']?>
 			<?php __('at')?>
@@ -46,9 +45,6 @@
 			<h3><?php __('administration')?></h3>
 			<ul>
 				<li>
-					<a href="">Usuarios suscritos</a>
-				</li>
-				<li>
 					<?php echo $html->link(__('edit', true), array('action'=>'edit', 'id'=>$speech['Speech']['id']));?>
 				</li>
 				<li>
@@ -56,7 +52,7 @@
 													'action'=>'delete',
 													'id'=>$speech['Speech']['id']),
 													null,
-													sprintf('¿'. __('are_you_sure_delete', true).' %s?', $title))?>
+													sprintf('¿'. __('are_you_sure_delete', true).' %s?', $speech['Speech']['title']))?>
 					
 				</li>
 			</ul>
@@ -71,8 +67,17 @@
 																$speech['Speech']['title']
 																),
 													'type' => 'file'));
-				echo $form->input('Attachment.name', array('size' => '20',
-															'label' => 'Tipo de archivo (vídeo, presentación, etc.)'));
+
+				echo $form->input('Attachment.name',
+    					  array ('label' => 'Tipo de archivo (vídeo, presentación, etc.)',
+    						     'options' => array(
+													'video' => __('video_speech', true),
+													'ppt' => __('file_speech', true),
+													'foto' => __('image_speech', true),
+													'audio' => __('audio_speech', true),
+													'otro' => __('other', true)
+													)));
+
 				echo $form->file('File');
 				echo $form->submit(__('upload', true));
 				echo $form->end();
@@ -81,24 +86,6 @@
 		<?php } ?>
 
 		<h3><?php __('attachments')?></h3>
-		<ul>
-			<li class="video">
-				<a href="" rel="#attachment-1"><?php __('video_speech', true)?></a>
-				<div id="attachment-1" class="overlay"></div>
-			</li>
-			<li class="document">
-				<a href="" rel="#attachment-2"><?php __('file_speech', true)?></a>
-				<div id="attachment-2" class="overlay"></div>
-			</li>
-			<li class="image">
-				<a href="" rel="#attachment-3"><?php __('image_speech', true)?></a>
-				<div id="attachment-3" class="overlay"></div>
-			</li>
-			<li class="audio">
-				<a href="" rel="#attachment-4"><?php __('audio_speech', true)?></a>
-				<div id="attachment-4" class="overlay"></div>
-			</li>
-		</ul>
 
 		<ul>
 			<?php
@@ -106,9 +93,32 @@
 				if ($files) :
 				foreach ($files as $file) :
 			?>
-			<li>
+			<?php
+				switch ($file['Attachment']['name']) {
+					case 'video':
+						echo '<li class="video">';
+						$file_type = __('video_speech', true);
+						break;
+					case 'ppt':
+						echo '<li class="document">';
+						$file_type = __('file_speech', true);
+						break;
+					case 'foto':
+						echo '<li class="image">';
+						$file_type = __('image_speech', true);
+						break;
+					case 'audio':
+						echo '<li class="audio">';
+						$file_type = __('audio_speech', true);
+						break;
+					default:
+						echo '<li>';
+						$file_type = __('other', true);
+						break;
+				}
+			?>
 				<?php
-					echo $html->link($file['Attachment']['name'],
+					echo $html->link($file_type,
 											"/attachments/download/".$file['Attachment']['id']);
 					if($current_user['User']['type'] == 'admin'){
 				?>

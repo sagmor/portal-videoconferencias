@@ -173,6 +173,9 @@ msgstr "Una Foto"
 msgid "audio_speech"
 msgstr "Un archivo de Audio"
 
+msgid "other"
+msgstr "Otro"
+
 msgid "not_attachment"
 msgstr "Esta conferencia no posee archivos adjuntos"
 

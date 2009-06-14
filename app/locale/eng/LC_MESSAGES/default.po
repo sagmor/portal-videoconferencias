@@ -14,20 +14,334 @@ msgstr "Location"
 msgid "date"
 msgstr "Date"
 
+msgid "actions"
+msgstr "Actions"
+
+msgid "edit"
+msgstr "Edit"
+
+msgid "delete"
+msgstr "Delete"
+
+msgid "are_you_sure_delete"
+msgstr "Are you sure what you want to delete"
+
+msgid "add_speech"
+msgstr "Add speech"
+
 msgid "tags"
 msgstr "Tags"
+
+msgid "tag"
+msgstr "tag"
 
 msgid "save"
 msgstr "Save"
 
+msgid "table_page"
+msgstr "Page"
+
+msgid "of"
+msgstr "of"
+
+msgid "at"
+msgstr "at"
+
+msgid "showing"
+msgstr "showing"
+
+msgid "speeches"
+msgstr "Speeches"
+
+msgid "prev_speeches"
+msgstr "← Previous speeches"
+
+msgid "next_speeches"
+msgstr "Next speeches →"
+
+msgid "administration"
+msgstr "Administration"
+
+msgid "email"
+msgstr "E-mail"
+
+msgid "password"
+msgstr "Password"
+
+msgid "search"
+msgstr "Search"
+
+#-------------------------------------------------
 #speeches/add
 msgid "title_add"
 msgstr "Add new speech"
 
+#-------------------------------------------------
 #speeches/edit
 msgid "title_edit"
 msgstr "Edit speech"
 
+#-------------------------------------------------
 #speeches/index
 msgid "title_index"
-msgstr "Speeches scheduled"
+msgstr "Agended speeches"
+
+#-------------------------------------------------
+#speeches/search
+msgid "search_by_tag"
+msgstr "Search by tag"
+
+msgid "search_by_speaker"
+msgstr "Search by speaker"
+
+msgid "search_by_location"
+msgstr "Search by location"
+
+msgid "search_by_date"
+msgstr "Search by date"
+
+msgid "message"
+msgstr "Search a criteria for search in the superior menu"
+
+#-------------------------------------------------
+#speeches/searchByDate
+msgid "title_search_by_date"
+msgstr "Search speeches by month and year"
+
+msgid "search_message_date"
+msgstr "Date (month - year)"
+
+msgid "not_founded_by_date"
+msgstr "Not founded speeches for this month"
+
+#-------------------------------------------------
+#speeches/searchByLocation
+msgid "title_search_by_location"
+msgstr "Search speeches by location"
+
+msgid "not_founded_by_location"
+msgstr "Not founded speeches for this location(s)"
+
+#-------------------------------------------------
+#speeches/searchBySpeaker
+msgid "title_search_by_speaker"
+msgstr "Search speeches by speaker"
+
+msgid "search_message_speaker"
+msgstr "Write speaker's name"
+
+msgid "not_founded_by_speaker"
+msgstr "Not founded speeches for this speaker"
+
+#-------------------------------------------------
+#speeches/searchByTags
+msgid "title_search_by_tags"
+msgstr "Search speeches by tags"
+
+msgid "search_message_tags"
+msgstr "Select the tag(s) for search"
+
+msgid "not_founded_by_tags"
+msgstr "Not founded speeches for this tag(s)"
+
+#-------------------------------------------------
+#speeches/show
+msgid "upload_file"
+msgstr "Upload a file"
+
+msgid "upload"
+msgstr "upload"
+
+msgid "users_suscribed"
+msgstr "users suscribed"
+
+msgid "suscribe"
+msgstr "Suscribe me!"
+
+msgid "attachments"
+msgstr "Attachments"
+
+msgid "video_speech"
+msgstr "Speech's video"
+
+msgid "file_speech"
+msgstr "Speech's slides"
+
+msgid "image_speech"
+msgstr "Speech's image"
+
+msgid "audio_speech"
+msgstr "Speech's audio"
+
+msgid "other"
+msgstr "Otro"
+
+msgid "not_attachment"
+msgstr "This speech doesn't have attachment"
+
+#-------------------------------------------------
+#calendar/table
+msgid "prev"
+msgstr "← previous"
+
+msgid "next"
+msgstr "next →"
+
+#-------------------------------------------------
+#elements/calendarbox
+msgid "view_calendar"
+msgstr "View calendar"
+
+#-------------------------------------------------
+#elements/loginbox
+msgid "user_in"
+msgstr "User in"
+
+msgid "register"
+msgstr "Register"
+
+#-------------------------------------------------
+#elements/next_speeches
+msgid "next_speeches_element"
+msgstr "Next speeches"
+
+msgid "not_next_speeches"
+msgstr "There aren't next speeches"
+
+#-------------------------------------------------
+#elements/user_data
+msgid "user"
+msgstr "User"
+
+msgid "user_edit"
+msgstr "Edit user's info"
+
+msgid "config_access"
+msgstr "Configure access"
+
+msgid "config_tags"
+msgstr "Configure tags"
+
+msgid "exit"
+msgstr "Exit"
+
+#-------------------------------------------------
+#layouts/default
+msgid "default_title"
+msgstr "Speeche's portal"
+
+msgid "default_subtitle"
+msgstr "Computer cience dapartment"
+
+msgid "home"
+msgstr "Home"
+
+msgid "calendar"
+msgstr "Calendar"
+
+msgid "about_us"
+msgstr "About us"
+
+#-------------------------------------------------
+#pages/about
+msgid "us"
+msgstr "Gruop 2"
+
+#-------------------------------------------------
+#tags/add
+msgid "add_tag"
+msgstr "Add new tag"
+
+#-------------------------------------------------
+#tags/administrar
+msgid "title_admin"
+msgstr "Admin tags"
+
+#-------------------------------------------------
+#users/change_pass
+msgid "title_chanche_pass"
+msgstr "Change password"
+
+msgid "new_pass"
+msgstr "New password: "
+
+msgid "confirm_new_pass"
+msgstr "Confirm new pass: "
+
+msgid "change_pass_button"
+msgstr "Change password"
+
+#-------------------------------------------------
+#users/edit
+msgid "title_edit_user"
+msgstr "Edit profile"
+
+msgid "user_name"
+msgstr "Name: "
+
+msgid "confirm_pass"
+msgstr "Confirm password: "
+
+msgid "spanish"
+msgstr "Español"
+
+msgid "english"
+msgstr "English"
+
+msgid "subscriptions"
+msgstr "Subscriptions"
+
+#-------------------------------------------------
+#users/index
+msgid "type"
+msgstr "Type"
+
+msgid "change_type"
+msgstr "Change type"
+
+#-------------------------------------------------
+#users/login
+msgid "title_login"
+msgstr "Login"
+
+msgid "button_login"
+msgstr "Login"
+
+msgid "do_you_have_an_account"
+msgstr "Do you have an account?"
+
+msgid "create_an_account"
+msgstr "Create an account!"
+
+#-------------------------------------------------
+#users/logout
+msgid "title_logout"
+msgstr "Session finished"
+
+#-------------------------------------------------
+#users/register
+msgid "case_sensitive"
+msgstr "Case sensitive!"
+
+#-------------------------------------------------
+#days
+msgid "Mon"
+msgstr "M"
+
+msgid "Tue"
+msgstr "T"
+
+msgid "Wed"
+msgstr "W"
+
+msgid "Thu"
+msgstr "T"
+
+msgid "Fri"
+msgstr "F"
+
+msgid "Sat"
+msgstr "S"
+
+msgid "Sun"
+msgstr "S"

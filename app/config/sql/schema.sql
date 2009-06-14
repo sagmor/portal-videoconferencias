@@ -18,7 +18,7 @@ CREATE TABLE users(
   PRIMARY KEY  (id)
 );
 
-DROP TABLE ;
+DROP TABLE tags;
 CREATE TABLE tags(
   id int(11) NOT NULL auto_increment,
   name varchar(255),
@@ -38,8 +38,8 @@ CREATE TABLE speeches(
   PRIMARY KEY  (id)
 );
 
-DROP TABLE speech_subscriptions;
-CREATE TABLE speech_subscriptions(
+DROP TABLE speeches_users;
+CREATE TABLE speeches_users(
   id int(11) NOT NULL auto_increment,
   user_id int(11),
   speech_id int(11),

@@ -196,5 +196,27 @@ class SpeechesController extends AppController {
 																'order' => 'Speech.date'));
 		return $nextSpeeches;
 	}
+
+	//función que retorna la fecha de la última conferencia agendada
+	function getDateLastSpeech() {
+		$lastSpeech = $this->Speech->find('first', array('order' => 'Speech.date DESC'));
+		return date($lastSpeech['Speech']['date']);
+	}
+
+	//función que retorna la fecha de la última conferencia agendada
+	function getDateFirstSpeech() {
+		$firstSpeech = $this->Speech->find('first', array('order' => 'Speech.date ASC'));
+		return date($firstSpeech['Speech']['date']);
+	}
+
+	//función para filtrar las charlas en el calendario
+	//FIXME: aqui hay que decidir si darle los parametros como argumento o los sacamos de $this->data
+	function filterCalendar() {
+		return $this->Speech->find('all', array(
+												'conditions' => array(
+																	'Speech.speakers' => $speaker,
+																	'Tag.name' => $tag,
+																	'Speech.location' => $location)));
+	}
 }
 ?>
