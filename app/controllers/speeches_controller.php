@@ -214,7 +214,7 @@ class SpeechesController extends AppController {
 	function filterCalendar() {
 		return $this->Speech->find('all', array(
 												'conditions' => array(
-																	'Speech.speakers' => $speaker,
+																	'Speech.speakers LIKE' => '%'.$speaker.'%',
 																	'Tag.name' => $tag,
 																	'Speech.location' => $location)));
 	}
