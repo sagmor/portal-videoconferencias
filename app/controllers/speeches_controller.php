@@ -196,6 +196,13 @@ class SpeechesController extends AppController {
 		           $this->Speech->findById($speech_id));
 		if(!empty($this->data['SpeechesUser'])){
 			$user_id = $this->Session->read('user_id');
+			$id = $this->Speech->SpeechesUser->find('first',
+			                                        array('conditions' =>
+			                                              array('speech_id' => $speech_id,
+			                                                    'user_id' => $user_id),
+                                                          'fields' => array('id')));
+            $id = $id['SpeechesUser']['id'];			                                               
+			$this->data['SpeechesUser']['id'] = $id;                                      
 			$this->data['SpeechesUser']['user_id'] = $user_id;
 			$this->data['SpeechesUser']['speech_id'] = $speech_id;
 			if($this->data['SpeechesUser']['resend_in'] != 0){
@@ -206,6 +213,32 @@ class SpeechesController extends AppController {
 				$this->flash('Te has suscrito a la charla', '/');
 			}
 		}
+	}
+	
+	function unsubscribe($speech_id){
+
+		$user_id = $this->Session->read('user_id');
+		$subscription['user_id'] = $user_id;
+		$subscription['speech_id'] = $speech_id;
+		$id = $this->Speech->SpeechesUser->find('first',
+			                                    array('conditions' =>
+			                                          array('speech_id' => $speech_id,
+			                                                'user_id' => $user_id),
+			                                          'fields' => array('id')));
+		$id = $id['SpeechesUser']['id'];	                                           
+		$this->Speech->SpeechesUser->del($id);
+		$this->flash('Se ha desubscrito de la charla', '/');
+		
+	}
+	
+	function isCurrentUserSubscribed($speech_id){
+		$user_id = $this->Session->read('user_id');
+		$c = $this->Speech->SpeechesUser->find('count',
+			                                    array('conditions' =>
+			                                          array('speech_id' => $speech_id,
+			                                                'user_id' => $user_id)));
+	   return $c>0;
+		
 	}
 	
 }
