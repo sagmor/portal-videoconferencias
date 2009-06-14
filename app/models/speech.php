@@ -108,7 +108,7 @@ class Speech extends AppModel {
                            'The Lecture '.$this->data['Speech']['title'].($del? ' has been modified':
         		                                                                  'has been deleted ');
         		$from = 'Portal Conferencias DCC <noreply@example.com>';
-        		$text = 'For more information visit the next page '.
+        		$text = 'For further information visit the next page '.
         		       'http://'.$_SERVER['SERVER_NAME'].'/speeches/show/'.$this->data['Speech']['id'];
         		$this->ae_send_mail($from, $to, $subject, $text);
         	}
