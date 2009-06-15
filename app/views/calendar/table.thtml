@@ -12,11 +12,11 @@
 ?>
   <?php 
    if ( $type == big ) {
-    echo $html->link('← anterior', 
+    echo $html->link(__('prev', true),
       array(  'action' => 'index', 
               'month' => date("n", $prev),
               'year' => date("Y", $prev)), array('class' => 'prev'));
-    echo $html->link('siguiente →', 
+    echo $html->link(__('next', true),
       array(  'action' => 'index', 
               'month' => date("n", $next),
               'year' => date("Y", $next)), array('class' => 'next'));
@@ -27,21 +27,21 @@
 <table border="0">
   <tr>
   <?php if ( $type == big ) { ?>
-    <th>Lunes</th>
-    <th>Martes</th>
-    <th>Miércoles</th>
-    <th>Jueves</th>
-    <th>Viernes</th>
-    <th>Sábado</th>
-    <th>Domingo</th>
+    <th><?php __('Monday')?></th>
+    <th><?php __('Tuesday')?></th>
+    <th><?php __('Wednesday')?></th>
+    <th><?php __('Tuesday')?></th>
+    <th><?php __('Friday')?></th>
+    <th><?php __('Saturday')?></th>
+    <th><?php __('Sunday')?></th>
   <?php } else { ?>
-    <th>L</th>
-    <th>M</th>
-    <th>M</th>
-    <th>J</th>
-    <th>V</th>
-    <th>S</th>
-    <th>D</th>
+    <th><?php __('Mon')?></th>
+    <th><?php __('Tue')?></th>
+    <th><?php __('Wed')?></th>
+    <th><?php __('Thu')?></th>
+    <th><?php __('Fri')?></th>
+    <th><?php __('Sat')?></th>
+    <th><?php __('Sun')?></th>
   <?php } ?>
   </tr>
   <tr>

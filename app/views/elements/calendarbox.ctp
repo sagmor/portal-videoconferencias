@@ -1,6 +1,6 @@
-<?php echo $html->link('Ver Calendario', '/calendar', array('class'=>'button')); ?>
-<div id="calendarbox">
-</div>
+<?php echo $html->link(__('view_calendar', true), '/calendar', array('class'=>'button')); ?>
+	<div id="calendarbox">
+	</div>
 <script type="text/javascript" charset="utf-8">
   $('#calendarbox').load("<?php echo $html->url(array(
 	        'controller' => 'calendar', 

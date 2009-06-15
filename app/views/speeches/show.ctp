@@ -1,16 +1,19 @@
 <div class="speech">
 	<h1 class="title"><?php echo $speech['Speech']['title']?></h1>
 	<div class="meta">
-		<p class="at"><?php echo $speech['Speech']['date']?> en <?php echo $speech['Speech']['location']?></p>
-		<p class="links"> <?php echo $speech_subscriptions?> Subscritos &nbsp;
+		<p class="at">
+			<?php echo $speech['Speech']['date']?>
+			<?php __('at')?>
+			<?php echo $speech['Speech']['location']?></p>
+		<p class="links"> <?php echo $speech_subscriptions.' '.__('users_suscribed')?>&nbsp;
 		<?php if($current_user['User']['type'] == 'normal') {
-		    echo $html->link('Subscribirse a esta charla!',
+		    echo $html->link(__('suscribe', true),
                              '/speeches/subscribe/'.$speech['Speech']['id']);
 		      }?>
-	    </p>
+		</p>
 	</div>
 	<div class="description">
-	  <p>Presentadores</p>
+	  <p><?php __('speakers')?></p>
 	  <ul>
         <?php
             $presentadores = split("[,]|[\n]|[;]", $speech['Speech']['speakers']);
@@ -21,11 +24,11 @@
         <?php endif; endforeach; ?>
     </ul>
     
-		<p>Descripción de la charla<br />
+		<p><?php __('description')?><br />
 			<?php echo $speech['Speech']['description']?>
 		</p>
 
-		<p>Categorías</p>
+		<p><?php __('tags')?></p>
 		<?php
 			$tags = $this->requestAction('speeches/getTagsBySpeechId/'.$speech['Speech']['id']);
 			foreach ($tags as $tag) :
@@ -39,23 +42,21 @@
 
 	<div class="attachments">
 		<?php if($current_user['User']['type'] == 'admin'){ ?>
-			<h3>Administración</h3>
+			<h3><?php __('administration')?></h3>
 			<ul>
 				<li>
-					<a href="">Usuarios suscritos</a>
+					<?php echo $html->link(__('edit', true), array('action'=>'edit', 'id'=>$speech['Speech']['id']));?>
 				</li>
 				<li>
-					<?php echo $html->link('Editar', array('action'=>'edit', 'id'=>$speech['Speech']['id']));?>
-				</li>
-				<li>
-					<?php echo $html->link('Borrar', array(
+					<?php echo $html->link(__('delete', true), array(
 													'action'=>'delete',
 													'id'=>$speech['Speech']['id']),
 													null,
-													'¿Está seguro?')?>
+													sprintf('¿'. __('are_you_sure_delete', true).' %s?', $speech['Speech']['title']))?>
+					
 				</li>
 			</ul>
-			<h3>Subir Archivo</h3>
+			<h3><?php __('upload_file')?></h3>
 			<?php
 				$folder = '/files/'.$speech['Speech']['id'].'/';
 				echo $form->create('Attachment', array(
@@ -66,34 +67,25 @@
 																$speech['Speech']['title']
 																),
 													'type' => 'file'));
-				echo $form->input('Attachment.name', array('size' => '20',
-															'label' => 'Tipo de archivo (vídeo, presentación, etc.)'));
+
+				echo $form->input('Attachment.name',
+    					  array ('label' => 'Tipo de archivo (vídeo, presentación, etc.)',
+    						     'options' => array(
+													'video' => __('video_speech', true),
+													'ppt' => __('file_speech', true),
+													'foto' => __('image_speech', true),
+													'audio' => __('audio_speech', true),
+													'otro' => __('other', true)
+													)));
+
 				echo $form->file('File');
-				echo $form->submit('Subir');
+				echo $form->submit(__('upload', true));
 				echo $form->end();
 			?>
 			<hr />
 		<?php } ?>
 
-		<h3>Adjuntos</h3>
-		<ul>
-			<li class="video">
-				<a href="" rel="#attachment-1">Video de la Presentacion</a>
-				<div id="attachment-1" class="overlay"></div>
-			</li>
-			<li class="document">
-				<a href="" rel="#attachment-2">Presentación</a>
-				<div id="attachment-2" class="overlay"></div>
-			</li>
-			<li class="image">
-				<a href="" rel="#attachment-3">Una Foto</a>
-				<div id="attachment-3" class="overlay"></div>
-			</li>
-			<li class="audio">
-				<a href="" rel="#attachment-4">Un archivo de Audio</a>
-				<div id="attachment-4" class="overlay"></div>
-			</li>
-		</ul>
+		<h3><?php __('attachments')?></h3>
 
 		<ul>
 			<?php
@@ -101,9 +93,32 @@
 				if ($files) :
 				foreach ($files as $file) :
 			?>
-			<li>
+			<?php
+				switch ($file['Attachment']['name']) {
+					case 'video':
+						echo '<li class="video">';
+						$file_type = __('video_speech', true);
+						break;
+					case 'ppt':
+						echo '<li class="document">';
+						$file_type = __('file_speech', true);
+						break;
+					case 'foto':
+						echo '<li class="image">';
+						$file_type = __('image_speech', true);
+						break;
+					case 'audio':
+						echo '<li class="audio">';
+						$file_type = __('audio_speech', true);
+						break;
+					default:
+						echo '<li>';
+						$file_type = __('other', true);
+						break;
+				}
+			?>
 				<?php
-					echo $html->link($file['Attachment']['name'],
+					echo $html->link($file_type,
 											"/attachments/download/".$file['Attachment']['id']);
 					if($current_user['User']['type'] == 'admin'){
 				?>
@@ -118,7 +133,7 @@
 
 		<?php
 			else :
-				echo 'Esta charla no posee archivos adjuntos';
+				echo __("not_attachment", true);
 
 			endif;
 		?>

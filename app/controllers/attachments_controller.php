@@ -34,9 +34,6 @@ class AttachmentsController extends AppController {
 	}
 
 	function upload($speech_id, $folder, $speech_title) {
-//		debug($this->data);
-//		debug($folder);
-//		debug($speech_title);
 		$folder = $folder.'/'.$speech_title;
 		$folder_url = WWW_ROOT.$folder;
 
@@ -44,49 +41,47 @@ class AttachmentsController extends AppController {
 		$folder_url = str_replace(' ', '_', $folder_url);
 		$rel_url = str_replace(' ', '_', $folder);
 
-//		debug($folder_url);
 		if(!is_dir($folder_url)) {
 			mkdir($folder_url);
-			chmod($folder_url, 0757); //en unix, permisos.
+			//en unix, permisos.
+			chmod($folder_url, 0757); 
 		}
 
 		$file = $this->data['Attachment']['File'];
-//		debug($file);
 		$filename = str_replace(' ', '_', $file['name']);
-//		debug($filename);
 		switch($file['error']) {
 
 			case 0:
-			// check filename already exists
+			// verifica si ya está el archivo
 				if(!file_exists($folder_url.'/'.$filename)) {
-					// create full filename
+					// crea el nombre completo del archivo
 					$full_url = $folder_url.'/'.$filename;
 					$url = $rel_url.'/'.$filename;
-					// upload the file
+					// sube el archivo
 					$success = move_uploaded_file($file['tmp_name'], $full_url);
 					// despues de mover, cambiar permisos del file a 0757.
 				} else {
-					// create unique filename and upload file
+					// crea un único nombre de archivo y lo sube
 					ini_set('date.timezone', 'Europe/London');
 					$now = date('Y-m-d-His');
 					$full_url = $folder_url.DS.$now.$filename;
 					$url = $rel_url.'/'.$now.$filename;
 					$success = move_uploaded_file($file['tmp_name'], $url);
 				}
-				// if upload was successful
+				// si se subió correctamente
 				if($success) {
-					// save the url of the file
+					// guarda la url del archivo
 					$result['urls'][] = $url;
 				} else {
 					$result['errors'][] = "Error uploaded $filename. Please try again.";
 				}
 				break;
 			case 3:
-				// an error occured
+				// un error ha ocurrido
 				$result['errors'][] = "Error uploading $filename. Please try again.";
 				break;
 			default:
-				// an error occured
+				// un error ha ocurrido
 				$result['errors'][] = "System error uploading $filename. Contact webmaster.";
 				break;
 		}
