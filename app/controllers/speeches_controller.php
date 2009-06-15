@@ -199,14 +199,18 @@ class SpeechesController extends AppController {
 
 	//función que retorna la fecha de la última conferencia agendada
 	function getDateLastSpeech() {
-		$lastSpeech = $this->Speech->find('first', array('order' => 'Speech.date DESC'));
-		return date($lastSpeech['Speech']['date']);
+		$lastSpeech = $this->Speech->find('first', array('order' => array('Speech.date' => 'desc')));
+		$dateLastSpeech = $lastSpeech['Speech']['date'];
+		debug($dateLastSpeech);
+		return $dateLastSpeech;
 	}
 
 	//función que retorna la fecha de la última conferencia agendada
 	function getDateFirstSpeech() {
-		$firstSpeech = $this->Speech->find('first', array('order' => 'Speech.date ASC'));
-		return date($firstSpeech['Speech']['date']);
+		$firstSpeech = $this->Speech->find('first', array('order' => array('Speech.date' => 'asc')));
+		$dateFirstSpeech = $firstSpeech['Speech']['date'];
+		debug($dateFirstSpeech);
+		return $dateFirstSpeech;
 	}
 
 	//función para filtrar las charlas en el calendario

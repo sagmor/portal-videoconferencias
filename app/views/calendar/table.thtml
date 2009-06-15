@@ -1,71 +1,87 @@
 <?php
-  $date = mktime(12, 0, 0, $month, 1, $year);
-  $next = $date - mktime(0,0,0,0,0,0) + mktime(0,0,0,0,31,0); #mktime(12, 0, 0, $month+1%12, 0, $year);
-  $prev = $date + mktime(0,0,0,0,0,0) - mktime(0,0,0,0,10,0);
-  $daysInMonth = date("t", $date);
-  
-  // calculate the position of the first day in the calendar (sunday = 1st column, etc)
-  $offset = date("w", $date) - 1;
-  if ($offset == -1) { $offset = 6; }
-  $rows = 1;
+$date = mktime(12, 0, 0, $month, 1, $year);
+$next = $date - mktime(0,0,0,0,0,0) + mktime(0,0,0,0,31,0); #mktime(12, 0, 0, $month+1%12, 0, $year);
+$prev = $date + mktime(0,0,0,0,0,0) - mktime(0,0,0,0,10,0);
+$daysInMonth = date("t", $date);
 
-?>
-  <?php 
-   if ( $type == big ) {
-    echo $html->link(__('prev', true),
-      array(  'action' => 'index', 
-              'month' => date("n", $prev),
-              'year' => date("Y", $prev)), array('class' => 'prev'));
-    echo $html->link(__('next', true),
-      array(  'action' => 'index', 
-              'month' => date("n", $next),
-              'year' => date("Y", $next)), array('class' => 'next'));
-              
-    } ?>
-<h2><?php echo date("F Y", $date) ?></h2>
+$lastSpeech = $this->requestAction('/speeches/getDateLastSpeech');
+$firstSpeech = $this->requestAction('/speeches/getDateFirstSpeech');
+if (date('Y-m-d',$date - mktime(0,0,0,0,0,0) + mktime(0,0,0,0,date("t", $date)-1,0)) < $firstSpeech || date('Y-m-d',$date) > $lastSpeech) {
+	echo 'No hay conferencias agendadas para esta fecha';
+} else {
+
+	// calculate the position of the first day in the calendar (sunday = 1st column, etc)
+	$offset = date("w", $date) - 1;
+	if ($offset == -1) { $offset = 6; }
+	$rows = 1;
+
+	?>
+	<?php
+	if ( $type == big ) {
+
+		if ($firstSpeech < date('Y-m-d',$prev)) {
+			echo $html->link(__('prev', true),
+				array(  'action' => 'index',
+			  'month' => date("n", $prev),
+			  'year' => date("Y", $prev)), array('class' => 'prev'));
+		}
+		if($lastSpeech > date('Y-m-d',$next)) {
+			echo $html->link(__('next', true),
+				array(  'action' => 'index',
+			  'month' => date("n", $next),
+			  'year' => date("Y", $next)), array('class' => 'next'));
+		}
+
+	} ?>
+<h2>
+	<?php
+	$month = date("F", $date);
+	echo __($month).' '.date("Y", $date);
+	?>
+</h2>
 
 <table border="0">
-  <tr>
-  <?php if ( $type == big ) { ?>
-    <th><?php __('Monday')?></th>
-    <th><?php __('Tuesday')?></th>
-    <th><?php __('Wednesday')?></th>
-    <th><?php __('Tuesday')?></th>
-    <th><?php __('Friday')?></th>
-    <th><?php __('Saturday')?></th>
-    <th><?php __('Sunday')?></th>
-  <?php } else { ?>
-    <th><?php __('Mon')?></th>
-    <th><?php __('Tue')?></th>
-    <th><?php __('Wed')?></th>
-    <th><?php __('Thu')?></th>
-    <th><?php __('Fri')?></th>
-    <th><?php __('Sat')?></th>
-    <th><?php __('Sun')?></th>
-  <?php } ?>
-  </tr>
-  <tr>
-  <?php
-    for($i = 1; $i <= $offset; $i++) {
-      echo "<td class=\"empty\"></td>";
-    }
-    
-    for($day = 1; $day <= $daysInMonth; $day++)
-    {
-        if( ($day + $offset - 1) % 7 == 0 && $day != 1)
-        {
-            echo "</tr>\n\t<tr>";
-            $rows++;
-        }
+	<tr>
+		<?php if ( $type == big ) { ?>
+		<th><?php __('Monday')?></th>
+		<th><?php __('Tuesday')?></th>
+		<th><?php __('Wednesday')?></th>
+		<th><?php __('Tuesday')?></th>
+		<th><?php __('Friday')?></th>
+		<th><?php __('Saturday')?></th>
+		<th><?php __('Sunday')?></th>
+		<?php } else { ?>
+		<th><?php __('Mon')?></th>
+		<th><?php __('Tue')?></th>
+		<th><?php __('Wed')?></th>
+		<th><?php __('Thu')?></th>
+		<th><?php __('Fri')?></th>
+		<th><?php __('Sat')?></th>
+		<th><?php __('Sun')?></th>
+		<?php } ?>
+	</tr>
+	<tr>
+		<?php
+		for($i = 1; $i <= $offset; $i++) {
+			echo "<td class=\"empty\"></td>";
+		}
+
+		for($day = 1; $day <= $daysInMonth; $day++)
+		{
+			if( ($day + $offset - 1) % 7 == 0 && $day != 1)
+			{
+				echo "</tr>\n\t<tr>";
+				$rows++;
+			}
 
 
-        echo "<td id=\"day$day\"><span class=\"daynumber\">$day</span></td>";
-    }
-    
-    while( ($day + $offset) <= $rows * 7){
-        echo "<td class=\"empty\"></td>";
-        $day++;
-    }
-  ?>
-  </tr>
+			echo "<td id=\"day$day\"><span class=\"daynumber\">$day</span></td>";
+		}
+
+		while( ($day + $offset) <= $rows * 7){
+			echo "<td class=\"empty\"></td>";
+			$day++;
+		}
+	}?>
+	</tr>
 </table>

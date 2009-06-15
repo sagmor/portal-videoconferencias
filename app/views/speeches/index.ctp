@@ -5,7 +5,12 @@
 										__('of', true).' %pages%, '.
 										__('showing', true).' %current% '.
 										__('speeches', true).' '.
-										__('of', true).' %count%')); ?></p>
+										__('of', true).' %count%'));
+//		$lastSpeech = $this->requestAction('/speeches/getDateLastSpeech');
+//		$firstSpeech = $this->requestAction('/speeches/getDateFirstSpeech');
+//		debug($lastSpeech);
+//		debug($firstSpeech);
+	?></p>
 <div id="table">
 <div  class="paging">
 	<?php
