@@ -6,7 +6,8 @@ $daysInMonth = date("t", $date);
 
 $lastSpeech = $this->requestAction('/speeches/getDateLastSpeech');
 $firstSpeech = $this->requestAction('/speeches/getDateFirstSpeech');
-if (date('Y-m-d',$date - mktime(0,0,0,0,0,0) + mktime(0,0,0,0,date("t", $date)-1,0)) < $firstSpeech || date('Y-m-d',$date) > $lastSpeech) {
+if (date('Y-m-d',$date - mktime(0,0,0,0,0,0) + mktime(0,0,0,0,date("t", $date)-1,0)) < $firstSpeech ||
+	date('Y-m-d',$date) > $lastSpeech) {
 	echo 'No hay conferencias agendadas para esta fecha';
 } else {
 

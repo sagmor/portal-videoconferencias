@@ -1,84 +1,81 @@
 <?php
 class SpeechesController extends AppController {
-    var $helpers = array('Html', 'Javascript', 'Form', 'Paginator');
-    var $name = 'Speeches';
+	var $helpers = array('Html', 'Javascript', 'Form', 'Paginator');
+	var $name = 'Speeches';
 	var $scaffold;
-	var $paginate = array('limit' => 10, 
+	var $paginate = array('limit' => 10,
 						'order' => array('Speech.date' => 'asc'),
 						'fields' => array('Speech.id',
 										'Speech.date',
 										'Speech.title',
 										'Speech.location',
 										'Speech.speakers',
-										));
-    
-    var $components = array('RequestHandler','json');
+		));
+
+	var $components = array('RequestHandler','json');
 
 	var $uses = array('Speech', 'SpeechesTags');
 	var $speakerSearched;
 
 	//función que muestra ek contenigo de una conferencia
-    function show($id = null) {
-        $this->Speech->id = $id;
-        $this->set('speech', $this->Speech->read());
-    }
+	function show($id = null) {
+		$this->Speech->id = $id;
+		$this->set('speech', $this->Speech->read());
+	}
 
 	//función para agregar una conferencia
-    function add() {
-      if ($this->validateAdmin()) {
-        if(!empty($this->data)) {
-			if($this->Speech->save($this->data)) {
-				$this->flash('Nueva charla creada', '', 1);
-				$this->redirect(array('action' => '/'));
+	function add() {
+		if ($this->validateAdmin()) {
+			if(!empty($this->data)) {
+				if($this->Speech->save($this->data)) {
+					$this->flash('Nueva charla creada', '', 1);
+					$this->redirect(array('action' => '/'));
+				}
 			}
-        }
-      }
-    }
-    
-    function index_json() {
-      $this->layout = null;
-         Configure::write('debug',0);
-         
-      $month = $this->params['month'];
-      $year = $this->params['year'];
-      
-      $result = $this->Speech->find('all', array(
-        'conditions'=>array('date BETWEEN ? AND ?' => array("$year-$month-01", "$year-$month-31"))));
-        
-      foreach ($result as $i => $data) {
-       $result[$i]['Speech']['url'] = Router::url(array('action'=>'show','id'=>$result[$i]['Speech']['id']));
-      }
-      $this->set('result', $this->json->encode($result));
-    }
+		}
+	}
+
+	function index_json() {
+		$this->layout = null;
+		Configure::write('debug',0);
+		$month = $this->params['month'];
+		$year = $this->params['year'];
+		$result = $this->Speech->find('all', array(
+							'conditions'=>array('date BETWEEN ? AND ?' => array("$year-$month-01", "$year-$month-31"))));
+		foreach ($result as $i => $data) {
+			$result[$i]['Speech']['url'] = Router::url(array('action'=>'show','id'=>$result[$i]['Speech']['id']));
+		}
+		$this->set('result', $this->json->encode($result));
+	}
 
 	//función para editar una conferencia
-    function edit($id = null) {
-      if ($this->validateAdmin()) {
-        $this->Speech->id = $id;
-        if (empty($this->data)) {
+	function edit($id = null) {
+		if ($this->validateAdmin()) {
+			$this->Speech->id = $id;
+			if (empty($this->data)) {
 				$this->data = $this->Speech->read();
-        } else {
-			if ($this->Speech->save($this->data)) {
-				$this->flash('La charla ha sido modificada exitosamente.', '/', 1);
-				$this->redirect(array('action' => '/'));
+			} else {
+				if ($this->Speech->save($this->data)) {
+					$this->flash('La charla ha sido modificada exitosamente.', '/', 1);
+					$this->redirect(array('action' => '/'));
+				}
 			}
-        }
-      }
-    }
+		}
+	}
 
 	//función para eliminar una conferencia
-    function delete($id) {
-      if ($this->validateAdmin()) {
-        $this->Speech->del($id);
-        $this->flash('La conferencia ha sido eliminada.', '/speeches/', 0);
-        $this->redirect(array('action' => '/'));
-      }
-    }
+	function delete($id) {
+		if ($this->validateAdmin()) {
+			$this->Speech->del($id);
+			$this->flash('La conferencia ha sido eliminada.', '/speeches/', 0);
+			$this->redirect(array('action' => '/'));
+		}
+	}
 
 	//función que muestra las conferencias en el index
 	function index() {
 		$this->set('data',  $this->paginate('Speech'));
-    }
+	}
 
 	function search() {
 	}
@@ -144,7 +141,7 @@ class SpeechesController extends AppController {
 		}
 
 	}
-//FIXME: muy mala implementación de la consulta, hecha así para aprovechar el paginamiento de cake
+	//FIXME: muy mala implementación de la consulta, hecha así para aprovechar el paginamiento de cake
 	function searchByTags() {
 		$dataTags = '';
 		$speechesIds = '';
@@ -154,8 +151,8 @@ class SpeechesController extends AppController {
 		}
 		if(isset($this->passedArgs) && $this->passedArgs != array()) {
 			for($i = 0; $i < count($this->passedArgs); $i++)
-				if(isset($this->passedArgs[$i]) && $this->passedArgs[$i] != '')
-					$dataTags[$i] = $this->passedArgs[$i];
+			if(isset($this->passedArgs[$i]) && $this->passedArgs[$i] != '')
+			$dataTags[$i] = $this->passedArgs[$i];
 		}
 		if ($dataTags != '') {
 			$this->set('isSearch', true);
@@ -201,7 +198,6 @@ class SpeechesController extends AppController {
 	function getDateLastSpeech() {
 		$lastSpeech = $this->Speech->find('first', array('order' => array('Speech.date' => 'desc')));
 		$dateLastSpeech = $lastSpeech['Speech']['date'];
-		debug($dateLastSpeech);
 		return $dateLastSpeech;
 	}
 
@@ -209,7 +205,6 @@ class SpeechesController extends AppController {
 	function getDateFirstSpeech() {
 		$firstSpeech = $this->Speech->find('first', array('order' => array('Speech.date' => 'asc')));
 		$dateFirstSpeech = $firstSpeech['Speech']['date'];
-		debug($dateFirstSpeech);
 		return $dateFirstSpeech;
 	}
 
