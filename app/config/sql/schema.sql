@@ -29,7 +29,7 @@ DROP TABLE speeches;
 CREATE TABLE speeches(
   id int(11) NOT NULL auto_increment,
   title varchar(255),
-  date timestamp,
+  date datetime,
   description text,
   location varchar(255),
   speakers text,
@@ -43,8 +43,8 @@ CREATE TABLE speeches_users(
   id int(11) NOT NULL auto_increment,
   user_id int(11),
   speech_id int(11),
-  remember_at timestamp,
-  resend_in timestamp,
+  remember_at datetime,
+  resend_in datetime,
   PRIMARY KEY  (id)
 );
 

@@ -188,7 +188,7 @@ class SpeechesController extends AppController {
 		$currentTime = date('Y-m-d-His');
 		$nextSpeeches = $this->Speech->find('all', array(
 											'conditions' => array(
-																'Speech.date >=' => $currentTime),
+																'Speech.date >=' => convert(nvarchar(19), $currentTime, 120)),
 																'limit' => 5,
 																'order' => 'Speech.date'));
 		return $nextSpeeches;
