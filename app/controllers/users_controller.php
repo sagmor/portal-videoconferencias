@@ -18,16 +18,16 @@ class UsersController extends AppController
 
 	function register() {
 		if (!empty($this->data['User'])){
-			if ($this->Captcha->protect('User')) {
+//			if ($this->Captcha->protect('User')) {
 				if ($this->User->save($this->data)){
 					$this->Session->write('user_id', $this->User->id);
 					$this->flash('Tu usuario ha sido creado correctamente', '/');
 				} else {
 					$this->data['User']['password'] = $this->data['User']['password_confirmation'] = '';
 				}
-			} else {
-				echo 'Falló la captura de imagen';
-			}
+//			} else {
+//				echo 'Falló la captura de imagen';
+//			}
 
 		}
 	}

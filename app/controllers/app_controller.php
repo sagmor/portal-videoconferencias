@@ -33,7 +33,7 @@ class AppController extends Controller {
 
 	protected function validateUser() {
 		if ($this->currentUser() == null) {
-			$this->flash('Debes ingresar al sistema para realizar esta operación', array('controller'=>'users', 'action'=>'login'));
+			$this->flash(__('you_have_to_enter', true), array('controller'=>'users', 'action'=>'login'));
 
 			return false;
 		}
@@ -45,7 +45,7 @@ class AppController extends Controller {
 		if (!$this->validateUser()) return false;
 
 		if ($this->current_user['User']['type'] != 'admin') {
-			$this->flash('Acción no autorizada', '/');
+			$this->flash(__('not_permited', true), '/');
 			return false;
 		}
 

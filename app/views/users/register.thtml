@@ -31,9 +31,9 @@
 												   'options' => $tags));
 	?>
 	<?php
-	$this->Captcha->filter = array('blur' => 1, 'noise' => 5);
-	$this->Captcha->case = true;
-	echo $captcha->input();
+//	$this->Captcha->filter = array('blur' => 1, 'noise' => 5);
+//	$this->Captcha->case = true;
+//	echo $captcha->input();
 	echo $form->end('Registrar');?>
 </div>
 

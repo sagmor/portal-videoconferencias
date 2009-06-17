@@ -89,7 +89,7 @@ class Speech extends AppModel {
 		return true;
 	}
 
-        function sendMail($user, $created, $del = false){
+function sendMail($user, $created, $del = false){
         	if($user['lang'] == 'es'){
         		$to = $user['email'];
         		$subject = $created?

@@ -1,5 +1,5 @@
 <h2><strong><?php __('user', true)?></strong></h2>
-Saludos: <br />
+<?php echo __('welcome') ?>: <br />
   <?php echo $current_user['User']['name']; ?>
 <ul>
 	<li><?php echo $html->link(__('user_edit', true), array('controller' => 'users',
