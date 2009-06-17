@@ -47,7 +47,7 @@ class MailDaemonController extends AppController {
 					$out.='Mail sent to '.$user['name'].'<br>';
 					$i++;
 				}
-				$notif['SpeechesUser']['remember_at'] = date('Y-m-d H:i:s',
+				$notif['SpeechesUser']['remember_at'] = date('m-d-Y H:i:s',
 				                                             time()+$notif['SpeechesUser']['resend_in']*24*60*60);
 			    $this->Speech->SpeechesUser->save($notif);
 			}

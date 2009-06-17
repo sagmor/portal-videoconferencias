@@ -90,7 +90,7 @@ class Speech extends AppModel {
 	}
 
 function sendMail($user, $created, $del = false){
-        	if($user['lang'] == 'es'){
+        	if($user['lang'] == 'esp'){
         		$to = $user['email'];
         		$subject = $created?
                            'Nueva charla '.$this->data['Speech']['title'].'. Portal conferencias DCC':

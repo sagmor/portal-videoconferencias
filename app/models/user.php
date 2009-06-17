@@ -88,21 +88,26 @@ class User extends AppModel
 	  return true;
 	}
 
-  function afterCreate() {
-        if($user['Data']['lang'] == 'es'){
-                ae_send_mail("no-reply@remitente.com",
-                             $this->data['User']['email'],
-                             "Subscripción portal conferencias",
-                             "Te haz registrado correctamente al portal de conferencias.\n".
-                             "Tu constraseña es ".$this->data['User']['password']);
-        }
-        else{
-                ae_send_mail("no-reply@remitente.com",
-                             $this->data['User']['email'],
-                             "Lectures portal subscription",
-                             "You have been correctly registered to the lectures portal.\n".
-                             "Your password is ".$this->data['User']['password']);
-        }
+  function afterSave($created) {
+  	if($created){
+  		if($this->data['User']['lang'] == 'esp'){
+  			$this->ae_send_mail("no-reply@remitente.com",
+  			                    $this->data['User']['email'],
+                                "Subscripción portal conferencias",
+                                "Te haz registrado correctamente al portal de conferencias.\n".
+                                "Tu constraseña es ".$this->data['User']['password']);
+  		}
+  		else{
+  			echo debug($this->data['User']['email']);
+  			$this->ae_send_mail("no-reply@remitente.com",
+  			                    $this->data['User']['email'],
+                                "Lectures portal subscription",
+                                "You have been correctly registered to the lectures portal.\n".
+                                "Your password is ".$this->data['User']['password']);
+  		}
+  		return true;
+  	}
+  	return false;
   }
 
   function encrypt($salt,$password) {
