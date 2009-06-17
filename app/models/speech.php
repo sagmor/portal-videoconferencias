@@ -47,7 +47,7 @@ class Speech extends AppModel {
 		$speech = $this->findById($this->id);
 		$this->data['Speech'] = $speech['Speech'];
 		$userIds = $speech['User'];
-	    $userIds = array_unique($userIds);
+	        $userIds = array_unique($userIds);
 		foreach($userIds as $user){
 			$this->sendMail($user, false, true);
 		}
@@ -105,7 +105,7 @@ function sendMail($user, $created, $del = false){
                            'The Lecture '.$this->data['Speech']['title'].($del? ' has been deleted':
         		                                                                ' has been modified');
         		$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
-        		$text =$del? 'La charla fue eliminada' : 
+        		$text =$del? 'The lecture was deleted' : 
         		             'For further information visit the next page '.
         		             $this->getRoot().'/speeches/show/'.$this->id;
         		$this->ae_send_mail($from, $to, $subject, $text);
