@@ -38,7 +38,7 @@
 	|
 	<?php echo  $paginator->next(__('next_speeches', true), null, null,  array('class'=>'disabled'));?>
 </div>
-<table  class="scaffold" cellpadding="2"  cellspacing="0">
+<table  class="scaffold" cellpadding="7"  cellspacing="0">
 <thead>
 	<tr>
 		<th><?php echo  $paginator->sort(__('title', true),'title'); ?></th>
