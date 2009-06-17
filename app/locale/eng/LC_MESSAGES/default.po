@@ -112,7 +112,7 @@ msgid "search_message_date"
 msgstr "Date (month - year)"
 
 msgid "not_founded_by_date"
-msgstr "Not founded speeches for this month"
+msgstr "No speeches found for this month"
 
 #-------------------------------------------------
 #speeches/searchByLocation
@@ -120,7 +120,7 @@ msgid "title_search_by_location"
 msgstr "Search speeches by location"
 
 msgid "not_founded_by_location"
-msgstr "Not founded speeches for this location(s)"
+msgstr "No speeches found for this location(s)"
 
 #-------------------------------------------------
 #speeches/searchBySpeaker
@@ -131,7 +131,7 @@ msgid "search_message_speaker"
 msgstr "Write speaker's name"
 
 msgid "not_founded_by_speaker"
-msgstr "Not founded speeches for this speaker"
+msgstr "No speeches found for this speaker"
 
 #-------------------------------------------------
 #speeches/searchByTags
@@ -142,7 +142,7 @@ msgid "search_message_tags"
 msgstr "Select the tag(s) for search"
 
 msgid "not_founded_by_tags"
-msgstr "Not founded speeches for this tag(s)"
+msgstr "No speeches found for this tag(s)"
 
 #-------------------------------------------------
 #speeches/show
@@ -153,7 +153,7 @@ msgid "upload"
 msgstr "upload"
 
 msgid "users_suscribed"
-msgstr "users suscribed"
+msgstr "suscribed users"
 
 msgid "suscribe"
 msgstr "Suscribe me!"
@@ -214,7 +214,7 @@ msgid "user"
 msgstr "User"
 
 msgid "user_edit"
-msgstr "Edit user's info"
+msgstr "Edit profile"
 
 msgid "config_access"
 msgstr "Configure access"
@@ -258,7 +258,10 @@ msgstr "Add new tag"
 #-------------------------------------------------
 #tags/administrar
 msgid "title_admin"
-msgstr "Admin tags"
+msgstr "Tags Administration"
+
+msgid "add_tag"
+msgstr "Add tag:"
 
 #-------------------------------------------------
 #users/change_pass
@@ -296,6 +299,9 @@ msgstr "Subscriptions"
 
 #-------------------------------------------------
 #users/index
+msgid "users_index_subtitle"
+msgstr "Configure Access"
+
 msgid "type"
 msgstr "Type"
 

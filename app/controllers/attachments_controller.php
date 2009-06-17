@@ -15,22 +15,26 @@ class AttachmentsController extends AppController {
 																'Attachment.speech_id' => $idSpeech)));
 		return $files;
 	}
-
 	function download($id) {
 		$file = $this->Attachment->findById($id);
 
 		$filePath = $file['Attachment']['location'].'/'.$file['Attachment']['filename'];
-		
+
 		$this->layout=null;
 		$this->set('file',$filePath);
 		// $this->redirect(array('controller' => '',));
 		#return WWW_ROOT.$filePath;
-		
+
 		#exit();
 	}
 
-	function delete($attachment) {
-		
+	function delete($id, $speech_id) {
+		if ($this->validateAdmin()) {
+			$attachment = $this->Attachment->find('all', array('conditions' => array('id'  => $id)));
+			unlink(WWW_ROOT.$attachment[0]['Attachment']['location'].'/'.$attachment[0]['Attachment']['filename']);
+			$this->Attachment->del($id);
+			$this->redirect(array('controller' => 'speeches','action' => 'show', $speech_id));
+		}
 	}
 
 	function upload($speech_id, $folder, $speech_title) {
@@ -44,7 +48,7 @@ class AttachmentsController extends AppController {
 		if(!is_dir($folder_url)) {
 			mkdir($folder_url);
 			//en unix, permisos.
-			chmod($folder_url, 0757); 
+			chmod($folder_url, 0757);
 		}
 
 		$file = $this->data['Attachment']['File'];
@@ -52,7 +56,7 @@ class AttachmentsController extends AppController {
 		switch($file['error']) {
 
 			case 0:
-			// verifica si ya está el archivo
+				// verifica si ya está el archivo
 				if(!file_exists($folder_url.'/'.$filename)) {
 					// crea el nombre completo del archivo
 					$full_url = $folder_url.'/'.$filename;
