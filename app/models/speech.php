@@ -41,35 +41,108 @@ class Speech extends AppModel {
 			}
 		}
 	}
-	
-//	function beforeSave(){
-//
-//		/*$relatedUsers = $this->find('all',
-//		 array('conditions' => array('Speech.id' => $this->data['Speech']['id'])),
-//		 array('fields' => array('User.name', 'User.email')));
-//		 if($oldTag[''])*/
-//
-//	}
 
-        function afterSave($created){
+	function afterDelete(){
+		
+		$userIds = $this->SpeechesUser->find('list',
+			                                  array('conditions' =>
+			                                        array('speech_id' => $this->data['Speech']['id']),
+                                                    'fields' => 
+			                                        array('user_id')));
+	    $userIds = array_unique($userIds);
+		foreach($userIds as $user_id){
+			$user = $this->User->findById($user_id);
+			$user = $user['User'];
+			$this->sendMail($user, false, true);
+		}
+		return false;
+		
+	}
 
-                if($created){
-                        $userIds = $this->User->UsersTag->find('list',
-                                                                    array('conditions' =>
-                                                                          array('tag_id' => $this->data['Tag']),
-                                                                          'fields' => 
-                                                                          array('UsersTag.user_id'))); 
-                        $userIds = array_unique($userIds);
-                        echo debug($this->data['Tag']);                                                  
-                        echo debug(array_unique($userIds));
-                        foreach($userIds as $user_id){
-                        	$user = $this->User->findById($user_id);
-                        	echo debug($user);
-                        }
-                }
-                
-                return false;
+	function afterSave($created){
+		
+		$userIds = array();
+		
+		if(!$created){
+			$userIds = $this->SpeechesUser->find('list',
+			                                      array('conditions' =>
+			                                            array('speech_id' => $this->data['Speech']['id']),
+                                                        'fields' => 
+			                                            array('user_id')));
+		}
+		else{
+			foreach($this->data['Tag'] as $tag_id){
+				$userIds = array_merge($userIds,
+			                           $this->User->UsersTag->find('list', //No funciona DISTINCT ni OR!!!
+		                                                           array('conditions' => 
+		                                                                 array('tag_id' => $tag_id),
+                                                                         'fields' =>
+		                                                                 array('user_id'))));
+			}
+		}                                                       
+		$userIds = array_unique($userIds);
+		foreach($userIds as $user_id){
+			$user = $this->User->findById($user_id);
+			$user = $user['User'];
+			$this->sendMail($user, $created);
+		}
+		return true;
+	}
 
+        function sendMail($user, $created, $del = false){
+        	if($user['lang'] == 'es'){
+        		$to = $user['email'];
+        		$subject = $created?
+                           'Nueva charla '.$this->data['Speech']['title'].'. Portal conferencias DCC':
+                           'La charla '.$this->data['Speech']['title'].($del? ' ha sufrido cambios':
+        		                                                              ' ha sido eliminada');
+        		$from = 'Portal Conferencias DCC <noreply@example.com>';
+        		$text = 'Para más información visite la siguiente dirección '.
+        		       'http://'.$_SERVER['SERVER_NAME'].'/speeches/show/'.$this->data['Speech']['id'];
+        		$this->ae_send_mail($from, $to, $subject, $text);
+        	}
+        	else{
+        		$to = $user['email'];
+        		$subject = $created?
+                           'New Lecture '.$this->data['Speech']['title'].'. Portal conferencias DCC':
+                           'The Lecture '.$this->data['Speech']['title'].($del? ' has been modified':
+        		                                                                  'has been deleted ');
+        		$from = 'Portal Conferencias DCC <noreply@example.com>';
+        		$text = 'For further information visit the next page '.
+        		       'http://'.$_SERVER['SERVER_NAME'].'/speeches/show/'.$this->data['Speech']['id'];
+        		$this->ae_send_mail($from, $to, $subject, $text);
+        	}
+        }
+        
+        function _rsc($s)
+        {
+        	$s = str_replace("\n", '', $s);
+        	$s = str_replace("\r", '', $s);
+        	return $s;
+        }
+        
+        function ae_send_mail($from, $to, $subject, $text, $headers=""){ //Factorizar de alguna forma esta funcion
+
+        	if (strtolower(substr(PHP_OS, 0, 3)) === 'win')
+        	$mail_sep = "\r\n";
+        	else
+        	$mail_sep = "\n";
+
+        	$h = '';
+        	if (is_array($headers))
+        	{
+        		foreach($headers as $k=>$v)
+        		$h = _rsc($k).': '._rsc($v).$mail_sep;
+        		if ($h != '') {
+        			$h = substr($h, 0, strlen($h) - strlen($mail_sep));
+        			$h = $mail_sep.$h;
+        		}
+        	}
+
+        	$from = $this->_rsc($from);
+        	$to = $this->_rsc($to);
+        	$subject = $this->_rsc($subject);
+        	return mail($to, $subject, $text, 'From: '.$from.$h);
         }
         
 }

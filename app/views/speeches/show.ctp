@@ -7,8 +7,17 @@
 			<?php echo $speech['Speech']['location']?></p>
 		<p class="links"> <?php echo $speech_subscriptions.' '.__('users_suscribed')?>&nbsp;
 		<?php if($current_user['User']['type'] == 'normal') {
+			     if($this->requestAction('/speeches/isCurrentUserSubscribed/'.$speech['Speech']['id'])){
 		    echo $html->link(__('suscribe', true),
                              '/speeches/subscribe/'.$speech['Speech']['id']);
+			     	echo $html->link('Desusbcribirse',
+                             '/speeches/unsubscribe/'.$speech['Speech']['id']);
+			     	
+		         }
+		         else{
+		    	    echo $html->link('Subscribirse a esta charla!',
+                             '/speeches/subscribe/'.$speech['Speech']['id']);
+		         }
 		      }?>
 		</p>
 	</div>
