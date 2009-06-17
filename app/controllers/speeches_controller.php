@@ -41,7 +41,7 @@ class SpeechesController extends AppController {
 		$month = $this->params['month'];
 		$year = $this->params['year'];
 		$result = $this->Speech->find('all', array(
-							'conditions'=>array('date BETWEEN ? AND ?' => array("$year-$month-01", "$year-$month-31"))));
+							'conditions'=>array('date BETWEEN ? AND ?' => array("$month-01-$year", "$month-31-$year"))));
 		foreach ($result as $i => $data) {
 			$result[$i]['Speech']['url'] = Router::url(array('action'=>'show','id'=>$result[$i]['Speech']['id']));
 		}

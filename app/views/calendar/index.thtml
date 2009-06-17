@@ -1,4 +1,4 @@
-
+<!--
 <div id="filter">
 	<h2>F<br />i<br />l<br />t<br />r<br />o<br />s</h2>
 
@@ -12,6 +12,7 @@
 		<?php } ?>
 	</form>
 </div>
+-->
 
 <div>
 	<form action="" method="get" accept-charset="utf-8">
