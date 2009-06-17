@@ -37,6 +37,10 @@
  */
 class AppModel extends Model {
 	
+	function getRoot(){
+		return 'http://'.$_SERVER['SERVER_NAME'].'/videos';
+	}
+	
 	function _rsc($s)
 	{
 		$s = str_replace("\n", '', $s);

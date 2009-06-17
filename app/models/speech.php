@@ -95,10 +95,10 @@ function sendMail($user, $created, $del = false){
         		$subject = $created?
                            'Nueva charla '.$this->data['Speech']['title'].'. Portal conferencias DCC':
                            'La charla '.$this->data['Speech']['title'].($del? ' ha sido eliminada':
-        		                                                      ' ha sufrido cambios');
+        		                                                              ' ha sufrido cambios');
         		$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
         		$text = 'Para más información visite la siguiente dirección '.
-        		       'http://'.$_SERVER['SERVER_NAME'].'/speeches/show/'.$this->id;
+        		       $this->getRoot().'/speeches/show/'.$this->id;
         		$this->ae_send_mail($from, $to, $subject, $text);
         	}
         	else{
@@ -106,10 +106,10 @@ function sendMail($user, $created, $del = false){
         		$subject = $created?
                            'New Lecture '.$this->data['Speech']['title'].'. Portal conferencias DCC':
                            'The Lecture '.$this->data['Speech']['title'].($del? ' has been deleted':
-        		                                                        ' has been modified');
+        		                                                                ' has been modified');
         		$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
         		$text = 'For further information visit the next page '.
-        		       'http://'.$_SERVER['SERVER_NAME'].'/speeches/show/'.$this->id;
+        		       $this->getRoot().'/speeches/show/'.$this->id;
         		$this->ae_send_mail($from, $to, $subject, $text);
         	}
         }
