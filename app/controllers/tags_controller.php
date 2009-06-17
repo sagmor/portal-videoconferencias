@@ -21,7 +21,7 @@ class TagsController extends AppController
 		  
 		  if(!empty($this->data['Tag']['name'])){
 			  $this->Tag->save($this->data);
-			  $this->flash('Se ha creado el Tag', array('action' => 'administrar'));
+			  $this->flash(__('add_tag_success',true), array('action' => 'administrar'));
 		  }
 	  }
 	}
@@ -29,7 +29,7 @@ class TagsController extends AppController
 	function delete($tag_id){
 	  if ($this->validateAdmin()) {
 		  $this->Tag->del($tag_id, true);
-      $this->flash('Se ha eliminado el Tag', array('action' => 'administrar'));
+      $this->flash(__('delete_tag_success', true), array('action' => 'administrar'));
     }
 	}
 

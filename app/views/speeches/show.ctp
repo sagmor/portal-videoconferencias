@@ -9,14 +9,14 @@
 	<p class="links"> <?php echo $speech_subscriptions.' '.__('users_suscribed', true)?>&nbsp;
 		<?php if($current_user['User']['type'] == 'normal') {
 			if($this->requestAction('/speeches/isCurrentUserSubscribed/'.$speech['Speech']['id'])){
-				echo $html->link(__('suscribe', true),
+				echo $html->link(__('edit_suscription', true),
 									 '/speeches/subscribe/'.$speech['Speech']['id']);
-				echo $html->link('Desusbcribirse',
+				echo $html->link(__('unsubscribe', true),
 									 '/speeches/unsubscribe/'.$speech['Speech']['id']);
 
 			}
 			else{
-				echo $html->link('Subscribirse a esta charla!',
+				echo $html->link(__('suscribe', true),
 									 '/speeches/subscribe/'.$speech['Speech']['id']);
 			}
 		}?>
