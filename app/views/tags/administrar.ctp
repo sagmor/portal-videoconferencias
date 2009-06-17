@@ -17,7 +17,7 @@
   </p>
   <p>
     <?php echo $form->input('Tag.name', array(
-											'label' => __('tag', true),
+											'label' => __('add_tag', true),
 											'size' => '26',
 											'maxlength' => '25'));
     	  echo $form->submit(__('save', true));

@@ -255,6 +255,9 @@ msgstr "Grupo 2"
 msgid "add_tag"
 msgstr "Agregar nueva categoría"
 
+msgid "add_tag"
+msgstr "Nueva categoría:"
+
 #-------------------------------------------------
 #tags/administrar
 msgid "title_admin"
@@ -296,6 +299,9 @@ msgstr "Susbscripciones"
 
 #-------------------------------------------------
 #users/index
+msgid "users_index_subtitle"
+msgstr "Configurar permisos"
+
 msgid "type"
 msgstr "Tipo"
 

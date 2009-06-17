@@ -1,5 +1,5 @@
 <div class="mainform">
-  <h2>Configurar permisos</h2>
+  <h2><?php __('users_index_subtitle') ?></h2>
   <?php echo $form->create('Tag', array('url' =>
 									   array('controller' => 'users', 'action' => 'index')));?>
   <p>
