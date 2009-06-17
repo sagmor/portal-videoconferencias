@@ -5,6 +5,7 @@
 			    <?php echo $form->input('SpeechesUser.resend_in',
 					                    array('label' => 'Recordar cada ',
 					                    'options' => array(0 => 'Nunca',
+					                                       1 => '1 día',
 					                                       7 =>'1 semana',
 					                                       15 => '15 días',
 					                                       30 => '1 mes')));?>

@@ -42,20 +42,16 @@ class Speech extends AppModel {
 		}
 	}
 
-	function afterDelete(){
+	function beforeDelete(){
 		
-		$userIds = $this->SpeechesUser->find('list',
-			                                  array('conditions' =>
-			                                        array('speech_id' => $this->data['Speech']['id']),
-                                                    'fields' => 
-			                                        array('user_id')));
+		$speech = $this->findById($this->id);
+		$this->data['Speech'] = $speech['Speech'];
+		$userIds = $speech['User'];
 	    $userIds = array_unique($userIds);
-		foreach($userIds as $user_id){
-			$user = $this->User->findById($user_id);
-			$user = $user['User'];
+		foreach($userIds as $user){
 			$this->sendMail($user, false, true);
 		}
-		return false;
+		return true;
 		
 	}
 
@@ -97,8 +93,9 @@ function sendMail($user, $created, $del = false){
                            'La charla '.$this->data['Speech']['title'].($del? ' ha sido eliminada':
         		                                                              ' ha sufrido cambios');
         		$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
-        		$text = 'Para más información visite la siguiente dirección '.
-        		       $this->getRoot().'/speeches/show/'.$this->id;
+        		$text = $del? 'La charla fue eliminada' :
+        		              'Para más información visite la siguiente dirección '.
+        		            $this->getRoot().'/speeches/show/'.$this->id;
         		$this->ae_send_mail($from, $to, $subject, $text);
         	}
         	else{
@@ -108,8 +105,9 @@ function sendMail($user, $created, $del = false){
                            'The Lecture '.$this->data['Speech']['title'].($del? ' has been deleted':
         		                                                                ' has been modified');
         		$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
-        		$text = 'For further information visit the next page '.
-        		       $this->getRoot().'/speeches/show/'.$this->id;
+        		$text =$del? 'La charla fue eliminada' : 
+        		             'For further information visit the next page '.
+        		             $this->getRoot().'/speeches/show/'.$this->id;
         		$this->ae_send_mail($from, $to, $subject, $text);
         	}
         }
