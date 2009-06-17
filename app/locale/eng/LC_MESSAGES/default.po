@@ -194,6 +194,11 @@ msgid "next"
 msgstr "next →"
 
 #-------------------------------------------------
+#calendar/index
+msgid "filters"
+msgstr "Filters."
+
+#-------------------------------------------------
 #elements/calendarbox
 msgid "view_calendar"
 msgstr "View calendar"
