@@ -19,8 +19,8 @@
 										__('table_page', true).' %page% '.
 										__('of', true).' %pages%, '.
 										__('showing', true).' %current% '.
-										__('speeches', true).' '.
-										__('of', true).' %count%'));
+										__('of', true).' %count%'.' '.
+										__('speeches', true)));
 		$paginator->options(array('url'=>$this->data['Speech']));
 	?>
 </p>

@@ -101,7 +101,7 @@ msgid "search_by_date"
 msgstr "Search by date"
 
 msgid "message"
-msgstr "Search a criteria for search in the superior menu"
+msgstr "Select a criteria of the superior menu for searching"
 
 #-------------------------------------------------
 #speeches/searchByDate
@@ -225,6 +225,9 @@ msgstr "Configure tags"
 msgid "exit"
 msgstr "Exit"
 
+msgid "welcome"
+msgstr "Welcome"
+
 #-------------------------------------------------
 #layouts/default
 msgid "default_title"
@@ -245,7 +248,7 @@ msgstr "About us"
 #-------------------------------------------------
 #pages/about
 msgid "us"
-msgstr "Gruop 2"
+msgstr "Team 2"
 
 #-------------------------------------------------
 #tags/add
@@ -322,6 +325,19 @@ msgstr "Session finished"
 #users/register
 msgid "case_sensitive"
 msgstr "Case sensitive!"
+
+#-------------------------------------------------
+#app_controller/validateUser
+msgid "you_have_to_enter"
+msgstr "You must be logged in to carry out this action"
+
+msgid "not_permited"
+msgstr "This action is not allow"
+
+#-------------------------------------------------
+#app_controller/speeches_controller
+msgid "new_speech_created"
+msgstr "New speech created"
 
 #-------------------------------------------------
 #days

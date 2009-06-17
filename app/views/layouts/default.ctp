@@ -27,8 +27,8 @@
 		<!-- start header -->
 		<div id="header">
 			<div id="logo">
-				<h1><a href="#"><?php __('default_title', true)?><sup></sup></a></h1>
-				<h2><?php __('default_subtitle', true)?></h2>
+				<h1><a href="#"><?php __('default_title')?><sup></sup></a></h1>
+				<h2><?php __('default_subtitle')?></h2>
 			</div>
 			<div id="menu">
 				<ul>

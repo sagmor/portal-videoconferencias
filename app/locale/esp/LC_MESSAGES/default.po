@@ -222,6 +222,9 @@ msgstr "Configurar permisos"
 msgid "config_tags"
 msgstr "Configurar categorías"
 
+msgid "welcome"
+msgstr "Saludos"
+
 msgid "exit"
 msgstr "Salir"
 
@@ -322,6 +325,19 @@ msgstr "Sesión finalizada"
 #users/register
 msgid "case_sensitive"
 msgstr "¡Deben coincidir mayusculas y minusculas!"
+
+#-------------------------------------------------
+#app_controller/validateUser
+msgid "you_have_to_enter"
+msgstr "Debes ingresar al sistema para realizar esta operación"
+
+msgid "not_permited"
+msgstr "Acción no autorizada"
+
+#-------------------------------------------------
+#app_controller/speeches_controller
+msgid "new_speech_created"
+msgstr "Nueva charla creada"
 
 #-------------------------------------------------
 #months
