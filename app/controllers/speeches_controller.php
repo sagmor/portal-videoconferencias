@@ -249,8 +249,8 @@ class SpeechesController extends AppController {
       $this->data['SpeechesUser']['user_id'] = $user_id;
       $this->data['SpeechesUser']['speech_id'] = $speech_id;
       if($this->data['SpeechesUser']['resend_in'] != 0){
-        $this->data['SpeechesUser']['resend_at'] = date('Y-m-d H:i:s',
-         time()+$this->data['SpeechesUser']['resend_in']*24*60*60);
+        $this->data['SpeechesUser']['resend_at'] = date('m-d-Y H:i:s',
+                                                        time()+$this->data['SpeechesUser']['resend_in']*24*60*60);
       }
       if ($this->Speech->SpeechesUser->save($this->data)) {
         $this->flash('Te has suscrito a la charla', '/');

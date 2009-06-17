@@ -90,13 +90,13 @@ class Speech extends AppModel {
 	}
 
 function sendMail($user, $created, $del = false){
-        	if($user['lang'] == 'es'){
+        	if($user['lang'] == 'esp'){
         		$to = $user['email'];
         		$subject = $created?
                            'Nueva charla '.$this->data['Speech']['title'].'. Portal conferencias DCC':
-                           'La charla '.$this->data['Speech']['title'].($del? ' ha sufrido cambios':
-        		                                                              ' ha sido eliminada');
-        		$from = 'Portal Conferencias DCC <noreply@example.com>';
+                           'La charla '.$this->data['Speech']['title'].($del? ' ha sido eliminada':
+        		                                                      ' ha sufrido cambios');
+        		$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
         		$text = 'Para más información visite la siguiente dirección '.
         		       'http://'.$_SERVER['SERVER_NAME'].'/speeches/show/'.$this->id;
         		$this->ae_send_mail($from, $to, $subject, $text);
@@ -105,9 +105,9 @@ function sendMail($user, $created, $del = false){
         		$to = $user['email'];
         		$subject = $created?
                            'New Lecture '.$this->data['Speech']['title'].'. Portal conferencias DCC':
-                           'The Lecture '.$this->data['Speech']['title'].($del? ' has been modified':
-        		                                                                  'has been deleted ');
-        		$from = 'Portal Conferencias DCC <noreply@example.com>';
+                           'The Lecture '.$this->data['Speech']['title'].($del? ' has been deleted':
+        		                                                        ' has been modified');
+        		$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
         		$text = 'For further information visit the next page '.
         		       'http://'.$_SERVER['SERVER_NAME'].'/speeches/show/'.$this->id;
         		$this->ae_send_mail($from, $to, $subject, $text);
