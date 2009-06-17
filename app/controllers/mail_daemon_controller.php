@@ -6,9 +6,9 @@ class MailDaemonController extends AppController {
 	
 	function index(){
 		
-		$fecha = date('Y-m-d H:i:s');
-		$manana_comienzo = date('Y-m-d', time()+24*60*60).' 00:00:00';
-		$manana_fin = date('Y-m-d', time()+24*60*60).' 23:59:59';
+		$fecha = date('m-d-Y H:i:s');
+		$manana_comienzo = date('m-d-Y', time()+24*60*60).' 00:00:00';
+		$manana_fin = date('m-d-Y', time()+24*60*60).' 23:59:59';
 		$toNotify = $this->Speech->SpeechesUser->find('all',
 			                                          array('conditions' =>
 			                                                array('remember_at <=' => $fecha,
