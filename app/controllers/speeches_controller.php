@@ -43,8 +43,8 @@ class SpeechesController extends AppController {
 		$date = mktime(12, 0, 0, $month, 1, $year);
 		$currentDay = date('d');
 		$daysInMonth = date("t", $date);
-		$next = $date - mktime(0,0,0,0,0,0) + mktime(0,0,0,0,$daysInMonth-$currentDay,0); #mktime(12, 0, 0, $month+1%12, 0, $year);
-		$prev = $date + mktime(0,0,0,0,0,0) - mktime(0,0,0,0,$currentDay,0);
+		$next = $date - mktime(0,0,0,1,0,0) + mktime(0,0,0,0,$daysInMonth-$currentDay,0); #mktime(12, 0, 0, $month+1%12, 0, $year);
+		$prev = $date + mktime(0,0,0,0,0,0) - mktime(0,0,0,1,$currentDay,0);
 		$daysInMonth = date("t", $date);
 		$first = date('m-d-Y',$prev);
 		$last = date('m-d-Y',$next);
