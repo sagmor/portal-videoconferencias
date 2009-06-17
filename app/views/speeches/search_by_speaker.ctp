@@ -31,7 +31,7 @@
 	|
 	<?php echo  $paginator->next(__('next_speeches', true), null, null,  array('class'=>'disabled'));?>
 </div>
-<table  class="scaffold" cellpadding="2"  cellspacing="0">
+<table  class="scaffold" cellpadding="7"  cellspacing="0">
 <thead>
 	<tr>
 		<th><?php echo  $paginator->sort(__('title', true),'title'); ?></th>
@@ -66,7 +66,7 @@ if(is_array($data)) {
 		<?php echo  $html->link($title, array('action' => 'show', $id));?>
 	</td>
 	<td>
-		<?php echo  $html->link($date, array('action' => 'show', $id));?>
+		<?php echo  $html->link($time->format('d-m-y h:i', $date), array('action' => 'show', $id));?>
 	</td>
 	<td>
 		<?php echo  $html->link($speakers, array('action' => 'show', $id));?>

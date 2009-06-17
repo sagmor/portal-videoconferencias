@@ -11,6 +11,7 @@
 			if($this->requestAction('/speeches/isCurrentUserSubscribed/'.$speech['Speech']['id'])){
 				echo $html->link(__('edit_suscription', true),
 									 '/speeches/subscribe/'.$speech['Speech']['id']);
+				echo '&nbsp;&nbsp;';
 				echo $html->link(__('unsubscribe', true),
 									 '/speeches/unsubscribe/'.$speech['Speech']['id']);
 

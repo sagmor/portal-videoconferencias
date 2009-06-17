@@ -112,7 +112,7 @@ msgid "search_message_date"
 msgstr "Date (month - year)"
 
 msgid "not_founded_by_date"
-msgstr "No speeches found for this month"
+msgstr "No speeches found for this date"
 
 #-------------------------------------------------
 #speeches/searchByLocation
@@ -192,6 +192,11 @@ msgstr "← previous"
 
 msgid "next"
 msgstr "next →"
+
+#-------------------------------------------------
+#calendar/index
+msgid "filters"
+msgstr "Filters."
 
 #-------------------------------------------------
 #elements/calendarbox

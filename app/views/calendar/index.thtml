@@ -14,12 +14,18 @@ foreach ($tags as $tag) {
 </div>
 -->
 
+
+
+<div id="calendar">
+</div>
+
 <div>
 	<form action="" method="get" accept-charset="utf-8">
+		<h2><?php __('filters')?></h2>
 		<?php
 		$tags = $this->requestAction('/tags/getTags');
 		$locations = $this->requestAction('/speeches/getLocations');
-		
+
 		echo __('tags');
 		echo $form->input('Locations', array(
 											"type" => "radio",
@@ -32,9 +38,6 @@ foreach ($tags as $tag) {
 										))
 		?>
 	</form>
-</div>
-
-<div id="calendar">
 </div>
 
 <div id="loading">
