@@ -40,8 +40,13 @@ class SpeechesController extends AppController {
 		Configure::write('debug',0);
 		$month = $this->params['month'];
 		$year = $this->params['year'];
+		$date = mktime(12, 0, 0, $month, 1, $year);
+		$next = $date - mktime(0,0,0,0,0,0) + mktime(0,0,0,0,31,0); #mktime(12, 0, 0, $month+1%12, 0, $year);
+		$prev = $date + mktime(0,0,0,0,0,0) - mktime(0,0,0,0,31,0);
+		$first = date('m-d-Y',$prev);
+		$last = date('m-d-Y',$next);
 		$result = $this->Speech->find('all', array(
-							'conditions'=>array('date BETWEEN ? AND ?' => array("$month-01-$year", "$month-31-$year"))));
+							'conditions'=>array('date BETWEEN ? AND ?' => array($first, $last))));
 		foreach ($result as $i => $data) {
 			$result[$i]['Speech']['url'] = Router::url(array('action'=>'show','id'=>$result[$i]['Speech']['id']));
 		}
@@ -123,8 +128,8 @@ class SpeechesController extends AppController {
 		if (!empty($year)) {
 			$this->set('isSearch', true);
 			$this->set('data',  $this->paginate('Speech', array('Speech.date BETWEEN ? AND ?' => array(
-																							"$year-$month-01",
-																							"$year-$month-31"))));
+																							"$month-01-$year",
+																							"$month-31-$year"))));
 		}
 	}
 
