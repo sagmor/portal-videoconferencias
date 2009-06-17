@@ -27,7 +27,7 @@ class MailDaemonController extends AppController {
 				$to = $user['email'];
 				if($user['lang'] = 'es'){
 					$subject = 'Recordatorio charla '.$speech['title'].' - Portal Conferencias DCC';
-					$from = 'Portal Conferencias DCC <noreply@example.com>';
+					$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
 					$text = 'Le recordamos que la charla '.$speech['title'].
             	            ' se llevara a cabo en la fecha'.$speech['date'].
             	            'Para más información visite la siguiente dirección '.
@@ -38,7 +38,7 @@ class MailDaemonController extends AppController {
 				}
 				else{
 					$subject = 'Reminder of the lecture '.$speech['title'].' - Portal Conferencias DCC';
-					$from = 'Portal Conferencias DCC <noreply@example.com>';
+					$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
 					$text = 'We remind you that the lecture '.$speech['title'].
             	            ' will be held on '.$speech['date'].
             	            'For further information visit the next page '.

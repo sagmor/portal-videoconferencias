@@ -96,7 +96,7 @@ function sendMail($user, $created, $del = false){
                            'Nueva charla '.$this->data['Speech']['title'].'. Portal conferencias DCC':
                            'La charla '.$this->data['Speech']['title'].($del? ' ha sufrido cambios':
         		                                                              ' ha sido eliminada');
-        		$from = 'Portal Conferencias DCC <noreply@example.com>';
+        		$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
         		$text = 'Para más información visite la siguiente dirección '.
         		       'http://'.$_SERVER['SERVER_NAME'].'/speeches/show/'.$this->id;
         		$this->ae_send_mail($from, $to, $subject, $text);
@@ -107,7 +107,7 @@ function sendMail($user, $created, $del = false){
                            'New Lecture '.$this->data['Speech']['title'].'. Portal conferencias DCC':
                            'The Lecture '.$this->data['Speech']['title'].($del? ' has been modified':
         		                                                                  'has been deleted ');
-        		$from = 'Portal Conferencias DCC <noreply@example.com>';
+        		$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
         		$text = 'For further information visit the next page '.
         		       'http://'.$_SERVER['SERVER_NAME'].'/speeches/show/'.$this->id;
         		$this->ae_send_mail($from, $to, $subject, $text);

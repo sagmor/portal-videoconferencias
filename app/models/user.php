@@ -91,15 +91,14 @@ class User extends AppModel
   function afterSave($created) {
   	if($created){
   		if($this->data['User']['lang'] == 'esp'){
-  			$this->ae_send_mail("no-reply@remitente.com",
+  			$this->ae_send_mail("Portal Conferencias DCC <no-reply@videosdcc.cl>",
   			                    $this->data['User']['email'],
                                 "Subscripción portal conferencias",
                                 "Te haz registrado correctamente al portal de conferencias.\n".
                                 "Tu constraseña es ".$this->data['User']['password']);
   		}
   		else{
-  			echo debug($this->data['User']['email']);
-  			$this->ae_send_mail("no-reply@remitente.com",
+  			$this->ae_send_mail("Portal Conferencias DCC <no-reply@videosdcc.cl>",
   			                    $this->data['User']['email'],
                                 "Lectures portal subscription",
                                 "You have been correctly registered to the lectures portal.\n".
