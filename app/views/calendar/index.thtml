@@ -1,34 +1,65 @@
-
+<!--
 <div id="filter">
-  <h2>F<br />i<br />l<br />t<br />r<br />o<br />s</h2>
-  
-  <form action="" method="get" accept-charset="utf-8">
-    <?php $tags = $this->requestAction('/tags/getTags');
-      foreach ($tags as $tag) {
-        $t = str_replace(" ", "-", $tag);
-        ?>
-        
-        <input type="checkbox" name="<?php echo $t ?>" id="<?php echo $t ?>" checked="checked" class="tag"><label for="<?php echo $t ?>"><?php echo $tag ?></label><br />
-      <?php } ?>
-  </form>
+	<h2>F<br />i<br />l<br />t<br />r<br />o<br />s</h2>
+
+	<form action="" method="get" accept-charset="utf-8">
+		<?php $tags = $this->requestAction('/tags/getTags');
+		foreach ($tags as $tag) {
+			$t = str_replace(" ", "-", $tag);
+			?>
+
+		<input type="checkbox" name="<?php echo $t ?>" id="<?php echo $t ?>" checked="checked" class="tag"><label for="<?php echo $t ?>"><?php echo $tag ?></label><br />
+		<?php } ?>
+	</form>
+</div>
+-->
+
+<div>
+	<form action="" method="get" accept-charset="utf-8">
+		<?php
+		$tags = $this->requestAction('/tags/getTags');
+		$locations = $this->requestAction('/speeches/getLocations');
+		echo __('tags');
+		foreach ($tags as $tag) {
+			$t = str_replace(" ", "-", $tag);
+			?>
+
+		<input type="checkbox" name="<?php echo $t ?>" id="<?php echo $t ?>" checked="checked" class="tag"><label for="<?php echo $t ?>"><?php echo $tag ?></label><br />
+		<?php }
+		echo __('location');
+		foreach ($locations as $location) {
+		?>
+		<input type="checkbox" name="<?php echo $location ?>" id="<?php echo $location ?>" checked="checked" class="tag"><label for="<?php echo $location ?>"><?php echo $location ?></label><br />
+		<?php
+		}
+//		echo $form->input('tagSelected', array(
+//											'type' => 'select',
+//											'options' => $tags,
+//											'selected' => $tags['all']));
+//		echo $form->input('locationSelected', array(
+//											'type' => 'select',
+//											'options' => $locations,
+//											'selected' => $locations['all']));
+		?>
+	</form>	
 </div>
 
 <div id="calendar">
 </div>
 
 <div id="loading">
-  <?php echo $html->image('loading.gif') ?>
+	<?php echo $html->image('loading.gif') ?>
 </div>
 
 <?php 
-	$this->addScript($javascript->output(sprintf($javascript->tags['javascriptlink'], $html->url(array(
-          'controller' => 'js',
-          'action' => 'calendar',
-          'ext' => 'js')))));
+$this->addScript($javascript->output(sprintf($javascript->tags['javascriptlink'], $html->url(array(
+		  'controller' => 'js',
+		  'action' => 'calendar',
+		  'ext' => 'js')))));
 ?>
 
 <script type="text/javascript" charset="utf-8">
-  $(document).ready(function() {
-  	loadCalendar(<?php echo $year; ?>,<?php echo $month; ?>);
-  });
+	$(document).ready(function() {
+		loadCalendar(<?php echo $year; ?>,<?php echo $month; ?>);
+	});
 </script>

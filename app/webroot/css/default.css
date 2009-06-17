@@ -5,7 +5,7 @@ Released for free under a Creative Commons Attribution 2.5 License
 */
 
 body {
-	margin: 100px 0 0 0;
+	margin: 5px 0 0 0;
 	padding: 0;
 	background: #FFFFFF url(images/img01.gif) repeat-x;
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -108,7 +108,7 @@ input, textarea, select {
 #logo h1 {
   margin-top: 10px;
 	font-size: 38px;
-	color: #494949;
+	color: #F5F5F5;
 }
 
 #logo h1 sup {
@@ -174,7 +174,7 @@ input, textarea, select {
 /* Content */
 
 #content {
-	float: left;
+	float: right;
 	width: 575px;
 }
 
@@ -257,7 +257,7 @@ input, textarea, select {
 /* Sidebar */
 
 #sidebar {
-	float: right;
+	float: left;
 	width: 195px;
 }
 
