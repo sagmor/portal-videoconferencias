@@ -98,7 +98,7 @@ class Speech extends AppModel {
         		                                                              ' ha sido eliminada');
         		$from = 'Portal Conferencias DCC <noreply@example.com>';
         		$text = 'Para más información visite la siguiente dirección '.
-        		       'http://'.$_SERVER['SERVER_NAME'].'/speeches/show/'.$this->data['Speech']['id'];
+        		       'http://'.$_SERVER['SERVER_NAME'].'/speeches/show/'.$this->id;
         		$this->ae_send_mail($from, $to, $subject, $text);
         	}
         	else{
@@ -109,40 +109,9 @@ class Speech extends AppModel {
         		                                                                  'has been deleted ');
         		$from = 'Portal Conferencias DCC <noreply@example.com>';
         		$text = 'For further information visit the next page '.
-        		       'http://'.$_SERVER['SERVER_NAME'].'/speeches/show/'.$this->data['Speech']['id'];
+        		       'http://'.$_SERVER['SERVER_NAME'].'/speeches/show/'.$this->id;
         		$this->ae_send_mail($from, $to, $subject, $text);
         	}
-        }
-        
-        function _rsc($s)
-        {
-        	$s = str_replace("\n", '', $s);
-        	$s = str_replace("\r", '', $s);
-        	return $s;
-        }
-        
-        function ae_send_mail($from, $to, $subject, $text, $headers=""){ //Factorizar de alguna forma esta funcion
-
-        	if (strtolower(substr(PHP_OS, 0, 3)) === 'win')
-        	$mail_sep = "\r\n";
-        	else
-        	$mail_sep = "\n";
-
-        	$h = '';
-        	if (is_array($headers))
-        	{
-        		foreach($headers as $k=>$v)
-        		$h = _rsc($k).': '._rsc($v).$mail_sep;
-        		if ($h != '') {
-        			$h = substr($h, 0, strlen($h) - strlen($mail_sep));
-        			$h = $mail_sep.$h;
-        		}
-        	}
-
-        	$from = $this->_rsc($from);
-        	$to = $this->_rsc($to);
-        	$subject = $this->_rsc($subject);
-        	return mail($to, $subject, $text, 'From: '.$from.$h);
         }
         
 }
