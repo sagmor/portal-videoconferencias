@@ -112,7 +112,7 @@ msgid "search_message_date"
 msgstr "Fecha (mes - año)"
 
 msgid "not_founded_by_date"
-msgstr "No existen conferencias agendadas en este mes"
+msgstr "No existen conferencias agendadas en esta fecha"
 
 #-------------------------------------------------
 #speeches/searchByLocation
