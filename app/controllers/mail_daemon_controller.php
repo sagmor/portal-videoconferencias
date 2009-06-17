@@ -7,10 +7,17 @@ class MailDaemonController extends AppController {
 	function index(){
 		
 		$fecha = date('Y-m-d H:i:s');
+		$manana_comienzo = date('Y-m-d', time()+24*60*60).' 00:00:00';
+		$manana_fin = date('Y-m-d', time()+24*60*60).' 23:59:59';
 		$toNotify = $this->Speech->SpeechesUser->find('all',
 			                                          array('conditions' =>
 			                                                array('remember_at <=' => $fecha,
-			                                                      'resend_in !=' => '2009-06-14')));
+			                                                      'resend_in !=' => '0')));
+		$charlasManana = $this->Speech->find('all',
+			                                               array('conditions' =>
+			                                                     array('date <=' => $manana_fin,
+			                                                           'date >=' => $manana_comienzo)));                                                   
+			                                                	                                                
 		$i=0;
 		$out = '';
 		foreach($toNotify as $notif){
@@ -31,7 +38,7 @@ class MailDaemonController extends AppController {
 					$text = 'Le recordamos que la charla '.$speech['title'].
             	            ' se llevara a cabo en la fecha'.$speech['date'].
             	            'Para más información visite la siguiente dirección '.
-        		            'http://'.$_SERVER['SERVER_NAME'].'/speeches/show/'.$speech['id'];
+        		            $this->getRoot().'/speeches/show/'.$speech['id'];
 					$this->ae_send_mail($from, $to, $subject, $text);
 					$out.='Mail enviado a '.$user['email']."<br>";
 					$i++;
@@ -42,7 +49,7 @@ class MailDaemonController extends AppController {
 					$text = 'We remind you that the lecture '.$speech['title'].
             	            ' will be held on '.$speech['date'].
             	            'For further information visit the next page '.
-        		            'http://'.$_SERVER['SERVER_NAME'].'/speeches/show/'.$speech['id'];
+        		            $this->getRoot().'/speeches/show/'.$speech['id'];
 					$this->ae_send_mail($from, $to, $subject, $text);
 					$out.='Mail sent to '.$user['name'].'<br>';
 					$i++;
@@ -52,6 +59,35 @@ class MailDaemonController extends AppController {
 			    $this->Speech->SpeechesUser->save($notif);
 			}
 		}
+		
+		foreach($charlasManana as $speech){
+			foreach($speech['User'] as $user){
+					$to = $user['email'];
+					if($user['lang'] = 'es'){
+						$subject = 'Recordatorio charla '.$speech['Speech']['title'].' - Portal Conferencias DCC';
+						$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
+						$text = 'Le recordamos que la charla '.$speech['Speech']['title'].
+            	            ' se llevara a cabo en mañana '.
+            	            'Para más información visite la siguiente dirección '.
+        		            $this->getRoot().'/speeches/show/'.$speech['Speech']['id'];
+						$this->ae_send_mail($from, $to, $subject, $text);
+						$out.='Mail enviado a '.$user['email']."<br>";
+						$i++;
+					}
+					else{
+						$subject = 'Reminder of the lecture '.$speech['Speech']['title'].' - Portal Conferencias DCC';
+						$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
+						$text = 'We remind you that the lecture '.$speech['Speech']['title'].
+            	                ' will be held tomorrow '.
+            	                'For further information visit the next page '.
+        		                $this->getRoot().'/speeches/show/'.$speech['Speech']['id'];
+						$this->ae_send_mail($from, $to, $subject, $text);
+						$out.='Mail sent to '.$user['name'].'<br>';
+						$i++;
+					}
+				}
+			}
+		
 		$out.="$i mails enviados<br>";
 		$this->set('out', $out);
 	}
@@ -85,6 +121,10 @@ class MailDaemonController extends AppController {
 		$to = $this->_rsc($to);
 		$subject = $this->_rsc($subject);
 		return mail($to, $subject, $text, 'From: '.$from.$h);
+	}
+	
+	function getRoot(){
+		return 'http://'.$_SERVER['SERVER_NAME'].'/videos';
 	}
 
 }
