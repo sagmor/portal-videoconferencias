@@ -156,7 +156,7 @@ class CaptchaComponent extends Object {
 
 	function __getFontPath() {
 
-		return WWW_ROOT . 'fonts' . '/';
+		return WWW_ROOT . 'fonts' . '\';
 
 	}
 
