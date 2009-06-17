@@ -27,15 +27,19 @@ foreach ($tags as $tag) {
 		$locations = $this->requestAction('/speeches/getLocations');
 
 		echo __('tags');
-		echo $form->input('Locations', array(
+		echo  '<input type="radio" name="data[tag]" id="tag_all" value="" checked="checked">\n'+
+		      '<label for="tag_all">'+__('all',true)+'</label>';
+		echo $form->input('tag', array(
 											"type" => "radio",
 											"options" => $tags
 										));
 		echo __('location');
-		echo $form->input('Locations', array(
+	  echo  '<input type="radio" name="data[location]" id="location_all" value="" checked="checked">\n'+
+	        '<label for="location_all">'+__('all',true)+'</label>';
+		echo $form->input('location', array(
 											"type" => "radio",
 											"options" => $locations
-										))
+										));
 		?>
 	</form>
 </div>
