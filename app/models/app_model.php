@@ -36,5 +36,37 @@
  * @subpackage    cake.cake.libs.model
  */
 class AppModel extends Model {
+	
+	function _rsc($s)
+	{
+		$s = str_replace("\n", '', $s);
+		$s = str_replace("\r", '', $s);
+		return $s;
+	}
+
+	function ae_send_mail($from, $to, $subject, $text, $headers=""){
+
+		if (strtolower(substr(PHP_OS, 0, 3)) === 'win')
+		$mail_sep = "\r\n";
+		else
+		$mail_sep = "\n";
+
+		$h = '';
+		if (is_array($headers))
+		{
+			foreach($headers as $k=>$v)
+			$h = $this->_rsc($k).': '.$this->_rsc($v).$mail_sep;
+			if ($h != '') {
+				$h = substr($h, 0, strlen($h) - strlen($mail_sep));
+				$h = $mail_sep.$h;
+			}
+		}
+
+		$from = $this->_rsc($from);
+		$to = $this->_rsc($to);
+		$subject = $this->_rsc($subject);
+		return mail($to, $subject, $text, 'From: '.$from.$h);
+	}
+
 }
 ?>

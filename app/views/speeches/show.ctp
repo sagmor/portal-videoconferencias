@@ -5,7 +5,7 @@
 			<?php echo $speech['Speech']['date']?>
 			<?php __('at')?>
 			<?php echo $speech['Speech']['location']?></p>
-		<p class="links"> <?php echo $speech_subscriptions.' '.__('users_suscribed')?>&nbsp;
+		<p class="links"> <?php echo $speech_subscriptions.' '.__('users_suscribed', true)?>&nbsp;
 		<?php if($current_user['User']['type'] == 'normal') {
 			     if($this->requestAction('/speeches/isCurrentUserSubscribed/'.$speech['Speech']['id'])){
 		    echo $html->link(__('suscribe', true),

@@ -16,12 +16,16 @@ class SpeechesController extends AppController {
 
   var $uses = array('Speech', 'SpeechesTags');
   var $speakerSearched;
-
-  //función que muestra ek contenigo de una conferencia
-  function show($id = null) {
-    $this->Speech->id = $id;
-    $this->set('speech', $this->Speech->read());
-  }
+  
+	//función que muestra ek contenigo de una conferencia
+	function show($id = null) {
+		$this->Speech->id = $id;
+		$this->set('speech', $this->Speech->read());
+		$speeches_subscriptions = $this->Speech->SpeechesUser->find('count',
+			                                                        array('conditions' =>
+			                                                        array('speech_id' => $id)));
+        $this->set('speech_subscriptions', $speeches_subscriptions);
+	}
 
   //función para agregar una conferencia
   function add() {
