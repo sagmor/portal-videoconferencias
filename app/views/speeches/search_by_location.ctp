@@ -72,7 +72,7 @@ if(is_array($data)) {
 		<?php echo  $html->link($title, array('action' => 'show', $id));?>
 	</td>
 	<td>
-		<?php echo  $html->link($date, array('action' => 'show', $id));?>
+		<?php echo  $html->link($time->format('d-m h:i', $date), array('action' => 'show', $id));?>
 	</td>
 	<td>
 		<?php echo  $html->link($speakers, array('action' => 'show', $id));?>

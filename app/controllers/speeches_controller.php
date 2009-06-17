@@ -1,6 +1,6 @@
 <?php
 class SpeechesController extends AppController {
-  var $helpers = array('Html', 'Javascript', 'Form', 'Paginator');
+  var $helpers = array('Html', 'Javascript', 'Form', 'Paginator', 'Time');
   var $name = 'Speeches';
   var $scaffold;
   var $paginate = array('limit' => 10,
