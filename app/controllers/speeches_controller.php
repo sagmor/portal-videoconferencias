@@ -126,10 +126,13 @@ class SpeechesController extends AppController {
 			$month = $this->passedArgs['month'];
 		}
 		if (!empty($year)) {
+			$first = date('m-d-Y', mktime(0, 0, 0, $month, 1, $year));
+			$last = date('m-d-Y', mktime(0, 0, 0, $month, 31, $year));
+
 			$this->set('isSearch', true);
 			$this->set('data',  $this->paginate('Speech', array('Speech.date BETWEEN ? AND ?' => array(
-																							"$month-01-$year",
-																							"$month-31-$year"))));
+																							$first,
+																							$last))));
 		}
 	}
 
