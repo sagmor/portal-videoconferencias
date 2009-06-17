@@ -101,7 +101,7 @@ msgid "search_by_date"
 msgstr "Search by date"
 
 msgid "message"
-msgstr "Select a criteria of the superior menu for searching"
+msgstr "To search, select a criteria by clicking one of the tabs above."
 
 #-------------------------------------------------
 #speeches/searchByDate
@@ -158,6 +158,12 @@ msgstr "suscribed users"
 msgid "suscribe"
 msgstr "Suscribe me!"
 
+msgid "edit_suscription"
+msgstr "Edit Subscription"
+
+msgid "unsubscribe"
+msgstr "Unsubscribe"
+
 msgid "attachments"
 msgstr "Attachments"
 
@@ -177,7 +183,7 @@ msgid "other"
 msgstr "Otro"
 
 msgid "not_attachment"
-msgstr "This speech doesn't have attachment"
+msgstr "This speech does not have attachments"
 
 #-------------------------------------------------
 #calendar/table
@@ -234,7 +240,7 @@ msgid "default_title"
 msgstr "Speeche's portal"
 
 msgid "default_subtitle"
-msgstr "Computer cience dapartment"
+msgstr "Departamento de Ciencias de la Computación"
 
 msgid "home"
 msgstr "Home"
@@ -331,6 +337,61 @@ msgstr "Session finished"
 #users/register
 msgid "case_sensitive"
 msgstr "Case sensitive!"
+
+#-------------------------------------------------
+#app_controller/users_controller/register
+msgid "your_user_has_been_created"
+msgstr "Your user has been created."
+
+#-------------------------------------------------
+#app_controller/users_controller/edit
+msgid "wrong_user_or_password"
+msgstr "Incorrect user e-mail or password."
+
+#-------------------------------------------------
+#app_controller/users_controller/login
+msgid "wrong_user_or_password"
+msgstr "Incorrect e-mail or password."
+
+#-------------------------------------------------
+#app_controller/users_controller/logout
+msgid "goodbye"
+msgstr "Good bye."
+
+#-------------------------------------------------
+#app_controller/speeches_controller/add
+msgid "new_speech_created"
+msgstr "New speech created."
+
+#-------------------------------------------------
+#app_controller/speeches_controller/edit
+msgid "edit_success"
+msgstr "The speech has been modified."
+
+#-------------------------------------------------
+#app_controller/speeches_controller/delete
+msgid "delete_success"
+msgstr "The speech has been deleted."
+
+#-------------------------------------------------
+#app_controller/speeches_controller/suscribe
+msgid "suscribe_success"
+msgstr "You have been suscribed to this speech."
+
+#-------------------------------------------------
+#app_controller/speeches_controller/unsuscribe
+msgid "unsuscribe_success"
+msgstr "You have been unsuscribe to this speech."
+
+#-------------------------------------------------
+#app_controller/tags_controller/administrar
+msgid "add_tag_success"
+msgstr "The tag has been created."
+
+#-------------------------------------------------
+#app_controller/tags_controller/delete
+msgid "delete_tag_success"
+msgstr "The tag has been deleted."
 
 #-------------------------------------------------
 #app_controller/validateUser

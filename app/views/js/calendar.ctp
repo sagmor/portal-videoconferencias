@@ -19,7 +19,7 @@ function loadCalendar(year,month) {
                    });
 
                    day = parseInt(s.date.substring(8,10));
-                   $('#day'+day).append("<span class=\""+tags+"\"><a href=\""+s.url+"\">"+s.title+"</a></span>");
+                   $('#day'+day).append("<span class=\""+tags+"\"><a href=\""+s.url+"\">"+s.title+"</a></span><br />");
 
 
                  });

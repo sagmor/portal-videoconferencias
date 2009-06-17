@@ -158,6 +158,12 @@ msgstr "usuarios suscritos"
 msgid "suscribe"
 msgstr "¡Subscribirse a esta charla!"
 
+msgid "edit_suscription"
+msgstr "Editar Subscripción"
+
+msgid "unsubscribe"
+msgstr "Desubscribir"
+
 msgid "attachments"
 msgstr "Adjuntos"
 
@@ -331,6 +337,66 @@ msgstr "Sesión finalizada"
 #users/register
 msgid "case_sensitive"
 msgstr "¡Deben coincidir mayusculas y minusculas!"
+
+#-------------------------------------------------
+#app_controller/users_controller/register
+msgid "your_user_has_been_created"
+msgstr "Tu usuario ha sido creado correctamente."
+
+#-------------------------------------------------
+#app_controller/users_controller/edit
+msgid "your_profile_is_update"
+msgstr "Se han actualizado los datos."
+
+#-------------------------------------------------
+#app_controller/users_controller/login
+msgid "wrong_user_or_password"
+msgstr "El e-mail no existe o la contraseña es incorrecta."
+
+#-------------------------------------------------
+#app_controller/users_controller/logout
+msgid "goodbye"
+msgstr "Hasta pronto."
+
+#-------------------------------------------------
+#app_controller/speeches_controller/add
+msgid "new_speech_created"
+msgstr "Nueva conferencia creada."
+
+#-------------------------------------------------
+#app_controller/speeches_controller/edit
+msgid "edit_success"
+msgstr "La conferencia ha sido modificada exitosamente."
+
+#-------------------------------------------------
+#app_controller/speeches_controller/delete
+msgid "delete_success"
+msgstr "La conferencia ha sido eliminada."
+
+#-------------------------------------------------
+#app_controller/speeches_controller/suscribe
+msgid "suscribe_success"
+msgstr "Se has suscrito a esta conferencia."
+
+#-------------------------------------------------
+#app_controller/speeches_controller/unsuscribe
+msgid "unsuscribe_success"
+msgstr "Se ha desubscrito de la charla."
+
+#-------------------------------------------------
+#app_controller/tags_controller/administrar
+msgid "add_tag_success"
+msgstr "Se ha creado la categoría."
+
+#-------------------------------------------------
+#app_controller/tags_controller/delete
+msgid "delete_tag_success"
+msgstr "Se ha eliminado la categoría."
+
+#-------------------------------------------------
+#app_controller/tags_controller/delete
+msgid "delete_tag_success"
+msgstr "Se ha eliminado la categoría."
 
 #-------------------------------------------------
 #app_controller/validateUser

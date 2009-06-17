@@ -9,25 +9,25 @@ class UsersController extends AppController
 		if ($this->validateAdmin()) {
 			$users = $this->User->find('all',
 				array('fields' => array('User.id',
-															   'User.name',
-															   'User.email',
-															   'User.type')));
+									   'User.name',
+									   'User.email',
+									   'User.type')));
 			$this->set('users', $users);
 		}
 	}
 
 	function register() {
 		if (!empty($this->data['User'])){
-//			if ($this->Captcha->protect('User')) {
-				if ($this->User->save($this->data)){
-					$this->Session->write('user_id', $this->User->id);
-					$this->flash('Tu usuario ha sido creado correctamente', '/');
-				} else {
-					$this->data['User']['password'] = $this->data['User']['password_confirmation'] = '';
-				}
-//			} else {
-//				echo 'Falló la captura de imagen';
-//			}
+			//			if ($this->Captcha->protect('User')) {
+			if ($this->User->save($this->data)){
+				$this->Session->write('user_id', $this->User->id);
+				$this->flash(__('your_user_has_been_created', true), '/');
+			} else {
+				$this->data['User']['password'] = $this->data['User']['password_confirmation'] = '';
+			}
+			//			} else {
+			//				echo 'Falló la captura de imagen';
+			//			}
 
 		}
 	}
@@ -49,7 +49,7 @@ class UsersController extends AppController
 			} else {
 				$this->User->read();
 				if ($this->User->save($this->data)) {
-					$this->flash('Se han actualizado los datos', '/');
+					$this->flash(__('your_profile_is_update', true), '/');
 				}
 			}
 		}
@@ -64,7 +64,7 @@ class UsersController extends AppController
 				$this->Session->write('user_id', $result['User']['id']);
 				$this->flash('Bienvenido', '/');
 			} else {
-				$this->flash('El usuario no existe o la contraseña es incorrecta', array('action' => 'login'));
+				$this->flash(__('wrong_user_or_password', true), array('action' => 'login'));
 			}
 		}
 	}
@@ -72,7 +72,7 @@ class UsersController extends AppController
 	function logout()
 	{
 		$this->Session->delete('user_id');
-		$this->flash('Hasta Pronto', '/');
+		$this->flash(__('goodbye', true), '/');
 	}
 
 	function verSuscripciones()

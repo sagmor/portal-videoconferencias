@@ -17,7 +17,7 @@ class SpeechesController extends AppController {
   var $uses = array('Speech', 'SpeechesTags');
   var $speakerSearched;
   
-	//función que muestra ek contenigo de una conferencia
+	//función que muestra el contenido de una conferencia
 	function show($id = null) {
 		$this->Speech->id = $id;
 		$this->set('speech', $this->Speech->read());
@@ -32,7 +32,7 @@ class SpeechesController extends AppController {
     if ($this->validateAdmin()) {
       if(!empty($this->data)) {
         if($this->Speech->save($this->data)) {
-          $this->flash('Nueva charla creada', '', 1);
+          $this->flash(__('new_speech_created', true), '', 1);
           $this->redirect(array('action' => '/'));
         }
       }
@@ -68,7 +68,7 @@ class SpeechesController extends AppController {
         $this->data = $this->Speech->read();
       } else {
         if ($this->Speech->save($this->data)) {
-          $this->flash('La charla ha sido modificada exitosamente.', '/', 1);
+          $this->flash(__('edit_success', true), '/', 1);
           $this->redirect(array('action' => '/'));
         }
       }
@@ -79,7 +79,7 @@ class SpeechesController extends AppController {
   function delete($id) {
     if ($this->validateAdmin()) {
       $this->Speech->del($id);
-      $this->flash('La conferencia ha sido eliminada.', '/speeches/', 0);
+      $this->flash(__('delete_success', true), '/speeches/', 0);
       $this->redirect(array('action' => '/'));
     }
   }
@@ -253,7 +253,7 @@ class SpeechesController extends AppController {
                                                         time()+$this->data['SpeechesUser']['resend_in']*24*60*60);
       }
       if ($this->Speech->SpeechesUser->save($this->data)) {
-        $this->flash('Te has suscrito a la charla', '/');
+        $this->flash(__('suscribe_success',true), '/');
       }
     }
   }
@@ -270,7 +270,7 @@ class SpeechesController extends AppController {
        'fields' => array('id')));
     $id = $id['SpeechesUser']['id'];
     $this->Speech->SpeechesUser->del($id);
-    $this->flash('Se ha desubscrito de la charla', '/');
+    $this->flash(__('unsuscribe_success'), '/');
 
   }
 
