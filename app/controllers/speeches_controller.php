@@ -185,7 +185,7 @@ class SpeechesController extends AppController {
 
 	//función que entrega las próximas 5 charlas, para cambiar esto sólo es necesario cambiar el valor de 'limit'
 	function nextSpeeches() {
-		$currentTime = date('Y-m-d-His');
+		$currentTime = date('m-d-Y');
 		$nextSpeeches = $this->Speech->find('all', array(
 											'conditions' => array(
 																'Speech.date >=' => $currentTime),
