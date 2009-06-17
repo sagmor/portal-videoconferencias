@@ -1,41 +1,44 @@
 <div class="mainform">
-  <?php echo $form->create('User', array('url' =>
-  									   array('controller' => 'users', 'action' => 'register')));?>
-    
-    
-    <p>
-      <?php echo $form->input('User.name', array( 'label' => 'Nombre:')); ?>
-    </p>
-    <p>
-      <?php echo $form->input('User.email', array( 'label' => 'Correo electrónico:')); ?>
-    </p>
-    <p>
-      <?php echo $form->input('User.password', array( 'label' => 'Contraseña:')); ?>
-    </p>
-    <p>
-      <?php echo $form->input('User.password_confirmation', array( 'label' => 'Confirmar contraseña:', 'type'=>'password')); ?>
-    </p>
-    <p>
-      <?php echo $form->input('User.lang', 
-    					  array ('label' => 'Idioma: ',
-    						     'options' => array(
-													'es' => "Español",
-													'en' => 'English'
-													))); ?>
-    </p>
-	
-    <p>
+	<?php echo $form->create('User', array('url' =>
+			array('controller' => 'users', 'action' => 'register')));?>
+
+
+	<p>
+		<?php echo $form->input('User.name', array( 'label' => __('user_name', true))); ?>
 	</p>
-		<?php $tags = $this->requestAction('/tags/getTags');
-    		  	echo $form->input('Tag', array('label' => 'Subscripciones',
-    		  								   'multiple' => 'checkbox',
-    		  								   'options' => $tags));
-		?>
-  <?php echo $form->end('Registrar');?>
+	<p>
+		<?php echo $form->input('User.email', array( 'label' => __('email', true))); ?>
+	</p>
+	<p>
+		<?php echo $form->input('User.password', array( 'label' => __('password', true))); ?>
+	</p>
+	<p>
+		<?php echo $form->input('User.password_confirmation', array( 'label' => __('confirm_pass', true), 'type'=>'password')); ?>
+	</p>
+	<p>
+		<?php echo $form->input('User.lang',
+			array ('label' => 'Idioma: ',
+										 'options' => array(
+											  'esp' => __('spanish', true),
+												'eng' => __('english', true)
+				))); ?>
+	</p>
+
+	<p>
+	<?php $tags = $this->requestAction('/tags/getTags');
+	echo $form->input('Tag', array('label' => __('subscriptions', true),
+												   'multiple' => 'checkbox',
+												   'options' => $tags));
+	?>
+	<?php
+	$this->Captcha->filter = array('blur' => 1, 'noise' => 5);
+	$this->Captcha->case = true;
+	echo $captcha->input();
+	echo $form->end('Registrar');?>
 </div>
 
 
-	
-	
+
+
 
 

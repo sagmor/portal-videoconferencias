@@ -1,6 +1,6 @@
-<h1>Búsqueda de Charlas por categoría</h1>
+<h1><?php __('title_search_by_tags')?></h1>
 
-<h3>Seleccione la o las categorías por las que desea realizar la búsqueda</h3>
+<h3><?php __('search_message_tags')?></h3>
 <?php
 	echo $form->create('Speech', array('action' => 'searchByTags'));
 	$tags = $this->requestAction(array('controller' => 'tags',
@@ -11,39 +11,45 @@
 	if(isset($this->params['pass']) && $this->params['pass'] != array()) {
 		$this->data['Tag']['Tag'] = $this->params['pass'];
 	}
-	echo $form->submit('Buscar');
+	echo $form->submit(__('search', true));
 ?>
 <?php if ($isSearch) { 
 		if(empty($data)) {
-			echo 'No existen conferencias asociadas a esta(s) categoría(s)';
+			echo __('not_founded_by_tags', true);
 		} else {?>
 
 <div id="resultSearch">
 	<p><?php
-		echo $paginator->counter(array('format' => 'Pagina %page% de %pages%,  mostrando %current% conferencias de %count%'));
+		echo $paginator->counter(array('format' =>
+										__('table_page', true).' %page% '.
+										__('of', true).' %pages%, '.
+										__('showing', true).' %current% '.
+										__('speeches', true).' '.
+										__('of', true).' %count%'));
 		$paginator->options(array('url'=>$this->data['Tag']['Tag']));
 		?>
 	</p>
-	<div  class="paging">
+<div  class="paging">
 	<?php
-		echo  $paginator->prev('← Charlas anteriores', null, null,  array('class'=>'disabled'));?>
+		echo  $paginator->prev(__('prev_speeches', true) , null, null,  array('class'=>'disabled'));
+	?>
 	|
-	<?php echo  $paginator->next('Charlas siguientes →', null, null,  array('class'=>'disabled'));?>
-	</div>
-	<table  class="scaffold" cellpadding="2"  cellspacing="0">
-		<thead>
-			<tr>
-				<th><?php echo  $paginator->sort('Titulo','title'); ?></th>
-				<th><?php echo  $paginator->sort('Fecha','date'); ?></th>
-				<th><?php echo  $paginator->sort('Oradores','speakers'); ?></th>
-				<th><?php echo  $paginator->sort('Lugar','location'); ?></th>
-				<?php if($current_user['User']['type'] == 'admin'){?>
-				<th>Acciones</th>
-				<?php }?>
-			</tr>
-		</thead>
-		<tbody>
-			<!--<?php  print_r($data); ?>-->
+	<?php echo  $paginator->next(__('next_speeches', true), null, null,  array('class'=>'disabled'));?>
+</div>
+<table  class="scaffold" cellpadding="2"  cellspacing="0">
+<thead>
+	<tr>
+		<th><?php echo  $paginator->sort(__('title', true),'title'); ?></th>
+		<th><?php echo  $paginator->sort(__('date', true),'date'); ?></th>
+		<th><?php echo  $paginator->sort(__('speakers', true),'speakers'); ?></th>
+		<th><?php echo  $paginator->sort(__('location', true),'location'); ?></th>
+		<?php if($current_user['User']['type'] == 'admin'){?>
+			<th><?php __('actions') ?></th>
+		<?php }?>
+	</tr>
+</thead>
+<tbody>
+	<!--<?php  print_r($data); ?>-->
 <?php
 $i = 0;
 if(is_array($data)) {
@@ -61,42 +67,43 @@ if(is_array($data)) {
 			echo '<tr  class="altrow">';
 		}
 		?>
-			<td>
-				<?php echo  $html->link($title, array('action' => 'show', $id));?>
-			</td>
-			<td>
-				<?php echo  $html->link($date, array('action' => 'show', $id));?>
-			</td>
-			<td>
-				<?php echo  $html->link($speakers, array('action' => 'show', $id));?>
-			</td>
-			<td>
-				<?php echo  $html->link($location, array('action' => 'show', $id));?>
-			</td>
-			<td>
-				<?php if($current_user['User']['type'] == 'admin') { ?>
-					<?php echo  $html->link('Editar', array('action' => 'edit', $id));?>
-					<?php echo  $html->link('Borrar', array('action' => 'delete', $id),null,
-						sprintf("¿Está  seguro que quiere borrar '%s'?", $title));?>
-					<?php } ?>
-			</td>
-			<?php }
+	<td>
+		<?php echo  $html->link($title, array('action' => 'show', $id));?>
+	</td>
+	<td>
+		<?php echo  $html->link($date, array('action' => 'show', $id));?>
+	</td>
+	<td>
+		<?php echo  $html->link($speakers, array('action' => 'show', $id));?>
+	</td>
+	<td>
+		<?php echo  $html->link($location, array('action' => 'show', $id));?>
+	</td>
+	<td>
+		<?php if($current_user['User']['type'] == 'admin') { ?>
+			<?php echo  $html->link(__('edit', true), array('action' => 'edit', $id));?>
+			<?php echo  $html->link(__('delete', true) , array('action' => 'delete', $id),null,
+				sprintf(__('are_you_sure_delete', true).' %s?', $title));?>
+		<?php } ?>
+	</td>
+	<?php }
 	} ?>
-		</tbody>
-	</table>
+</tbody>
+</table>
 </div>
 
-<?php if($current_user['User']['type'] == 'admin') { ?>
 <div  class="actions">
 	<ul>
-		<li>
-			<?php echo  $html->link('Agregar Charla', array('action' => 'add')); ?>
-		</li>
+		<?php if($current_user['User']['type'] == 'admin') { ?>
+			<li>
+				<?php echo  $html->link(__('add_speech', true), array('action' => 'add')); ?>
+			</li>
+		<?php }?>
 	</ul>
 </div>
-<?php }
-	}
-} ?>
 <?php
-$form->end();
+	}
+}?>
+<?php
+	$form->end();
 ?>

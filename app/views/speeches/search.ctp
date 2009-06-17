@@ -1,21 +1,21 @@
 <div id="menu" style="float:left">
 	<ul>
 		<li>
-		  <?php echo $html->link('Buscar por categoría', array(
+		  <?php echo $html->link(__('search_by_tag', true), array(
 															'controller' => 'speeches',
 															'action' => 'searchByTags')); ?>
 		<li>
-		  <?php echo $html->link('Buscar por orador', array(
+		  <?php echo $html->link(__('search_by_speaker', true), array(
 															'controller' => 'speeches',
 															'action' => 'searchBySpeaker')); ?>
 		</li>
 		<li>
-		  <?php echo $html->link('Buscar por lugar', array(
+		  <?php echo $html->link(__('search_by_location', true), array(
 															'controller' => 'speeches',
 															'action' => 'searchByLocation')); ?>
 		</li>
 		<li>
-		  <?php echo $html->link('Buscar por fecha', array(
+		  <?php echo $html->link(__('search_by_date', true), array(
 															'controller' => 'speeches',
 															'action' => 'searchByDate')); ?>
 		</li>
@@ -24,7 +24,7 @@
 <div id="content">
 	<h3>
 		<?php
-			echo 'Seleccione un criterio de búsqueda en el menú superior';
+			echo __('message', true);
 		?>
 	</h3>
 </div>

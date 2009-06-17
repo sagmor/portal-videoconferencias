@@ -1,15 +1,29 @@
-<h2>Charlas agendadas</h2>
-<p><?php  echo $paginator->counter(array('format' => 'Pagina %page% de %pages%,  mostrando %current% conferencias de %count%')); ?></p>
+<h2><?php __('title_index') ?></h2>
+<!--información de la página de la tabla actual-->
+<p><?php  echo $paginator->counter(array('format' => 
+										__('table_page', true).' %page% '.
+										__('of', true).' %pages%, '.
+										__('showing', true).' %current% '.
+										__('speeches', true).' '.
+										__('of', true).' %count%')); ?></p>
 <div id="table">
+<div  class="paging">
+	<?php
+	$paginator->options(array('url'=>$this->passedArgs));
+	echo  $paginator->prev(__('prev_speeches', true) , null, null,  array('class'=>'disabled'));?>
+	|
+	<?php echo  $paginator->next(__('next_speeches', true), null, null,  array('class'=>'disabled'));?>
+</div>
+
 <table  class="scaffold" cellpadding="2"  cellspacing="0">
 <thead>
 	<tr>
-		<th><?php echo  $paginator->sort('Titulo','title'); ?></th>
-		<th><?php echo  $paginator->sort('Fecha','date'); ?></th>
-		<th><?php echo  $paginator->sort('Oradores','speakers'); ?></th>
-		<th><?php echo  $paginator->sort('Lugar','location'); ?></th>
+		<th><?php echo  $paginator->sort(__('title', true),'title'); ?></th>
+		<th><?php echo  $paginator->sort(__('date', true),'date'); ?></th>
+		<th><?php echo  $paginator->sort(__('speakers', true),'speakers'); ?></th>
+		<th><?php echo  $paginator->sort(__('location', true),'location'); ?></th>
 		<?php if($current_user['User']['type'] == 'admin'){?>
-			<th>Acciones</th>
+			<th><?php __('actions') ?></th>
 		<?php }?>
 	</tr>
 </thead>
@@ -46,9 +60,9 @@ if(is_array($data)) {
 	</td>
 	<td>
 		<?php if($current_user['User']['type'] == 'admin') { ?>
-			<?php echo  $html->link('Editar', array('action' => 'edit', $id));?>
-			<?php echo  $html->link('Borrar', array('action' => 'delete', $id),null,
-				sprintf("¿Está  seguro que quiere borrar '%s'?", $title));?>
+			<?php echo  $html->link(__('edit', true), array('action' => 'edit', $id));?>
+			<?php echo  $html->link(__('delete', true) , array('action' => 'delete', $id),null,
+				sprintf(__('are_you_sure_delete', true).' %s?', $title));?>
 		<?php } ?>
 	</td>
 	<?php }
@@ -56,18 +70,12 @@ if(is_array($data)) {
 </tbody>
 </table>
 </div>
-<div  class="paging">
-	<?php 
-	$paginator->options(array('url'=>$this->passedArgs));
-	echo  $paginator->prev('← Charlas anteriores', null, null,  array('class'=>'disabled'));?>
-	|
-	<?php echo  $paginator->next('Charlas siguientes →', null, null,  array('class'=>'disabled'));?>
-</div>
+
 <div  class="actions">
 	<ul>
 		<?php if($current_user['User']['type'] == 'admin') { ?>
 			<li>
-				<?php echo  $html->link('Agregar Charla', array('action' => 'add')); ?>
+				<?php echo  $html->link(__('add_speech', true), array('action' => 'add')); ?>
 			</li>
 		<?php }?>
 	</ul>
