@@ -1,16 +1,16 @@
 <!--
 <div id="filter">
-	<h2>F<br />i<br />l<br />t<br />r<br />o<br />s</h2>
+<h2>F<br />i<br />l<br />t<br />r<br />o<br />s</h2>
 
-	<form action="" method="get" accept-charset="utf-8">
-		<?php $tags = $this->requestAction('/tags/getTags');
-		foreach ($tags as $tag) {
-			$t = str_replace(" ", "-", $tag);
-			?>
+<form action="" method="get" accept-charset="utf-8">
+<?php $tags = $this->requestAction('/tags/getTags');
+foreach ($tags as $tag) {
+	$t = str_replace(" ", "-", $tag);
+	?>
 
-		<input type="checkbox" name="<?php echo $t ?>" id="<?php echo $t ?>" checked="checked" class="tag"><label for="<?php echo $t ?>"><?php echo $tag ?></label><br />
-		<?php } ?>
-	</form>
+	<input type="checkbox" name="<?php echo $t ?>" id="<?php echo $t ?>" checked="checked" class="tag"><label for="<?php echo $t ?>"><?php echo $tag ?></label><br />
+	<?php } ?>
+</form>
 </div>
 -->
 
@@ -19,29 +19,19 @@
 		<?php
 		$tags = $this->requestAction('/tags/getTags');
 		$locations = $this->requestAction('/speeches/getLocations');
+		
 		echo __('tags');
-		foreach ($tags as $tag) {
-			$t = str_replace(" ", "-", $tag);
-			?>
-
-		<input type="checkbox" name="<?php echo $t ?>" id="<?php echo $t ?>" checked="checked" class="tag"><label for="<?php echo $t ?>"><?php echo $tag ?></label><br />
-		<?php }
+		echo $form->input('Locations', array(
+											"type" => "radio",
+											"options" => $tags
+										));
 		echo __('location');
-		foreach ($locations as $location) {
+		echo $form->input('Locations', array(
+											"type" => "radio",
+											"options" => $locations
+										))
 		?>
-		<input type="checkbox" name="<?php echo $location ?>" id="<?php echo $location ?>" checked="checked" class="tag"><label for="<?php echo $location ?>"><?php echo $location ?></label><br />
-		<?php
-		}
-//		echo $form->input('tagSelected', array(
-//											'type' => 'select',
-//											'options' => $tags,
-//											'selected' => $tags['all']));
-//		echo $form->input('locationSelected', array(
-//											'type' => 'select',
-//											'options' => $locations,
-//											'selected' => $locations['all']));
-		?>
-	</form>	
+	</form>
 </div>
 
 <div id="calendar">
