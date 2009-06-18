@@ -22,20 +22,24 @@ foreach ($tags as $tag) {
 <div>
 	<form action="" method="get" accept-charset="utf-8">
 		<h2><?php __('filters')?></h2>
+		<?php __('tags'); ?>
+		<?php 
+		  echo  '<input type="radio" name="data[tag]" id="tag_all" value="" checked="checked">\n'.
+		        '<label for="tag_all">'+__('all',true)+'</label>';
+		  
+      $tags = $this->requestAction('/tags/getTags');
+		  echo $form->input('tag', array(
+      											"type" => "radio",
+      											"options" => $tags
+      										));
+    ?>
 		<?php
-		$tags = $this->requestAction('/tags/getTags');
-		$locations = $this->requestAction('/speeches/getLocations');
+		__('location');
 
-		echo __('tags');
-		echo  '<input type="radio" name="data[tag]" id="tag_all" value="" checked="checked">\n'+
-		      '<label for="tag_all">'+__('all',true)+'</label>';
-		echo $form->input('tag', array(
-											"type" => "radio",
-											"options" => $tags
-										));
-		echo __('location');
-	  echo  '<input type="radio" name="data[location]" id="location_all" value="" checked="checked">\n'+
+	  echo  '<input type="radio" name="data[location]" id="location_all" value="" checked="checked">\n'.
 	        '<label for="location_all">'+__('all',true)+'</label>';
+
+		$locations = $this->requestAction('/speeches/getLocations');
 		echo $form->input('location', array(
 											"type" => "radio",
 											"options" => $locations
