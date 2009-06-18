@@ -25,7 +25,7 @@ foreach ($tags as $tag) {
 		<?php __('tags'); ?>
 		
 		<input type="radio" name="data[tag]" id="tag_all" value="" checked="checked">
-		<label for="tag_all"><?php __('all', true) ?></label>
+		<label for="tag_all"><?php __('all') ?></label>
 		
 		<?php 
       $tags = $this->requestAction('/tags/getTags');
@@ -38,7 +38,7 @@ foreach ($tags as $tag) {
 		<?php __('location'); ?>
 		
 		<input type="radio" name="data[location]" id="location_all" value="" checked="checked">
-		<label for="location_all"><?php __('all', true) ?></label>
+		<label for="location_all"><?php __('all') ?></label>
 
     <?php
 		$locations = $this->requestAction('/speeches/getLocations');
