@@ -2,6 +2,9 @@
 msgid "title"
 msgstr "Título"
 
+msgid "all"
+msgstr "Todos"
+
 msgid "speakers"
 msgstr "Presentadores"
 
