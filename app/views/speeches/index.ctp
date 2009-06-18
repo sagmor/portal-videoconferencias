@@ -52,7 +52,7 @@ if(is_array($data)) {
 			</td>
 			<td>
 				<?php
-					echo  $html->link($time->format('d-m-y h:i', $date), array('action' => 'show', $id));?>
+					echo  $html->link($time->format('d-m-y H:i', $date), array('action' => 'show', $id));?>
 			</td>
 			<td>
 				<?php echo  $html->link($speakers, array('action' => 'show', $id));?>
