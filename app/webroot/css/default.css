@@ -507,3 +507,6 @@ a.next {
   display: block;
 }
 
+.item span {
+  display: none;
+}
