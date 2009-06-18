@@ -497,3 +497,6 @@ msgstr "S"
 
 msgid "Sun"
 msgstr "D"
+
+msgid "all"
+msgstr "Todas"
