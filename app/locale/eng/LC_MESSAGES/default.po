@@ -465,5 +465,8 @@ msgstr "S"
 msgid "Sun"
 msgstr "S"
 
-msgid "all"
+msgid "todos"
+msgstr "All"
+
+msgid "todos"
 msgstr "All"

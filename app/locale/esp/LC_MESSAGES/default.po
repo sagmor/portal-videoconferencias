@@ -527,5 +527,8 @@ msgstr "S"
 msgid "Sun"
 msgstr "D"
 
-msgid "all"
+msgid "todos"
+msgstr "Todos"
+
+msgid "todos"
 msgstr "Todas"
