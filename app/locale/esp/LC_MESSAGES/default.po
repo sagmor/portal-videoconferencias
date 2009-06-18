@@ -74,7 +74,7 @@ msgstr "Buscar"
 msgid "todos"
 msgstr "Todos"
 
-msgid "todos"
+msgid "todas"
 msgstr "Todas"
 
 #-------------------------------------------------
