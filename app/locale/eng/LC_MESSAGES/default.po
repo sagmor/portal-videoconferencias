@@ -186,6 +186,34 @@ msgid "not_attachment"
 msgstr "This speech does not have attachments"
 
 #-------------------------------------------------
+#speeches/suscribe
+msgid "remember_at"
+msgstr "Remember at "
+
+msgid "suscribe_title"
+msgstr "Suscribe to speech"
+
+msgid "never"
+msgstr "Never"
+
+msgid "one_day"
+msgstr "1 day"
+
+msgid "one_week"
+msgstr "1 week"
+
+msgid "fifteen_days"
+msgstr "15 days"
+
+msgid "one_month"
+msgstr "1 month"
+
+#-------------------------------------------------
+#calendar/table
+msgid "remember_at"
+msgstr "Recordar cada "
+
+#-------------------------------------------------
 #calendar/table
 msgid "prev"
 msgstr "← previous"
@@ -347,6 +375,11 @@ msgstr "Case sensitive!"
 #app_controller/users_controller/register
 msgid "your_user_has_been_created"
 msgstr "Your user has been created."
+
+#-------------------------------------------------
+#app_controller/users_controller/edit
+msgid "your_profile_is_update"
+msgstr "Your profile is update."
 
 #-------------------------------------------------
 #app_controller/users_controller/edit

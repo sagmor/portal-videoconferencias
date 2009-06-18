@@ -3,12 +3,12 @@
 			<h1>Subscribirse a la charla <?php echo $speech['Speech']['title']?></h1>
 		    <p>
 			    <?php echo $form->input('SpeechesUser.resend_in',
-					                    array('label' => 'Recordar cada ',
-					                    'options' => array(0 => 'Nunca',
-					                                       1 => '1 día',
-					                                       7 =>'1 semana',
-					                                       15 => '15 días',
-					                                       30 => '1 mes')));?>
+					                    array('label' => __('remember_at', true),
+					                    'options' => array(0 => __('never', true),
+					                                       1 => __('one_day', true),
+					                                       7 => __('one_week', true),
+					                                       15 => __('fifteen_days', true),
+					                                       30 => __('one_month', true))));?>
 			</p>
 			<p><?php echo $form->submit('Subscribirse') ?></p>
 	</form>
