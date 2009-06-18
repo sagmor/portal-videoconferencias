@@ -32,13 +32,13 @@ class MailDaemonController extends AppController {
 			$speech = $speech['Speech'];
 			if($speech){
 				$to = $user['email'];
-				if($user['lang'] = 'es'){
+				if($user['lang'] = 'esp'){
 					$subject = 'Recordatorio charla '.$speech['title'].' - Portal Conferencias DCC';
 					$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
 					$text = 'Le recordamos que la charla '.$speech['title'].
-            	            ' se llevara a cabo en la fecha'.$speech['date'].
-            	            'Para más información visite la siguiente dirección '.
-        		            $this->getRoot().'/speeches/show/'.$speech['id'];
+                                                ' se llevara a cabo en la fecha'.$speech['date'].
+                                                'Para más información visite la siguiente dirección '.
+                                        $this->getRoot().'/speeches/show/'.$speech['id'];
 					$this->ae_send_mail($from, $to, $subject, $text);
 					$out.='Mail enviado a '.$user['email']."<br>";
 					$i++;
@@ -47,8 +47,8 @@ class MailDaemonController extends AppController {
 					$subject = 'Reminder of the lecture '.$speech['title'].' - Portal Conferencias DCC';
 					$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
 					$text = 'We remind you that the lecture '.$speech['title'].
-            	            ' will be held on '.$speech['date'].
-            	            'For further information visit the next page '.
+                                                ' will be held on '.$speech['date'].
+                                                'For further information visit the next page '.
         		            $this->getRoot().'/speeches/show/'.$speech['id'];
 					$this->ae_send_mail($from, $to, $subject, $text);
 					$out.='Mail sent to '.$user['name'].'<br>';
@@ -63,12 +63,12 @@ class MailDaemonController extends AppController {
 		foreach($charlasManana as $speech){
 			foreach($speech['User'] as $user){
 					$to = $user['email'];
-					if($user['lang'] = 'es'){
+					if($user['lang'] = 'esp'){
 						$subject = 'Recordatorio charla '.$speech['Speech']['title'].' - Portal Conferencias DCC';
 						$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
 						$text = 'Le recordamos que la charla '.$speech['Speech']['title'].
-            	            ' se llevara a cabo en mañana '.
-            	            'Para más información visite la siguiente dirección '.
+                                                        ' se llevara a cabo en mañana '.
+                                                        'Para más información visite la siguiente dirección '.
         		            $this->getRoot().'/speeches/show/'.$speech['Speech']['id'];
 						$this->ae_send_mail($from, $to, $subject, $text);
 						$out.='Mail enviado a '.$user['email']."<br>";
@@ -78,9 +78,9 @@ class MailDaemonController extends AppController {
 						$subject = 'Reminder of the lecture '.$speech['Speech']['title'].' - Portal Conferencias DCC';
 						$from = 'Portal Conferencias DCC <no-reply@videosdcc.cl>';
 						$text = 'We remind you that the lecture '.$speech['Speech']['title'].
-            	                ' will be held tomorrow '.
-            	                'For further information visit the next page '.
-        		                $this->getRoot().'/speeches/show/'.$speech['Speech']['id'];
+                                                        ' will be held tomorrow '.
+                                                        'For further information visit the next page '.
+        	                                $this->getRoot().'/speeches/show/'.$speech['Speech']['id'];
 						$this->ae_send_mail($from, $to, $subject, $text);
 						$out.='Mail sent to '.$user['name'].'<br>';
 						$i++;
