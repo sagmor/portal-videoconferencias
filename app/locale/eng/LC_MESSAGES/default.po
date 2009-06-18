@@ -71,6 +71,12 @@ msgstr "Password"
 msgid "search"
 msgstr "Search"
 
+msgid "todos"
+msgstr "All"
+
+msgid "todos"
+msgstr "All"
+
 #-------------------------------------------------
 #speeches/add
 msgid "title_add"
@@ -465,8 +471,4 @@ msgstr "S"
 msgid "Sun"
 msgstr "S"
 
-msgid "todos"
-msgstr "All"
 
-msgid "todos"
-msgstr "All"

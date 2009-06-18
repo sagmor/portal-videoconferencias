@@ -2,9 +2,6 @@
 msgid "title"
 msgstr "Título"
 
-msgid "all"
-msgstr "Todos"
-
 msgid "speakers"
 msgstr "Presentadores"
 
@@ -73,6 +70,12 @@ msgstr "Contraseña"
 
 msgid "search"
 msgstr "Buscar"
+
+msgid "todos"
+msgstr "Todos"
+
+msgid "todos"
+msgstr "Todas"
 
 #-------------------------------------------------
 #speeches/add
@@ -527,8 +530,4 @@ msgstr "S"
 msgid "Sun"
 msgstr "D"
 
-msgid "todos"
-msgstr "Todos"
 
-msgid "todos"
-msgstr "Todas"
