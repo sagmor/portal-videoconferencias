@@ -38,7 +38,7 @@ foreach ($tags as $tag) {
 		<?php __('location'); ?>
 		
 		<input type="radio" name="data[location]" id="location_all" value="" checked="checked">
-		<label for="location_all"><?php __('all') ?>'</label>
+		<label for="location_all"><?php __('all') ?></label>
 
     <?php
 		$locations = $this->requestAction('/speeches/getLocations');
