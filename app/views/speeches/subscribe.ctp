@@ -1,6 +1,6 @@
 <div id="create" class="mainform">
 	<form method="post" action="<?php echo $html->url('/speeches/subscribe/'.$speech['Speech']['id'])?>">
-			<h1>Subscribirse a la charla <?php echo $speech['Speech']['title']?></h1>
+			<h1><?php __('suscribe_title')?><?php echo $speech['Speech']['title']?></h1>
 		    <p>
 			    <?php echo $form->input('SpeechesUser.resend_in',
 					                    array('label' => __('remember_at', true),
@@ -10,6 +10,6 @@
 					                                       15 => __('fifteen_days', true),
 					                                       30 => __('one_month', true))));?>
 			</p>
-			<p><?php echo $form->submit('Subscribirse') ?></p>
+			<p><?php echo $form->submit(__('subscribe_button', true)) ?></p>
 	</form>
 </div>

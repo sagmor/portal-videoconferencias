@@ -191,7 +191,7 @@ msgid "remember_at"
 msgstr "Remember at "
 
 msgid "suscribe_title"
-msgstr "Suscribe to speech"
+msgstr "Suscribe to speech "
 
 msgid "never"
 msgstr "Never"
@@ -208,10 +208,8 @@ msgstr "15 days"
 msgid "one_month"
 msgstr "1 month"
 
-#-------------------------------------------------
-#calendar/table
-msgid "remember_at"
-msgstr "Recordar cada "
+msgid "subscribe_button"
+msgstr "Subscribe"
 
 #-------------------------------------------------
 #calendar/table
