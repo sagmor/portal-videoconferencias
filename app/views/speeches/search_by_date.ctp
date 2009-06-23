@@ -103,9 +103,9 @@ if(is_array($data)) {
 		<?php }?>
 	</ul>
 </div>
-<?php 
+<?php
 	}
 }?>
 <?php
-	$form->end();
+	echo $form->end();
 ?>

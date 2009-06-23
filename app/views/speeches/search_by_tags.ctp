@@ -105,5 +105,5 @@ if(is_array($data)) {
 	}
 }?>
 <?php
-	$form->end();
+	echo $form->end();
 ?>
