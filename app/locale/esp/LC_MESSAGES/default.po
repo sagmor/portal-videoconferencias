@@ -193,28 +193,28 @@ msgstr "Esta conferencia no posee archivos adjuntos"
 
 #-------------------------------------------------
 #speeches/suscribe
-msgid "remember_at"
+msgid "Recordar cada "
 msgstr "Recordar cada "
 
-msgid "suscribe_title"
+msgid "Subscribirse a la conferencia "
 msgstr "Subscribirse a la conferencia "
 
-msgid "never"
+msgid "Nunca"
 msgstr "Nunca"
 
-msgid "one_day"
+msgid "1 día"
 msgstr "1 día"
 
-msgid "one_week"
+msgid "1 semana"
 msgstr "1 semana"
 
-msgid "fifteen_days"
+msgid "15 días"
 msgstr "15 días"
 
 msgid "one_month"
 msgstr "1 mes"
 
-msgid "subscribe_button"
+msgid "Subscribir"
 msgstr "Subscribir"
 
 #-------------------------------------------------

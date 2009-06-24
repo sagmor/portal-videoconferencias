@@ -193,28 +193,28 @@ msgstr "This speech does not have attachments"
 
 #-------------------------------------------------
 #speeches/suscribe
-msgid "remember_at"
+msgid "Recordar cada "
 msgstr "Remember at "
 
-msgid "suscribe_title"
+msgid "Subscribirse a la conferencia "
 msgstr "Suscribe to speech "
 
-msgid "never"
+msgid "Nunca"
 msgstr "Never"
 
-msgid "one_day"
+msgid "1 día"
 msgstr "1 day"
 
-msgid "one_week"
+msgid "1 semana"
 msgstr "1 week"
 
-msgid "fifteen_days"
+msgid "15 días"
 msgstr "15 days"
 
 msgid "one_month"
 msgstr "1 month"
 
-msgid "subscribe_button"
+msgid "Subscribir"
 msgstr "Subscribe"
 
 #-------------------------------------------------
