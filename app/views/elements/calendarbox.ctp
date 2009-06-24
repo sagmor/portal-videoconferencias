@@ -18,7 +18,7 @@
                  $.each(data, function(i,e) {
                    s = e.Speech;
                    day = parseInt(s.date.substring(8,10));
-                   $('#day'+day+ ' .daynumber').css('font-weight', 'bold');
+                   $('#day'+day+ ' .daynumber').css('font-weight', 'bold', 'color', 'red');
 
 
                  });
