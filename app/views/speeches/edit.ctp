@@ -45,9 +45,11 @@
 
 			<!-- Categorías -->
 			<?php $tags = $this->requestAction('/tags/getTags');
+				echo '<div id="tags">';
 					echo $form->input('Tag', array('label' => __('tags', true),
 												   'multiple' => 'checkbox',
 												   'options' => $tags));
+				echo '</div>'
 			?>
 
 		<p>

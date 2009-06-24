@@ -483,6 +483,10 @@ a.next {
   width: 300px;
 }
 
+#tags input {
+  width: 30px;
+}
+
 #create textarea {
   width: 300px;
   height: 100px;

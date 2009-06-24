@@ -22,30 +22,30 @@ foreach ($tags as $tag) {
 <div>
 	<form action="" method="get" accept-charset="utf-8">
 		<h2><?php __('filters')?></h2>
-		<?php __('tags'); ?>
-		
+		<?php __('tags');?>
+
 		<input type="radio" name="data[tag]" id="tag_all" value="" checked="checked">
-		<label for="tag_all"><?php __('todas') ?></label>
-		
-		<?php 
-      $tags = $this->requestAction('/tags/getTags');
-		  echo $form->input('tag', array(
-      											"type" => "radio",
-      											"options" => $tags
-      										));
-    ?>
-    
+		<label for="tag_all"><?php __('todas')?></label>
+
+		<?php
+			$tags = $this->requestAction('/tags/getTags');
+			echo $form->input('tag', array(
+															"type" => "radio",
+															"options" => $tags
+				));
+		?>
+
 		<?php __('location'); ?>
-		
+
 		<input type="radio" name="data[location]" id="location_all" value="" checked="checked">
 		<label for="location_all"><?php __('todos') ?></label>
 
-    <?php
+		<?php
 		$locations = $this->requestAction('/speeches/getLocations');
 		echo $form->input('location', array(
-											"type" => "radio",
-											"options" => $locations
-										));
+													"type" => "radio",
+													"options" => $locations
+			));
 		?>
 	</form>
 </div>
